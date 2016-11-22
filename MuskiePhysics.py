@@ -36,6 +36,10 @@ class Text:
     def __init__(self):
         # How to create a rectangular shape in pymunk that matches the
         # bounding box of the text in pygame?
+        #
+        # pymunk.Poly.create_box(body, size_tuple, radius)
+        #
+        # This creates the shape to go with a body
 
         # How to draw the shapes rotated to match the physics rotation?
         pass
