@@ -1,4 +1,9 @@
 from MuskiePhysics import *
 
-window("My Window", 300, 600)
+window("My Window", 400, 300)
+gravity(0.0, -900.0)
+
+b1 = ball(100, 10, 30, 1)
+b1.color = Color('green')
+
 run()
