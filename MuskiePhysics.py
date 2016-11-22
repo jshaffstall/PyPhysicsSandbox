@@ -36,6 +36,8 @@ class Text:
     def __init__(self):
         # How to create a rectangular shape in pymunk that matches the
         # bounding box of the text in pygame?
+
+        # How to draw the shapes rotated to match the physics rotation?
         pass
 
 
