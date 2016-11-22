@@ -30,6 +30,14 @@ class Ball:
         p = to_pygame(self.shape.body.position)
         pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
 
+class Text:
+    color = Color('black')
+
+    def __init__(self):
+        # How to create a rectangular shape in pymunk that matches the
+        # bounding box of the text in pygame?
+        pass
+
 
 def to_pygame(p):
     # Converts pymunk body position into pygame coordinate tuple
@@ -47,7 +55,7 @@ def window(title, width, height):
 
 
 def gravity(x, y):
-    space.gravity = (x, -y)
+    space.gravity = (x, y)
 
 
 def ball(x, y, radius, mass):
