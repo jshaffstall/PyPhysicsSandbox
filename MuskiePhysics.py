@@ -14,6 +14,7 @@ space = pymunk.Space()
 win_title = "Untitled"
 win_width = 500
 win_height = 500
+frame_hook = None
 
 shapes = []
 
@@ -102,12 +103,14 @@ class Box:
         space.add(body, self.shape)
         self.width = width
         self.height = height
+        self.radius = radius
 
     def draw(self, screen):
         ps = [self.shape.body.local_to_world(v) for v in self.shape.get_vertices()]
         ps += [ps[0]]
 
         pygame.draw.polygon(screen, self.color, ps)
+        pygame.draw.lines(screen, self.color, False, ps, self.radius)
 
     @property
     def elasticity(self):
@@ -136,6 +139,12 @@ def window(title, width, height):
     win_height = height
 
 
+def step_function(hook):
+    global frame_hook
+
+    frame_hook = hook
+
+
 def gravity(x, y):
     space.gravity = (x, y)
 
@@ -161,6 +170,13 @@ def box(x, y, width, height, mass=1):
     return box
 
 
+def static_rounded_box(x, y, width, height, radius, mass=1):
+    box = Box(x, y, width, height, radius, mass, True)
+    shapes.append(box)
+
+    return box
+
+
 def rounded_box(x, y, width, height, radius, mass=1):
     box = Box(x, y, width, height, radius, mass, False)
     shapes.append(box)
@@ -178,6 +194,9 @@ def run():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit(0)
+
+        if frame_hook:
+            frame_hook ()
 
         screen.fill((255, 255, 255))
 

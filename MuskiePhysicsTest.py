@@ -9,7 +9,7 @@ b1.color = Color('green')
 b2 = ball(98, 100, 30, 1, True)
 b2.color = Color('blue')
 
-box1 = static_box(200,200, 30, 10)
+box1 = static_rounded_box(200,200, 30, 10, 3)
 box1.color = Color('red')
 
 run()
