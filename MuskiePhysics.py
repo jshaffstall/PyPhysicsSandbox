@@ -2,6 +2,8 @@
 # but also exposing the more interesting features that Calico Graphics does not, such as pins
 # and joints.
 
+# TODO: Need to allow tying two objects together so they move as one
+
 from pygame import Color
 
 import sys
@@ -38,7 +40,7 @@ class Ball:
 class Text:
     color = Color('black')
 
-    def __init__(self):
+    def __init__(self, x, y, text):
         # How to create a rectangular shape in pymunk that matches the
         # bounding box of the text in pygame?
         #
@@ -46,9 +48,19 @@ class Text:
         #
         # This creates the shape to go with a body
 
-        # How to draw the shapes rotated to match the physics rotation?
         pass
 
+    def draw(self, screen):
+        # initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
+        # myfont = pygame.font.SysFont("monospace", 15)
+        #
+        # # render text
+        # label = myfont.render("Some text!", 1, (255, 255, 0))
+        # screen.blit(label, (100, 100))
+
+        # How to draw the shapes rotated to match the physics rotation?
+
+        pass
 
 def to_pygame(p):
     # Converts pymunk body position into pygame coordinate tuple
