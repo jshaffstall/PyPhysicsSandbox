@@ -188,25 +188,25 @@ def mouse_pressed ():
     return False
 
 
-def static_ball(x, y, radius, mass=1):
-    return ball(x, y, radius, mass, True)
+def static_ball(p, radius, mass=1):
+    return ball(p, radius, mass, True)
 
 
-def ball(x, y, radius, mass=1, static=False):
-    ball = Ball(x, y, radius, mass, static)
+def ball(p, radius, mass=1, static=False):
+    ball = Ball(p[0], p[1], radius, mass, static)
     shapes.append(ball)
 
     return ball
 
 
-def static_box(x, y, width, height, mass=1):
-    return box(x, y, width, height, mass, True)
+def static_box(p, width, height, mass=1):
+    return box(p, width, height, mass, True)
 
 
-def box(x, y, width, height, mass=1, static=False):
+def box(p, width, height, mass=1, static=False):
     # Polygons expect x,y to be the center point
-    x += width/2
-    y += height/2
+    x = p[0] + width/2
+    y = p[1] + height/2
 
     box = Box(x, y, width, height, 0, mass, static)
     shapes.append(box)
@@ -214,14 +214,14 @@ def box(x, y, width, height, mass=1, static=False):
     return box
 
 
-def static_rounded_box(x, y, width, height, radius, mass=1):
-    return rounded_box(x, y, width, height, radius, mass, True)
+def static_rounded_box(p, width, height, radius, mass=1):
+    return rounded_box(p, width, height, radius, mass, True)
 
 
-def rounded_box(x, y, width, height, radius, mass=1, static=False):
+def rounded_box(p, width, height, radius, mass=1, static=False):
     # Polygons expect x,y to be the center point
-    x += width/2
-    y += height/2
+    x = p[0] + width/2
+    y = p[1] + height/2
 
     box = Box(x, y, width, height, radius, mass, static)
     shapes.append(box)
