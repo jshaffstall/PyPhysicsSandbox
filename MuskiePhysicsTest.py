@@ -12,7 +12,7 @@ def look_for_ball ():
 
     old_active = b1.active
 
-step_function(look_for_ball)
+set_observer(look_for_ball)
 
 window("My Window", 400, 300)
 gravity(0.0, 500.0)

@@ -20,7 +20,7 @@ space = pymunk.Space()
 win_title = "Untitled"
 win_width = 500
 win_height = 500
-frame_hook = None
+observer = None
 
 shapes = []
 
@@ -161,10 +161,10 @@ def window(title, width, height):
     win_height = height
 
 
-def step_function(hook):
-    global frame_hook
+def set_observer(hook):
+    global observer
 
-    frame_hook = hook
+    observer = hook
 
 
 def gravity(x, y):
@@ -256,8 +256,8 @@ def run():
             if event.type == pygame.QUIT:
                 sys.exit(0)
 
-        if frame_hook:
-            frame_hook ()
+        if observer:
+            observer ()
 
         screen.fill((255, 255, 255))
 
