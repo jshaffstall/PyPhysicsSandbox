@@ -8,6 +8,7 @@
 #   shapely http://toblerity.org/shapely/project.html#installation
 
 # TODO: Need to allow tying two objects together so they move as one
+# TODO: add line segment object
 
 from pygame import Color
 
