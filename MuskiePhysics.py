@@ -19,9 +19,14 @@ shapes = []
 class Ball:
     color = Color('black')
 
-    def __init__(self, x, y, radius, mass):
+    def __init__(self, x, y, radius, mass, static):
         moment = pymunk.moment_for_circle(mass, 0, radius)
-        body = pymunk.Body(mass, moment)
+
+        if static:
+            body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
+        else:
+            body = pymunk.Body(mass, moment)
+
         body.position = x, y
         self.shape = pymunk.Circle(body, radius)
         space.add(body, self.shape)
@@ -64,7 +69,7 @@ def gravity(x, y):
     space.gravity = (x, y)
 
 
-def ball(x, y, radius, mass):
+def ball(x, y, radius, mass, static=False):
     # What is the shape that's returned?  To do anything
     # else with this object, I probably need to wrap it
     # in an object of my creation that knows how to draw
@@ -74,7 +79,7 @@ def ball(x, y, radius, mass):
     # the simulation for drawing purposes, along with
     # being returned to the user so they can further
     # modify the shape.
-    ball = Ball(x, y, radius, mass)
+    ball = Ball(x, y, radius, mass, static)
     shapes.append(ball)
 
     return ball
