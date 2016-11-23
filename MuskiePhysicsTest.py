@@ -9,7 +9,7 @@ b1.color = Color('green')
 b2 = ball(98, 100, 30, 1, True)
 b2.color = Color('blue')
 
-box1 = static_rounded_box(200,200, 30, 10, 3)
+box1 = static_rounded_box(0, 290, 400, 10, 3)
 box1.color = Color('red')
 
 #tri1 = triangle((195, 35), (245, 35), (220, -15))
@@ -17,5 +17,6 @@ box1.color = Color('red')
 
 poly1 = poly(((195, 35), (245, 35), (220, -15)))
 poly1.color = Color('blue')
+poly1.wrap = True
 
 run()

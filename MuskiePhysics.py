@@ -8,6 +8,7 @@
 #   shapely http://toblerity.org/shapely/project.html#installation
 
 # TODO: Need to allow tying two objects together so they move as one
+# TODO: Expose friction and set some reasonable default
 
 from pygame import Color
 
@@ -26,6 +27,7 @@ shapes = []
 
 class Ball:
     color = Color('black')
+    wrap = False
 
     def __init__(self, x, y, radius, mass, static):
         moment = pymunk.moment_for_circle(mass, 0, radius)
@@ -57,6 +59,7 @@ class Ball:
 
 class Text:
     color = Color('black')
+    wrap = False
 
     def __init__(self, x, y, text, static):
         # How to create a rectangular shape in pymunk that matches the
@@ -93,6 +96,7 @@ class Text:
 
 class Box:
     color = Color('black')
+    wrap = False
 
     def __init__(self, x, y, width, height, radius, mass, static):
         moment = pymunk.moment_for_box(mass, (width, height))
@@ -131,6 +135,7 @@ class Box:
 
 class Poly:
     color = Color('black')
+    wrap = False
 
     def __init__(self, x, y, vertices, radius, mass, static):
         moment = pymunk.moment_for_poly(mass, vertices, (0, 0), radius)
@@ -206,6 +211,10 @@ def static_box(x, y, width, height, mass=1):
 
 
 def box(x, y, width, height, mass=1, static=False):
+    # Polygons expect x,y to be the center point
+    x += width/2
+    y += height/2
+
     box = Box(x, y, width, height, 0, mass, static)
     shapes.append(box)
 
@@ -217,6 +226,10 @@ def static_rounded_box(x, y, width, height, radius, mass=1):
 
 
 def rounded_box(x, y, width, height, radius, mass=1, static=False):
+    # Polygons expect x,y to be the center point
+    x += width/2
+    y += height/2
+
     box = Box(x, y, width, height, radius, mass, static)
     shapes.append(box)
 
@@ -283,6 +296,22 @@ def run():
         for shape in shapes_to_remove:
             space.remove(shape.shape, shape.shape.body)
             shapes.remove(shape)
+
+        # Also adjust positions for any shapes that are supposed
+        # to wrap and have gone off an edge of the screen.
+        for shape in shapes:
+            if shape.wrap:
+                if shape.shape.body.position.x < 0:
+                    shape.shape.body.position = (win_width-1, shape.shape.body.position.y)
+
+                if shape.shape.body.position.x >= win_width:
+                    shape.shape.body.position = (0, shape.shape.body.position.y)
+
+                if shape.shape.body.position.y < 0:
+                    shape.shape.body.position = (shape.shape.body.position.x, win_height-1)
+
+                if shape.shape.body.position.y >= win_height:
+                    shape.shape.body.position = (shape.shape.body.position.x, 0)
 
         # Now draw the shapes that are left
         for shape in shapes:
