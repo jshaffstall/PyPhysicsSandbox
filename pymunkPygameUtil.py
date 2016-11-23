@@ -89,6 +89,7 @@ class DrawOptions(pymunk.SpaceDebugDrawOptions):
         pygame.draw.lines(self.surface, fill_color, False, [p1, p2], r)
 
     def draw_polygon(self, verts, radius, outline_color, fill_color):
+        #polygon.get_vertices() gets the array of vertices
         ps = [to_pygame(v, self.surface) for v in verts]
         ps += [ps[0]]
 
