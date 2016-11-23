@@ -40,7 +40,7 @@ class Ball:
 class Text:
     color = Color('black')
 
-    def __init__(self, x, y, text):
+    def __init__(self, x, y, text, static):
         # How to create a rectangular shape in pymunk that matches the
         # bounding box of the text in pygame?
         #
@@ -59,8 +59,30 @@ class Text:
         # screen.blit(label, (100, 100))
 
         # How to draw the shapes rotated to match the physics rotation?
+        p = to_pygame(self.shape.body.position)
+        pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
 
-        pass
+
+class Box:
+    color = Color('black')
+
+    def __init__(self, x, y, width, height, radius, mass, static):
+        moment = pymunk.moment_for_box(mass, (width, height))
+
+        if static:
+            body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
+        else:
+            body = pymunk.Body(mass, moment)
+
+        body.position = x, y
+        self.shape = pymunk.Poly.create_box(body, (width, height), radius)
+        space.add(body, self.shape)
+        self.width = width
+        self.height = height
+
+    def draw(self, screen):
+        p = to_pygame(self.shape.body.position)
+
 
 def to_pygame(p):
     # Converts pymunk body position into pygame coordinate tuple
@@ -81,20 +103,25 @@ def gravity(x, y):
     space.gravity = (x, y)
 
 
-def ball(x, y, radius, mass, static=False):
-    # What is the shape that's returned?  To do anything
-    # else with this object, I probably need to wrap it
-    # in an object of my creation that knows how to draw
-    # the shape in pygame and can allow color changes, etc.
-    #
-    # That shape should get added to a list of shapes in
-    # the simulation for drawing purposes, along with
-    # being returned to the user so they can further
-    # modify the shape.
+def ball(x, y, radius, mass=1, static=False):
     ball = Ball(x, y, radius, mass, static)
     shapes.append(ball)
 
     return ball
+
+
+def box(x, y, width, height, mass=1, static=False):
+    box = Box(x, y, width, height, 0, mass, static)
+    shapes.append(box)
+
+    return box
+
+
+def rounded_box(x, y, width, height, radius, mass=1, static=False):
+    box = Box(x, y, width, height, radius, mass, static)
+    shapes.append(box)
+
+    return box
 
 
 def run():
