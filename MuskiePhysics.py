@@ -24,79 +24,10 @@ frame_hook = None
 
 shapes = []
 
-
-class Ball:
+class BaseShape:
     color = Color('black')
     wrap = False
     active = True
-
-    def __init__(self, x, y, radius, mass, static):
-        moment = pymunk.moment_for_circle(mass, 0, radius)
-
-        if static:
-            body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
-        else:
-            body = pymunk.Body(mass, moment)
-
-        body.position = x, y
-        self.shape = pymunk.Circle(body, radius)
-        self.shape.elasticity = 0.90
-        self.shape.friction = 0.6
-        space.add(body, self.shape)
-
-    def draw(self, screen):
-        p = to_pygame(self.shape.body.position)
-        pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
-
-    @property
-    def elasticity(self):
-        return self.shape.elasticity
-
-    @elasticity.setter
-    def elasticity(self, value):
-        if type(value) == float:
-            self.shape.elasticity=value
-        else:
-            print("Elasticity value must be a floating point value")
-
-    @property
-    def friction(self):
-        return self.shape.friction
-
-    @friction.setter
-    def friction(self, value):
-        if type(value) == float:
-            self.shape.friction = value
-        else:
-            print("Friction value must be a floating point value")
-
-
-class Text:
-    color = Color('black')
-    wrap = False
-    active = True
-
-    def __init__(self, x, y, text, static):
-        # How to create a rectangular shape in pymunk that matches the
-        # bounding box of the text in pygame?
-        #
-        # pymunk.Poly.create_box(body, size_tuple, radius)
-        #
-        # This creates the shape to go with a body
-        self.shape.elasticity = 0.9
-        self.shape.friction = 0.6
-
-    def draw(self, screen):
-        # initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
-        # myfont = pygame.font.SysFont("monospace", 15)
-        #
-        # # render text
-        # label = myfont.render("Some text!", 1, (255, 255, 0))
-        # screen.blit(label, (100, 100))
-
-        # How to draw the shapes rotated to match the physics rotation?
-        p = to_pygame(self.shape.body.position)
-        pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
 
     @property
     def elasticity(self):
@@ -121,11 +52,51 @@ class Text:
             print("Friction value must be a floating point value")
 
 
-class Box:
-    color = Color('black')
-    wrap = False
-    active = True
+class Ball(BaseShape):
+    def __init__(self, x, y, radius, mass, static):
+        moment = pymunk.moment_for_circle(mass, 0, radius)
 
+        if static:
+            body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
+        else:
+            body = pymunk.Body(mass, moment)
+
+        body.position = x, y
+        self.shape = pymunk.Circle(body, radius)
+        self.shape.elasticity = 0.90
+        self.shape.friction = 0.6
+        space.add(body, self.shape)
+
+    def draw(self, screen):
+        p = to_pygame(self.shape.body.position)
+        pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
+
+
+class Text(BaseShape):
+    def __init__(self, x, y, text, static):
+        # How to create a rectangular shape in pymunk that matches the
+        # bounding box of the text in pygame?
+        #
+        # pymunk.Poly.create_box(body, size_tuple, radius)
+        #
+        # This creates the shape to go with a body
+        self.shape.elasticity = 0.9
+        self.shape.friction = 0.6
+
+    def draw(self, screen):
+        # initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
+        # myfont = pygame.font.SysFont("monospace", 15)
+        #
+        # # render text
+        # label = myfont.render("Some text!", 1, (255, 255, 0))
+        # screen.blit(label, (100, 100))
+
+        # How to draw the shapes rotated to match the physics rotation?
+        p = to_pygame(self.shape.body.position)
+        pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
+
+
+class Box(BaseShape):
     def __init__(self, x, y, width, height, radius, mass, static):
         moment = pymunk.moment_for_box(mass, (width, height))
 
@@ -150,34 +121,8 @@ class Box:
         pygame.draw.polygon(screen, self.color, ps)
         pygame.draw.lines(screen, self.color, False, ps, self.radius)
 
-    @property
-    def elasticity(self):
-        return self.shape.elasticity
 
-    @elasticity.setter
-    def elasticity(self, value):
-        if type(value) == float:
-            self.shape.elasticity=value
-        else:
-            print("Elasticity value must be a floating point value")
-
-    @property
-    def friction(self):
-        return self.shape.friction
-
-    @friction.setter
-    def friction(self, value):
-        if type(value) == float:
-            self.shape.friction = value
-        else:
-            print("Friction value must be a floating point value")
-
-
-class Poly:
-    color = Color('black')
-    wrap = False
-    active = True
-
+class Poly(BaseShape):
     def __init__(self, x, y, vertices, radius, mass, static):
         moment = pymunk.moment_for_poly(mass, vertices, (0, 0), radius)
 
@@ -199,28 +144,6 @@ class Poly:
 
         pygame.draw.polygon(screen, self.color, ps)
         pygame.draw.lines(screen, self.color, False, ps, self.radius)
-
-    @property
-    def elasticity(self):
-        return self.shape.elasticity
-
-    @elasticity.setter
-    def elasticity(self, value):
-        if type(value) == float:
-            self.shape.elasticity=value
-        else:
-            print("Elasticity value must be a floating point value")
-
-    @property
-    def friction(self):
-        return self.shape.friction
-
-    @friction.setter
-    def friction(self, value):
-        if type(value) == float:
-            self.shape.friction = value
-        else:
-            print("Friction value must be a floating point value")
 
 
 def to_pygame(p):

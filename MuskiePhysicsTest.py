@@ -2,6 +2,7 @@ from MuskiePhysics import *
 
 old_active = True
 
+
 def look_for_ball ():
     global b1
     global old_active
