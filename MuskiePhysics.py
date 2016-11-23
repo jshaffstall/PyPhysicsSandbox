@@ -31,11 +31,23 @@ class Ball:
 
         body.position = x, y
         self.shape = pymunk.Circle(body, radius)
+        self.shape.elasticity = 0.90
         space.add(body, self.shape)
 
     def draw(self, screen):
         p = to_pygame(self.shape.body.position)
         pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
+
+    @property
+    def elasticity(self):
+        return self.shape.elasticity
+
+    @elasticity.setter
+    def elasticity(self, value):
+        if type(value) == float:
+            self.shape.elasticity=value
+        else:
+            print("Elasticity value must be a floating point value")
 
 class Text:
     color = Color('black')
@@ -47,8 +59,7 @@ class Text:
         # pymunk.Poly.create_box(body, size_tuple, radius)
         #
         # This creates the shape to go with a body
-
-        pass
+        self.shape.elasticity = 0.9
 
     def draw(self, screen):
         # initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
@@ -61,6 +72,17 @@ class Text:
         # How to draw the shapes rotated to match the physics rotation?
         p = to_pygame(self.shape.body.position)
         pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
+
+    @property
+    def elasticity(self):
+        return self.shape.elasticity
+
+    @elasticity.setter
+    def elasticity(self, value):
+        if type(value) == float:
+            self.shape.elasticity = value
+        else:
+            print("Elasticity value must be a floating point value")
 
 
 class Box:
@@ -76,12 +98,27 @@ class Box:
 
         body.position = x, y
         self.shape = pymunk.Poly.create_box(body, (width, height), radius)
+        self.shape.elasticity = 0.9
         space.add(body, self.shape)
         self.width = width
         self.height = height
 
     def draw(self, screen):
-        p = to_pygame(self.shape.body.position)
+        ps = [self.shape.body.local_to_world(v) for v in self.shape.get_vertices()]
+        ps += [ps[0]]
+
+        pygame.draw.polygon(screen, self.color, ps)
+
+    @property
+    def elasticity(self):
+        return self.shape.elasticity
+
+    @elasticity.setter
+    def elasticity(self, value):
+        if type(value) == float:
+            self.shape.elasticity=value
+        else:
+            print("Elasticity value must be a floating point value")
 
 
 def to_pygame(p):
@@ -110,15 +147,22 @@ def ball(x, y, radius, mass=1, static=False):
     return ball
 
 
-def box(x, y, width, height, mass=1, static=False):
-    box = Box(x, y, width, height, 0, mass, static)
+def static_box(x, y, width, height, mass=1):
+    box = Box(x, y, width, height, 0, mass, True)
     shapes.append(box)
 
     return box
 
 
-def rounded_box(x, y, width, height, radius, mass=1, static=False):
-    box = Box(x, y, width, height, radius, mass, static)
+def box(x, y, width, height, mass=1):
+    box = Box(x, y, width, height, 0, mass, False)
+    shapes.append(box)
+
+    return box
+
+
+def rounded_box(x, y, width, height, radius, mass=1):
+    box = Box(x, y, width, height, radius, mass, False)
     shapes.append(box)
 
     return box
