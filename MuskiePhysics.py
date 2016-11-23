@@ -149,6 +149,10 @@ def gravity(x, y):
     space.gravity = (x, y)
 
 
+def static_ball(x, y, radius, mass=1):
+    return ball(x, y, radius, mass, True)
+
+
 def ball(x, y, radius, mass=1, static=False):
     ball = Ball(x, y, radius, mass, static)
     shapes.append(ball)
@@ -157,28 +161,22 @@ def ball(x, y, radius, mass=1, static=False):
 
 
 def static_box(x, y, width, height, mass=1):
-    box = Box(x, y, width, height, 0, mass, True)
-    shapes.append(box)
-
-    return box
+    return box(x, y, width, height, mass, True)
 
 
-def box(x, y, width, height, mass=1):
-    box = Box(x, y, width, height, 0, mass, False)
+def box(x, y, width, height, mass=1, static=False):
+    box = Box(x, y, width, height, 0, mass, static)
     shapes.append(box)
 
     return box
 
 
 def static_rounded_box(x, y, width, height, radius, mass=1):
-    box = Box(x, y, width, height, radius, mass, True)
-    shapes.append(box)
-
-    return box
+    return rounded_box(x, y, width, height, radius, mass, True)
 
 
-def rounded_box(x, y, width, height, radius, mass=1):
-    box = Box(x, y, width, height, radius, mass, False)
+def rounded_box(x, y, width, height, radius, mass=1, static=False):
+    box = Box(x, y, width, height, radius, mass, static)
     shapes.append(box)
 
     return box
