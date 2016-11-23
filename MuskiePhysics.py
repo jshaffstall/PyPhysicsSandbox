@@ -21,6 +21,7 @@ win_title = "Untitled"
 win_width = 500
 win_height = 500
 observer = None
+pressed = False
 
 shapes = []
 
@@ -28,6 +29,9 @@ class BaseShape:
     color = Color('black')
     wrap = False
     active = True
+
+    def hit(self, x, y):
+        self.shape.body.apply_impulse_at_local_point((x,y))
 
     @property
     def elasticity(self):
@@ -169,6 +173,19 @@ def set_observer(hook):
 
 def gravity(x, y):
     space.gravity = (x, y)
+
+
+def mouse_pressed ():
+    global pressed
+
+    if not pressed and pygame.mouse.get_pressed()[0]:
+        pressed = True
+        return True
+
+    if pressed and not pygame.mouse.get_pressed()[0]:
+        pressed = False
+
+    return False
 
 
 def static_ball(x, y, radius, mass=1):
