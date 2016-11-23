@@ -27,6 +27,7 @@ shapes = []
 class Ball:
     color = Color('black')
     wrap = False
+    active = True
 
     def __init__(self, x, y, radius, mass, static):
         moment = pymunk.moment_for_circle(mass, 0, radius)
@@ -72,6 +73,7 @@ class Ball:
 class Text:
     color = Color('black')
     wrap = False
+    active = True
 
     def __init__(self, x, y, text, static):
         # How to create a rectangular shape in pymunk that matches the
@@ -121,6 +123,7 @@ class Text:
 class Box:
     color = Color('black')
     wrap = False
+    active = True
 
     def __init__(self, x, y, width, height, radius, mass, static):
         moment = pymunk.moment_for_box(mass, (width, height))
@@ -172,6 +175,7 @@ class Box:
 class Poly:
     color = Color('black')
     wrap = False
+    active = True
 
     def __init__(self, x, y, vertices, radius, mass, static):
         moment = pymunk.moment_for_poly(mass, vertices, (0, 0), radius)
@@ -342,6 +346,7 @@ def run():
                 shapes_to_remove.append(shape)
 
         for shape in shapes_to_remove:
+            shape.active = False
             space.remove(shape.shape, shape.shape.body)
             shapes.remove(shape)
 

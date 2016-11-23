@@ -1,12 +1,26 @@
 from MuskiePhysics import *
 
+old_active = True
+
+def look_for_ball ():
+    global b1
+    global old_active
+
+    if old_active != b1.active and not b1.active:
+        print ("Goodbye ball!")
+
+    old_active = b1.active
+
+step_function(look_for_ball)
+
 window("My Window", 400, 300)
 gravity(0.0, 500.0)
 
-b1 = ball(100, 10, 30, 1)
+b1 = ball(100, 10, 30)
 b1.color = Color('green')
+b1.friction = 0.25
 
-b2 = ball(98, 100, 30, 1, True)
+b2 = static_ball(98, 100, 30)
 b2.color = Color('blue')
 
 box1 = static_rounded_box(0, 290, 400, 10, 3)
