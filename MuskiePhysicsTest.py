@@ -12,4 +12,10 @@ b2.color = Color('blue')
 box1 = static_rounded_box(200,200, 30, 10, 3)
 box1.color = Color('red')
 
+#tri1 = triangle((195, 35), (245, 35), (220, -15))
+#tri1.color = Color('blue')
+
+poly1 = poly(((195, 35), (245, 35), (220, -15)))
+poly1.color = Color('blue')
+
 run()
