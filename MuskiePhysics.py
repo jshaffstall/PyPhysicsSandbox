@@ -8,7 +8,6 @@
 #   shapely http://toblerity.org/shapely/project.html#installation
 
 # TODO: Need to allow tying two objects together so they move as one
-# TODO: Expose friction and set some reasonable default
 
 from pygame import Color
 
@@ -40,6 +39,7 @@ class Ball:
         body.position = x, y
         self.shape = pymunk.Circle(body, radius)
         self.shape.elasticity = 0.90
+        self.shape.friction = 0.6
         space.add(body, self.shape)
 
     def draw(self, screen):
@@ -57,6 +57,18 @@ class Ball:
         else:
             print("Elasticity value must be a floating point value")
 
+    @property
+    def friction(self):
+        return self.shape.friction
+
+    @friction.setter
+    def friction(self, value):
+        if type(value) == float:
+            self.shape.friction = value
+        else:
+            print("Friction value must be a floating point value")
+
+
 class Text:
     color = Color('black')
     wrap = False
@@ -69,6 +81,7 @@ class Text:
         #
         # This creates the shape to go with a body
         self.shape.elasticity = 0.9
+        self.shape.friction = 0.6
 
     def draw(self, screen):
         # initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
@@ -93,6 +106,17 @@ class Text:
         else:
             print("Elasticity value must be a floating point value")
 
+    @property
+    def friction(self):
+        return self.shape.friction
+
+    @friction.setter
+    def friction(self, value):
+        if type(value) == float:
+            self.shape.friction = value
+        else:
+            print("Friction value must be a floating point value")
+
 
 class Box:
     color = Color('black')
@@ -109,6 +133,7 @@ class Box:
         body.position = x, y
         self.shape = pymunk.Poly.create_box(body, (width, height), radius)
         self.shape.elasticity = 0.9
+        self.shape.friction = 0.6
         space.add(body, self.shape)
         self.width = width
         self.height = height
@@ -132,6 +157,17 @@ class Box:
         else:
             print("Elasticity value must be a floating point value")
 
+    @property
+    def friction(self):
+        return self.shape.friction
+
+    @friction.setter
+    def friction(self, value):
+        if type(value) == float:
+            self.shape.friction = value
+        else:
+            print("Friction value must be a floating point value")
+
 
 class Poly:
     color = Color('black')
@@ -148,6 +184,7 @@ class Poly:
         body.position = x, y
         self.shape = pymunk.Poly(body, vertices, None, radius)
         self.shape.elasticity = 0.9
+        self.shape.friction = 0.6
         space.add(body, self.shape)
         self.radius = radius
 
@@ -168,6 +205,17 @@ class Poly:
             self.shape.elasticity=value
         else:
             print("Elasticity value must be a floating point value")
+
+    @property
+    def friction(self):
+        return self.shape.friction
+
+    @friction.setter
+    def friction(self, value):
+        if type(value) == float:
+            self.shape.friction = value
+        else:
+            print("Friction value must be a floating point value")
 
 
 def to_pygame(p):
