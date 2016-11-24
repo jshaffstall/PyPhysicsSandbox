@@ -13,9 +13,8 @@
 # TODO: bug with poly not drawing catapult arm correctly
 # lever = poly(((50, 200), (65, 200), (65, 440), (450, 440), (450, 450), (50, 450)))
 # Need to decompose concave polygons into convex polygons automatically
-# Sample code here for detecting convex polygons: https://www.toptal.com/python/computational-geometry-in-python-from-theory-to-implementation
-# Need to make sure points are in counterclockwise order first (or put them into ccw order automatically)
 # Possibly use this library which has polygon decomposition: http://sseemayer.github.io/Py2D/features.html
+# it has functions for detecting convexity and ordering points in ccw order
 
 from pygame import Color
 
