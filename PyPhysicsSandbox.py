@@ -15,6 +15,7 @@
 # Need to decompose concave polygons into convex polygons automatically
 # Sample code here for detecting convex polygons: https://www.toptal.com/python/computational-geometry-in-python-from-theory-to-implementation
 # Need to make sure points are in counterclockwise order first (or put them into ccw order automatically)
+# Possibly use this library which has polygon decomposition: http://sseemayer.github.io/Py2D/features.html
 
 from pygame import Color
 
