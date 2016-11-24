@@ -10,6 +10,8 @@
 
 # TODO: Need to allow tying two objects together so they move as one
 # TODO: add line segment object
+# TODO: bug with poly not drawing catapult arm correctly
+# lever = poly(((50, 200), (65, 200), (65, 440), (450, 440), (450, 450), (50, 450)))
 
 from pygame import Color
 
@@ -311,7 +313,7 @@ def text_with_font(p, caption, font, size, mass=1, static=False):
     return text
 
 
-def run():
+def run(do_physics=True):
     screen = pygame.display.set_mode((win_width, win_height))
     pygame.display.set_caption(win_title)
     clock = pygame.time.Clock()
@@ -360,7 +362,8 @@ def run():
         for shape in shapes:
             shape.draw(screen)
 
-        space.step(1/50.0)
+        if do_physics:
+            space.step(1/50.0)
 
         pygame.display.flip()
         clock.tick(50)

@@ -122,10 +122,12 @@ Creates text that will interact with the world as if it were a rectangle.  The s
 p is a tuple containing the x and  y coordinates of the upper left corner of the text.
 
 ```python
-run()
+run(do_physics=True)
 ```
 
 Call this after you have created all your shapes to actually run the simulation.  This function returns only when the user has closed the simulation window.
+
+Pass False to this method to do the drawing but not activate physics.  Useful for getting the scene right before running the simulation.
 
 ###Shape Methods
 
