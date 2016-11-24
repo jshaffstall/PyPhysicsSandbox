@@ -1,4 +1,4 @@
-from MuskiePhysics import *
+from PyPhysicsSandbox import *
 
 # old_active = True
 #
@@ -20,14 +20,20 @@ from MuskiePhysics import *
 #     global step
 #
 #     if step == 0:
-#         marble = ball(390,380,5)
+#         marble = ball((390,380),5)
 #         marble.color = Color('black')
 #         marble.hit(-800,-900)
 #         step = 50
 #     else:
 #         step -= 1
-#
-# set_observer(look_for_ball)
+
+def look_for_ball():
+    global poly1
+
+    if mouse_pressed():
+        poly1.hit(0,-50)
+
+set_observer(look_for_ball)
 
 window("My Window", 400, 300)
 gravity(0.0, 500.0)
@@ -42,8 +48,8 @@ b2.color = Color('blue')
 box1 = static_rounded_box((0, 290), 400, 10, 3)
 box1.color = Color('red')
 
-#tri1 = triangle((195, 35), (245, 35), (220, -15))
-#tri1.color = Color('blue')
+tri1 = triangle((260, 35), (250, 35), (240, -15))
+tri1.color = Color('red')
 
 poly1 = poly(((195, 35), (245, 35), (220, -15)))
 poly1.color = Color('blue')

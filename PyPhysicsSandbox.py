@@ -5,7 +5,8 @@
 # Dependencies
 #
 #   pymunk http://www.pymunk.org/en/latest/
-#   shapely http://toblerity.org/shapely/project.html#installation
+#   pygame http://www.pygame.org
+
 
 # TODO: Need to allow tying two objects together so they move as one
 # TODO: add line segment object
@@ -26,12 +27,12 @@ pressed = False
 shapes = []
 
 class BaseShape:
-    color = Color('black')
-    wrap = False
+    _color = Color('black')
+    _wrap = False
     active = True
 
     def hit(self, x, y):
-        self.shape.body.apply_impulse_at_local_point((x,y))
+        self.shape.body.apply_impulse_at_world_point((x,y))
 
     @property
     def elasticity(self):
@@ -54,6 +55,28 @@ class BaseShape:
             self.shape.friction = value
         else:
             print("Friction value must be a floating point value")
+
+    @property
+    def wrap(self):
+        return self._wrap
+
+    @wrap.setter
+    def wrap(self, value):
+        if type(value) == bool:
+            self._wrap = value
+        else:
+            print("Wrap value must be a bool value")
+
+    @property
+    def color(self):
+        return self._color
+
+    @color.setter
+    def color(self, value):
+        if type(value) == Color:
+            self._color = value
+        else:
+            print("Color value must be a Color instance")
 
 
 class Ball(BaseShape):
