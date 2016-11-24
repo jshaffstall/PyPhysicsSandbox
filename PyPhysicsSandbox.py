@@ -12,6 +12,9 @@
 # TODO: add line segment object
 # TODO: bug with poly not drawing catapult arm correctly
 # lever = poly(((50, 200), (65, 200), (65, 440), (450, 440), (450, 450), (50, 450)))
+# Need to decompose concave polygons into convex polygons automatically
+# Sample code here for detecting convex polygons: https://www.toptal.com/python/computational-geometry-in-python-from-theory-to-implementation
+# Need to make sure points are in counterclockwise order first (or put them into ccw order automatically)
 
 from pygame import Color
 
@@ -173,10 +176,13 @@ class Poly(BaseShape):
 
     def draw(self, screen):
         ps = [self.shape.body.local_to_world(v) for v in self.shape.get_vertices()]
-        ps += [ps[0]]
+
+        if len(ps) != 3:
+            for p in ps:
+                pygame.draw.circle(screen, Color('red'), to_pygame(p), 2, 0)
 
         pygame.draw.polygon(screen, self.color, ps)
-        pygame.draw.lines(screen, self.color, False, ps, self.radius)
+        pygame.draw.lines(screen, self.color, True, ps, self.radius)
 
 
 def to_pygame(p):
