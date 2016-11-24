@@ -27,13 +27,13 @@ from PyPhysicsSandbox import *
 #     else:
 #         step -= 1
 
-def look_for_ball():
-    global poly1
-
-    if mouse_pressed():
-        poly1.hit(0,-50)
-
-set_observer(look_for_ball)
+# def look_for_ball():
+#     global poly1
+#
+#     if mouse_pressed():
+#         poly1.hit(0,-50)
+#
+# set_observer(look_for_ball)
 
 window("My Window", 400, 300)
 gravity(0.0, 500.0)

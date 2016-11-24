@@ -108,14 +108,16 @@ static_poly(vertices, mass=1)
 
 Creates a closed polygon out of the given points and returns its instance.  The last point is automatically connected back to the first point.  The static version does not move.
 
-vertices is a tuple of points, where each point is a tuple of x and y coordinates.
+vertices is a tuple of points, where each point is a tuple of x and y coordinates.  The order of these points matters!
 
 ```python
-text(x, y, caption)
-static_text(x, y, caption)
+text(p, caption)
+static_text(p, caption)
 ```
 
-Creates text that will interact with the world as if it were a rectangle.  The static text does not move.
+Creates text that will interact with the world as if it were a rectangle.  The static text version does not move.
+
+p is a tuple containing the x and  y coordinates of the upper left corner of the text.
 
 ###Shape Methods
 

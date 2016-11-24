@@ -99,30 +99,6 @@ class Ball(BaseShape):
         pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
 
 
-class Text(BaseShape):
-    def __init__(self, x, y, text, static):
-        # How to create a rectangular shape in pymunk that matches the
-        # bounding box of the text in pygame?
-        #
-        # pymunk.Poly.create_box(body, size_tuple, radius)
-        #
-        # This creates the shape to go with a body
-        self.shape.elasticity = 0.9
-        self.shape.friction = 0.6
-
-    def draw(self, screen):
-        # initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
-        # myfont = pygame.font.SysFont("monospace", 15)
-        #
-        # # render text
-        # label = myfont.render("Some text!", 1, (255, 255, 0))
-        # screen.blit(label, (100, 100))
-
-        # How to draw the shapes rotated to match the physics rotation?
-        p = to_pygame(self.shape.body.position)
-        pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
-
-
 class Box(BaseShape):
     def __init__(self, x, y, width, height, radius, mass, static):
         moment = pymunk.moment_for_box(mass, (width, height))
@@ -147,6 +123,33 @@ class Box(BaseShape):
 
         pygame.draw.polygon(screen, self.color, ps)
         pygame.draw.lines(screen, self.color, False, ps, self.radius)
+
+
+class Text(Box):
+    def __init__(self, x, y, caption, font_name, font_size, mass, static):
+        self.font = pygame.font.SysFont(font_name, font_size)
+        width, height = self.font.size(caption)
+
+        self.x = x
+        self.y = y
+        self.caption = caption
+
+        box_x = x + width / 2
+        box_y = y + height / 2
+
+        super(Text,self).__init__(box_x, box_y, width, height, 3, mass, static)
+
+    def draw(self, screen):
+        # initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
+        # myfont = pygame.font.SysFont("monospace", 15)
+        #
+        # # render text
+        # label = myfont.render("Some text!", 1, (255, 255, 0))
+        # screen.blit(label, (100, 100))
+
+        # How to draw the shapes rotated to match the physics rotation?
+        label = self.font.render(self.caption, True, self._color)
+        screen.blit(label, (self.x, self.y))
 
 
 class Poly(BaseShape):
@@ -283,6 +286,24 @@ def triangle(p1, p2, p3, mass=1, static=False):
     shapes.append(triangle)
 
     return triangle
+
+
+def static_text(p, caption, mass=1):
+    return text(p, caption, mass, True)
+
+
+def text(p, caption, mass=1, static=False):
+    text = Text(p[0], p[1], caption, "Arial", 12, mass, static)
+    return text
+
+
+def static_text_with_font(p, caption, font, size, mass=1):
+    return text_with_font(p, caption, font, size, mass, True)
+
+
+def text_with_font(p, caption, font, size, mass=1, static=False):
+    text = Text(p[0], p[1], caption, font, size, mass, static)
+    return text
 
 
 def run():
