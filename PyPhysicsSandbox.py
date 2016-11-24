@@ -16,6 +16,9 @@ from pygame import Color
 import sys
 import pygame
 import pymunk
+import math
+
+pygame.init()
 
 space = pymunk.Space()
 win_title = "Untitled"
@@ -127,12 +130,14 @@ class Box(BaseShape):
 
 class Text(Box):
     def __init__(self, x, y, caption, font_name, font_size, mass, static):
-        self.font = pygame.font.SysFont(font_name, font_size)
-        width, height = self.font.size(caption)
+        font = pygame.font.SysFont(font_name, font_size)
+        width, height = font.size(caption)
+        height -= font.get_ascent()
 
         self.x = x
         self.y = y
         self.caption = caption
+        self.label = font.render(self.caption, True, self.color)
 
         box_x = x + width / 2
         box_y = y + height / 2
@@ -140,16 +145,12 @@ class Text(Box):
         super(Text,self).__init__(box_x, box_y, width, height, 3, mass, static)
 
     def draw(self, screen):
-        # initialize font; must be called after 'pygame.init()' to avoid 'Font not Initialized' error
-        # myfont = pygame.font.SysFont("monospace", 15)
-        #
-        # # render text
-        # label = myfont.render("Some text!", 1, (255, 255, 0))
-        # screen.blit(label, (100, 100))
+        body_angle = self.shape.body.angle
+        degrees = body_angle * 180 / math.pi
+        rotated = pygame.transform.rotate(self.label, -degrees)
 
-        # How to draw the shapes rotated to match the physics rotation?
-        label = self.font.render(self.caption, True, self._color)
-        screen.blit(label, (self.x, self.y))
+        size = rotated.get_rect()
+        screen.blit(rotated, (self.shape.body.position.x-(size.width/2), self.shape.body.position.y-(size.height/2)))
 
 
 class Poly(BaseShape):
@@ -294,6 +295,8 @@ def static_text(p, caption, mass=1):
 
 def text(p, caption, mass=1, static=False):
     text = Text(p[0], p[1], caption, "Arial", 12, mass, static)
+    shapes.append(text)
+
     return text
 
 
@@ -303,19 +306,21 @@ def static_text_with_font(p, caption, font, size, mass=1):
 
 def text_with_font(p, caption, font, size, mass=1, static=False):
     text = Text(p[0], p[1], caption, font, size, mass, static)
+    shapes.append(text)
+
     return text
 
 
 def run():
-    pygame.init()
     screen = pygame.display.set_mode((win_width, win_height))
     pygame.display.set_caption(win_title)
     clock = pygame.time.Clock()
+    running = True
 
-    while True:
+    while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                sys.exit(0)
+                running = False
 
         if observer:
             observer ()
@@ -359,6 +364,8 @@ def run():
 
         pygame.display.flip()
         clock.tick(50)
+
+    pygame.quit()
 
 
 def poly_centroid(vertices):

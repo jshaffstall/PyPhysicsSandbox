@@ -28,6 +28,8 @@ poly1.color = Color('blue')
 poly1.wrap = True
 
 run()
+
+print('Done!')
 ```
 
 ## Motivation
@@ -118,6 +120,12 @@ static_text(p, caption)
 Creates text that will interact with the world as if it were a rectangle.  The static text version does not move.
 
 p is a tuple containing the x and  y coordinates of the upper left corner of the text.
+
+```python
+run()
+```
+
+Call this after you have created all your shapes to actually run the simulation.  This function returns only when the user has closed the simulation window.
 
 ###Shape Methods
 

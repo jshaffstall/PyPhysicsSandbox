@@ -33,7 +33,13 @@ from PyPhysicsSandbox import *
 #     if mouse_pressed():
 #         poly1.hit(0,-50)
 #
-# set_observer(look_for_ball)
+
+def look_for_ball():
+    if mouse_pressed ():
+        while not mouse_pressed ():
+            pass
+
+set_observer(look_for_ball)
 
 window("My Window", 400, 300)
 gravity(0.0, 500.0)
@@ -55,4 +61,10 @@ poly1 = poly(((195, 35), (245, 35), (220, -15)))
 poly1.color = Color('blue')
 poly1.wrap = True
 
+text1 = text((200,200), "Hello World")
+text1.color = Color('green')
+text1.wrap = True
+
 run()
+
+
