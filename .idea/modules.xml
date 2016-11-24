@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/PymunkWrapper.iml" filepath="$PROJECT_DIR$/.idea/PymunkWrapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PyPhysicsSandbox.iml" filepath="$PROJECT_DIR$/.idea/PyPhysicsSandbox.iml" />
     </modules>
   </component>
 </project>

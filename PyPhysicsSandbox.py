@@ -6,7 +6,7 @@
 #
 #   pymunk http://www.pymunk.org/en/latest/
 #   pygame http://www.pygame.org
-
+#   py2d   http://sseemayer.github.io/Py2D
 
 # TODO: Need to allow tying two objects together so they move as one
 # TODO: add line segment object
@@ -15,10 +15,11 @@
 # Need to decompose concave polygons into convex polygons automatically
 # Possibly use this library which has polygon decomposition: http://sseemayer.github.io/Py2D/features.html
 # it has functions for detecting convexity and ordering points in ccw order
+# Install py2d using : pip install py2d
 
 from pygame import Color
+from py2d.vecmath.Polygon import *
 
-import sys
 import pygame
 import pymunk
 import math
