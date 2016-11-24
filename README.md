@@ -34,7 +34,7 @@ print('Done!')
 
 ## Motivation
 
-The Calico IDE had a simple but limited physics simulation built into it I used for a lab in my introductory programming classes.  Students wanted to use features that were reasonable to think about in a physics simulation (joints and pins, for example), but were not supported in Calico.  This wrapper keeps the simplicity of the Calico physics API but exposes more advanced tools.
+The Calico IDE had a nice physics simulation built into it I used for a lab in my introductory programming classes.  Students wanted to use features that were reasonable to think about in a physics simulation (joints and pins, for example), but were not exposed by Calico.  This wrapper keeps the simplicity of the Calico physics API but exposes more advanced tools.
 
 ## Installation
 
