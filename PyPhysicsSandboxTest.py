@@ -1,4 +1,4 @@
-from PyPhysicsSandbox import *
+from pyPhysicsSandbox import *
 
 # old_active = True
 #

@@ -1,11 +1,11 @@
 ## Synopsis
 
-PyPhysicsSandbox is a simple wrapper around Pymunk that makes it easy to write code to explore physics simulations.  It's intended for use in introductory programming classrooms.
+pyPhysicsSandbox is a simple wrapper around Pymunk that makes it easy to write code to explore physics simulations.  It's intended for use in introductory programming classrooms.
 
 ## Code Example
 
 ```python
-from PyPhysicsSandbox import *
+from pyPhysicsSandbox import *
 
 window("My Window", 400, 300)
 gravity(0.0, 500.0)
@@ -36,11 +36,39 @@ print('Done!')
 
 The Calico IDE had a nice physics simulation built into it I used for a lab in my introductory programming classes.  Students wanted to use features that were reasonable to think about in a physics simulation (joints and pins, for example), but were not exposed by Calico.  This wrapper keeps the simplicity of the Calico physics API but exposes more advanced tools.
 
+Also, being IDE agnostic, this library can be used with your favorite IDE.
+
 ## Installation
 
-The code is written for Python 3, and uses pygame and pymunk.  You must install both of those packages before you can use this library.
+The code is written for Python 3, and uses pygame, pymunk, and py2d.  You must install all of those packages before you can use this library.
 
-TODO: how to install easily?
+###Python 3
+
+https://www.python.org/
+
+This library was written with Python 3.4, but should run on any newer Python 3.
+
+###pygame
+
+http://www.pygame.org/
+
+This library was written with pygame 1.9.  I specifically used the Windows 64-bit versions available at http://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame , but any 1.9 or later version that supports Python 3 should work.
+
+###pymunk
+
+http://www.pymunk.org/
+
+This library was written with pymunk 5.1.0.
+
+###py2d
+
+https://github.com/sseemayer/Py2D
+
+This library was written with the version of py2d on github, since the pip package at the time did not support Python 3.  To install directly from github ???
+
+###pyPhysicsSandbox
+
+TODO: how to install the library itself from github?  Need to write a setup.py file
 
 ## API Reference
 

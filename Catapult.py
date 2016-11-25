@@ -1,4 +1,4 @@
-from PyPhysicsSandbox import *
+from pyPhysicsSandbox import *
 
 WIN_WIDTH = 500
 WIN_HT = 600
