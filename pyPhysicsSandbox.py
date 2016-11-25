@@ -9,6 +9,7 @@
 #   py2d   http://sseemayer.github.io/Py2D  Must use version in github that has Python 3 compatibility
 
 # TODO: Need to allow tying two objects together so they move as one
+# Specifically putting text inside of another object would be nice if I need to special case it
 
 from pygame import Color
 from py2d.Math.Polygon import *
