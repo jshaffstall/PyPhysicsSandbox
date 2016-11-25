@@ -19,7 +19,6 @@ lever = poly(((50, 425), (65, 425), (65, 440), (450, 440), (450, 450), (50, 450)
 lever.color = Color("darkblue")
 lever.elasticity = 0.50
 
-ball
 ball1 = ball( (90, 425), 10)
 ball1.color = Color("green")
 ball1.wrap = True
