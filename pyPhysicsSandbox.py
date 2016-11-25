@@ -359,7 +359,15 @@ def run(do_physics=True):
 
         for shape in shapes_to_remove:
             shape.active = False
-            space.remove(shape.shape, shape.body)
+
+            if type(shape.shape) is list:
+                for s in shape.shape:
+                    space.remove(s)
+
+                space.remove(shape.body)
+            else:
+                space.remove(shape.shape, shape.body)
+
             shapes.remove(shape)
 
         # Also adjust positions for any shapes that are supposed
