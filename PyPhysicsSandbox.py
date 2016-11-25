@@ -18,7 +18,7 @@
 # Install py2d using : pip install py2d
 
 from pygame import Color
-from py2d.vecmath.Polygon import *
+from py2d.Math.Polygon import *
 
 import pygame
 import pymunk
@@ -93,15 +93,15 @@ class Ball(BaseShape):
         moment = pymunk.moment_for_circle(mass, 0, radius)
 
         if static:
-            body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
+            self.body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
         else:
-            body = pymunk.Body(mass, moment)
+            self.body = pymunk.Body(mass, moment)
 
-        body.position = x, y
-        self.shape = pymunk.Circle(body, radius)
+        self.body.position = x, y
+        self.shape = pymunk.Circle(self.body, radius)
         self.shape.elasticity = 0.90
         self.shape.friction = 0.6
-        space.add(body, self.shape)
+        space.add(self.body, self.shape)
 
     def draw(self, screen):
         p = to_pygame(self.body.position)
@@ -113,15 +113,15 @@ class Box(BaseShape):
         moment = pymunk.moment_for_box(mass, (width, height))
 
         if static:
-            body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
+            self.body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
         else:
-            body = pymunk.Body(mass, moment)
+            self.body = pymunk.Body(mass, moment)
 
-        body.position = x, y
-        self.shape = pymunk.Poly.create_box(body, (width, height), radius)
+        self.body.position = x, y
+        self.shape = pymunk.Poly.create_box(self.body, (width, height), radius)
         self.shape.elasticity = 0.9
         self.shape.friction = 0.6
-        space.add(body, self.shape)
+        space.add(self.body, self.shape)
         self.width = width
         self.height = height
         self.radius = radius
@@ -164,15 +164,15 @@ class Poly(BaseShape):
         moment = pymunk.moment_for_poly(mass, vertices, (0, 0), radius)
 
         if static:
-            body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
+            self.body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
         else:
-            body = pymunk.Body(mass, moment)
+            self.body = pymunk.Body(mass, moment)
 
-        body.position = x, y
-        self.shape = pymunk.Poly(body, vertices, None, radius)
+        self.body.position = x, y
+        self.shape = pymunk.Poly(self.body, vertices, None, radius)
         self.shape.elasticity = 0.9
         self.shape.friction = 0.6
-        space.add(body, self.shape)
+        space.add(self.body, self.shape)
         self.radius = radius
 
     def draw(self, screen):
