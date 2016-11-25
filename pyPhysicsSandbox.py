@@ -11,6 +11,9 @@
 # TODO: Need to allow tying two objects together so they move as one
 # Specifically putting text inside of another object would be nice if I need to special case it
 
+# TODO: create this as an open source library for distribution
+# https://jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/
+
 from pygame import Color
 from py2d.Math.Polygon import *
 

@@ -24,16 +24,18 @@ ball1 = ball((90, 425), 10)
 ball1.color = Color("green")
 ball1.wrap = True
 
-left = static_triangle((10, 10), (285, 300), (10, 590))
-#left.friction = 0
+left = static_triangle((10, 10), (295, 300), (10, 590))
 
-right = static_triangle((590, 10), (315, 300), (590, 590))
-#right.friction = 0
+right = static_triangle((590, 10), (305, 300), (590, 590))
 
-for y in range(10, 250, 10):
-    for x in range(10+y,590-y,10):
-        ball2 = ball((x, y), 5)
+for y in range(10, 250, 4):
+    for x in range(10+y,590-y,4):
+        ball2 = ball((x, y), 2)
         ball2.color = Color(random.randint(0,255),random.randint (0,255),random.randint (0,255))
+        ball2.elasticity = 0.0
+        ball2.friction = 0.3
+        count += 1
+
 
 # for x in range(10, 590, 2):
 #     ball2 = ball((x, 10), 1)
