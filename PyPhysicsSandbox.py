@@ -41,7 +41,7 @@ class BaseShape:
     active = True
 
     def hit(self, x, y):
-        self.shape.body.apply_impulse_at_world_point((x,y))
+        self.body.apply_impulse_at_world_point((x,y))
 
     @property
     def elasticity(self):
@@ -104,7 +104,7 @@ class Ball(BaseShape):
         space.add(body, self.shape)
 
     def draw(self, screen):
-        p = to_pygame(self.shape.body.position)
+        p = to_pygame(self.body.position)
         pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
 
 
@@ -127,7 +127,7 @@ class Box(BaseShape):
         self.radius = radius
 
     def draw(self, screen):
-        ps = [self.shape.body.local_to_world(v) for v in self.shape.get_vertices()]
+        ps = [self.body.local_to_world(v) for v in self.shape.get_vertices()]
         ps += [ps[0]]
 
         pygame.draw.polygon(screen, self.color, ps)
@@ -151,12 +151,12 @@ class Text(Box):
         super(Text,self).__init__(box_x, box_y, width, height, 3, mass, static)
 
     def draw(self, screen):
-        body_angle = self.shape.body.angle
+        body_angle = self.body.angle
         degrees = body_angle * 180 / math.pi
         rotated = pygame.transform.rotate(self.label, -degrees)
 
         size = rotated.get_rect()
-        screen.blit(rotated, (self.shape.body.position.x-(size.width/2), self.shape.body.position.y-(size.height/2)))
+        screen.blit(rotated, (self.body.position.x-(size.width/2), self.body.position.y-(size.height/2)))
 
 
 class Poly(BaseShape):
@@ -176,7 +176,7 @@ class Poly(BaseShape):
         self.radius = radius
 
     def draw(self, screen):
-        ps = [self.shape.body.local_to_world(v) for v in self.shape.get_vertices()]
+        ps = [self.body.local_to_world(v) for v in self.shape.get_vertices()]
 
         if len(ps) != 3:
             for p in ps:
@@ -341,29 +341,29 @@ def run(do_physics=True):
         # that they won't be involved in anything visible
         shapes_to_remove = []
         for shape in shapes:
-            if shape.shape.body.position.y > win_height*2:
+            if shape.body.position.y > win_height*2:
                 shapes_to_remove.append(shape)
 
         for shape in shapes_to_remove:
             shape.active = False
-            space.remove(shape.shape, shape.shape.body)
+            space.remove(shape.shape, shape.body)
             shapes.remove(shape)
 
         # Also adjust positions for any shapes that are supposed
         # to wrap and have gone off an edge of the screen.
         for shape in shapes:
             if shape.wrap:
-                if shape.shape.body.position.x < 0:
-                    shape.shape.body.position = (win_width-1, shape.shape.body.position.y)
+                if shape.body.position.x < 0:
+                    shape.body.position = (win_width-1, shape.body.position.y)
 
-                if shape.shape.body.position.x >= win_width:
-                    shape.shape.body.position = (0, shape.shape.body.position.y)
+                if shape.body.position.x >= win_width:
+                    shape.body.position = (0, shape.body.position.y)
 
-                if shape.shape.body.position.y < 0:
-                    shape.shape.body.position = (shape.shape.body.position.x, win_height-1)
+                if shape.body.position.y < 0:
+                    shape.body.position = (shape.body.position.x, win_height-1)
 
-                if shape.shape.body.position.y >= win_height:
-                    shape.shape.body.position = (shape.shape.body.position.x, 0)
+                if shape.body.position.y >= win_height:
+                    shape.body.position = (shape.body.position.x, 0)
 
         # Now draw the shapes that are left
         for shape in shapes:
