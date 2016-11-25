@@ -6,16 +6,9 @@
 #
 #   pymunk http://www.pymunk.org/en/latest/
 #   pygame http://www.pygame.org
-#   py2d   http://sseemayer.github.io/Py2D
+#   py2d   http://sseemayer.github.io/Py2D  Must use version in github that has Python 3 compatibility
 
 # TODO: Need to allow tying two objects together so they move as one
-# TODO: add line segment object
-# TODO: bug with poly not drawing catapult arm correctly
-# lever = poly(((50, 200), (65, 200), (65, 440), (450, 440), (450, 450), (50, 450)))
-# Need to decompose concave polygons into convex polygons automatically
-# Possibly use this library which has polygon decomposition: http://sseemayer.github.io/Py2D/features.html
-# it has functions for detecting convexity and ordering points in ccw order
-# Install py2d using : pip install py2d
 
 from pygame import Color
 from py2d.Math.Polygon import *
@@ -45,23 +38,37 @@ class BaseShape:
 
     @property
     def elasticity(self):
+        if type(self.shape) is list:
+            return self.shape[0].elasticity
+
         return self.shape.elasticity
 
     @elasticity.setter
     def elasticity(self, value):
         if type(value) == float:
-            self.shape.elasticity = value
+            if type(self.shape) is list:
+                for shape in self.shape:
+                    shape.elasticity = value
+            else:
+                self.shape.elasticity = value
         else:
             print("Elasticity value must be a floating point value")
 
     @property
     def friction(self):
+        if type(self.shape) is list:
+            return self.shape[0].friction
+
         return self.shape.friction
 
     @friction.setter
     def friction(self, value):
         if type(value) == float:
-            self.shape.friction = value
+            if type(self.shape) is list:
+                for shape in self.shape:
+                    shape.friction = value
+            else:
+                self.shape.friction = value
         else:
             print("Friction value must be a floating point value")
 
@@ -99,8 +106,8 @@ class Ball(BaseShape):
 
         self.body.position = x, y
         self.shape = pymunk.Circle(self.body, radius)
-        self.shape.elasticity = 0.90
-        self.shape.friction = 0.6
+        self.elasticity = 0.90
+        self.friction = 0.6
         space.add(self.body, self.shape)
 
     def draw(self, screen):
@@ -119,8 +126,8 @@ class Box(BaseShape):
 
         self.body.position = x, y
         self.shape = pymunk.Poly.create_box(self.body, (width, height), radius)
-        self.shape.elasticity = 0.9
-        self.shape.friction = 0.6
+        self.elasticity = 0.9
+        self.friction = 0.6
         space.add(self.body, self.shape)
         self.width = width
         self.height = height
@@ -169,21 +176,26 @@ class Poly(BaseShape):
             self.body = pymunk.Body(mass, moment)
 
         self.body.position = x, y
-        self.shape = pymunk.Poly(self.body, vertices, None, radius)
-        self.shape.elasticity = 0.9
-        self.shape.friction = 0.6
+
+        temp = Polygon.from_tuples(vertices)
+        polys = Polygon.convex_decompose(temp)
+
+        shapes = []
+
+        for poly in polys:
+            shapes.append(pymunk.Poly(self.body, poly.as_tuple_list(), None, radius))
+
+        self.shape = shapes
+        self.elasticity = 0.9
+        self.friction = 0.6
         space.add(self.body, self.shape)
         self.radius = radius
 
     def draw(self, screen):
-        ps = [self.body.local_to_world(v) for v in self.shape.get_vertices()]
+        for shape in self.shape:
+            ps = [self.body.local_to_world(v) for v in shape.get_vertices()]
 
-        if len(ps) != 3:
-            for p in ps:
-                pygame.draw.circle(screen, Color('red'), to_pygame(p), 2, 0)
-
-        pygame.draw.polygon(screen, self.color, ps)
-        pygame.draw.lines(screen, self.color, True, ps, self.radius)
+            pygame.draw.polygon(screen, self.color, ps)
 
 
 def to_pygame(p):
