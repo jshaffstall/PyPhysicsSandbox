@@ -228,7 +228,13 @@ class PivotJoint(BaseShape):
 class PinJoint(BaseShape):
     def __init__(self, p1, shape1, p2, shape2):
         self.body = shape1.body
-        self.shape = pymunk.PinJoint(shape1.body, p1, shape2.body, p2)
+
+        ax = p1[0]-shape1.body.position.x
+        ay = p1[1]-shape1.body.position.y
+        bx = p2[0]-shape2.body.position.x
+        by = p2[1]-shape2.body.position.y
+
+        self.shape = pymunk.PinJoint(shape1.body, shape2.body, (ax, ay), (bx, by))
         space.add(self.shape)
 
     def draw(self, screen):

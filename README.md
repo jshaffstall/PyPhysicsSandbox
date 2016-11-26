@@ -177,7 +177,16 @@ gear1 = gear(shape1, shape2)
 Creates a gear joint connecting the two shapes.  A gear joint keeps the angle of the two shapes constant.  Two parallel boxes, for example, will remain parallel.
  
 ```python
+motor(shape1, shape2, radians)
 ```
+
+Creates a motor to give the two shapes the same angular rotation force.
+
+```python
+pin((100, 580), ball1, (150, 580), ball2)
+```
+
+Creates a pin joint between the two shapes at the given points.  A pin join creates a fixed separation between the two bodies (as if there is a metal pin connecting them).  You'll get strange effects when wrapping these shapes.
 
 ```python
 run(do_physics=True)
