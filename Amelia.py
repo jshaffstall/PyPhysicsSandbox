@@ -34,8 +34,6 @@ for y in range(10, 250, 4):
         ball2.color = Color(random.randint(0,255),random.randint (0,255),random.randint (0,255))
         ball2.elasticity = 0.0
         ball2.friction = 0.3
-        count += 1
-
 
 # for x in range(10, 590, 2):
 #     ball2 = ball((x, 10), 1)
