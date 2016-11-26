@@ -202,6 +202,25 @@ class Poly(BaseShape):
             pygame.draw.polygon(screen, self.color, ps)
 
 
+class PinJoint(BaseShape):
+    def __init__(self, x, y):
+        self.body = pymunk.Body(body_type=pymunk.Body.STATIC)
+        self.body.position = x, y
+        self.shape = []
+        space.add(self.body, self.shape)
+
+    def connect(self, shape):
+        join_x = self.body.position.x-shape.body.position.x
+        join_y = self.body.position.y-shape.body.position.y
+        join = pymunk.PinJoint(shape.body, self.body, (join_x, join_y), (0, 0))
+        self.shape.append(join)
+        space.add(join)
+
+    def draw(self, screen):
+        p = to_pygame(self.body.position)
+        pygame.draw.circle(screen, self.color, p, 5, 0)
+
+
 def to_pygame(p):
     # Converts pymunk body position into pygame coordinate tuple
     return int(p.x), int(p.y)
@@ -335,6 +354,12 @@ def text_with_font(p, caption, font, size, mass=1, static=False):
 
     return text
 
+
+def pin(p):
+    pin = PinJoint(p[0], p[1])
+    shapes.append(pin)
+
+    return pin
 
 def run(do_physics=True):
     screen = pygame.display.set_mode((win_width, win_height))
