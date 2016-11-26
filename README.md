@@ -2,6 +2,8 @@
 
 pyPhysicsSandbox is a simple wrapper around Pymunk that makes it easy to write code to explore physics simulations.  It's intended for use in introductory programming classrooms.
 
+Caution! The simulation does not behave well if you start out with objects overlapping each other, especially if overlapping objects are connected with joints.
+
 ## Code Example
 
 ```python
@@ -152,6 +154,21 @@ static_text(p, caption)
 Creates text that will interact with the world as if it were a rectangle.  The static text version does not move.
 
 p is a tuple containing the x and  y coordinates of the upper left corner of the text.
+
+```python
+pin1 = pin(p)
+pin1.connect(other_shape)
+```
+
+Create a pin joint at point p in the world.  The other_shape should be a shape whose coordinates intersect the location of the pin joint.  
+
+The pin join pins the other shape to the background, not allowing it to fall.  The other shape can rotate around the pin joint.
+ 
+```python
+gear1 = gear(shape1, shape2)
+```
+
+Creates a gear joint connecting the two shapes.  A gear joint keeps the angle of the two shapes constant.  Two parallel boxes, for example, will remain parallel. 
 
 ```python
 run(do_physics=True)
