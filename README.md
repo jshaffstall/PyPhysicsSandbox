@@ -88,7 +88,13 @@ Specifies the width and height and caption of the simulation window.  Multiple c
 gravity(x, y)
 ```
 
-Sets the gravity of the simulation.  Positive y is downward, positive x is rightward.
+Sets the gravity of the simulation.  Positive y is downward, positive x is rightward.  Default is (0, 500).
+
+```python
+damping(v)
+```
+
+Sets how much velocity each object in the simulation keeps each second.  Must be a floating point number.  Default is 0.95.  Values higher than 1.0 cause objects to increase in speed rather than lose it.  A value of 1.0 means objects will not lose any velocity artificially.   
 
 ```python
 set_observer(observer_func)

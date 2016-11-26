@@ -24,6 +24,9 @@ import math
 pygame.init()
 
 space = pymunk.Space()
+space.gravity = (0.0, 500.0)
+space.damping = 0.95
+
 win_title = "Untitled"
 win_width = 500
 win_height = 500
@@ -268,6 +271,10 @@ def set_observer(hook):
 
 def gravity(x, y):
     space.gravity = (x, y)
+
+
+def damping(v):
+    space.damping = v
 
 
 def mouse_pressed ():

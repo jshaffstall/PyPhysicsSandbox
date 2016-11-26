@@ -4,7 +4,6 @@ import random
 WIN_WIDTH = 600
 WIN_HT = 600
 window("Amelia's Test", WIN_WIDTH, WIN_HT)
-gravity(0.0, 500.0)
 
 # floor
 base = static_box((0, 590), WIN_WIDTH, 10)
@@ -32,15 +31,15 @@ base.color = Color("black")
 # gear2 = gear(arm2, arm3, 90)
 # gear3 = gear(arm3, arm4, 90)
 
-arm1 = box((100, 200), 100, 10)
+arm1 = box((100, 200), 100, 10, 100)
 arm1.color = Color("yellow")
-arm1.friction = .90
+arm1.friction = 1.0
 
 arm3 = box((345, 150), 10, 100)
 arm3.color = Color("yellow")
 arm3.friction = .90
 
-pivot1 = pivot((150, 205))
+pivot1 = pivot((105, 205))
 pivot1.connect(arm1)
 
 pivot2 = pivot((350, 200))
@@ -53,7 +52,7 @@ pivot2.connect(arm3)
 # ball2.color = Color("green")
 
 #gear(arm1, arm3)
-motor = motor(arm1, arm3, -2)
+#motor = motor(arm1, arm3, -2)
 
 # # # fulcrum
 # # triangle = poly(((250, 450), (275, 500), (225, 500)))
