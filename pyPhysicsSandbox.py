@@ -4,8 +4,8 @@
 #
 # Dependencies
 #
-#   pymunk http://www.pymunk.org/en/latest/
-#   pygame http://www.pygame.org
+#   pymunk http://www.pymunk.org (can install this with pip)
+#   pygame http://www.pygame.org (need a version of this that supports Python 3)
 #   py2d   http://sseemayer.github.io/Py2D  Must use version in github that has Python 3 compatibility
 
 # TODO: Need to allow tying two objects together so they move as one
