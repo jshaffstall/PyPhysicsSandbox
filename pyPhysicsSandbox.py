@@ -35,6 +35,7 @@ pressed = False
 
 shapes = []
 
+
 class BaseShape:
     _color = Color('black')
     _wrap = False
@@ -210,7 +211,7 @@ class PivotJoint(BaseShape):
         self.body = pymunk.Body(body_type=pymunk.Body.STATIC)
         self.body.position = x, y
         self.shape = []
-        space.add(self.body, self.shape)
+        space.add(self.body)
 
     def connect(self, shape):
         join_x = self.body.position.x-shape.body.position.x
@@ -222,6 +223,16 @@ class PivotJoint(BaseShape):
     def draw(self, screen):
         p = to_pygame(self.body.position)
         pygame.draw.circle(screen, self.color, p, 5, 0)
+
+
+class PinJoint(BaseShape):
+    def __init__(self, p1, shape1, p2, shape2):
+        self.body = shape1.body
+        self.shape = pymunk.PinJoint(shape1.body, p1, shape2.body, p2)
+        space.add(self.shape)
+
+    def draw(self, screen):
+        pass
 
 
 class GearJoint(BaseShape):
@@ -405,6 +416,13 @@ def motor(shape1, shape2, speed=5):
     shapes.append(motor)
 
     return motor
+
+
+def pin(p1, shape1, p2, shape2):
+    pin = PinJoint(p1, shape1, p2, shape2)
+    shapes.append(pin)
+
+    return pin
 
 
 def run(do_physics=True):
