@@ -40,7 +40,7 @@ Also, being IDE agnostic, this library can be used with your favorite IDE.
 
 ## Installation
 
-The code is written for Python 3, and uses pygame, pymunk, and py2d.  You must install all of those packages before you can use this library.
+The code is written for Python 3, and uses pygame, pymunk, and py2d.  You must install all of those packages before you can use this library.  I have not made use of requirements.txt since py2d and pygame particularly you cannot install using pip.
 
 ###Python 3
 
@@ -52,23 +52,27 @@ This library was written with Python 3.4, but should run on any newer Python 3.
 
 http://www.pygame.org/
 
-This library was written with pygame 1.9.  I specifically used the Windows 64-bit versions available at http://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame , but any 1.9 or later version that supports Python 3 should work.
+This library was written with pygame 1.9.  I specifically used the Windows 64-bit versions available at http://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame , but any 1.9 or later version that supports Python 3 should work.  
 
 ###pymunk
 
 http://www.pymunk.org/
 
-This library was written with pymunk 5.1.0.
+This library was written with pymunk 5.1.0.  This you can safely install using pip.
 
 ###py2d
 
 https://github.com/sseemayer/Py2D
 
-This library was written with the version of py2d on github, since the pip package at the time did not support Python 3.  To install directly from github ???
+This library was written with the version of py2d on github, since the pip package at the time did not support Python 3.  To get a quick and dirty install from github, use pip to install the older version and then download a zip from github and copy the py2d directory over top of the same directory in your Python site-packages.
 
 ###pyPhysicsSandbox
 
-TODO: how to install the library itself from github?  Need to write a setup.py file
+Once the dependencies are installed, install this library using:
+
+```
+pip install pyPhysicsSandbox
+```
 
 ## API Reference
 
