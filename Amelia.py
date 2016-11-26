@@ -40,19 +40,20 @@ arm3 = box((345, 150), 10, 100)
 arm3.color = Color("yellow")
 arm3.friction = .90
 
-pin1 = pin((150, 205))
-pin1.connect(arm1)
+pivot1 = pivot((150, 205))
+pivot1.connect(arm1)
 
-pin2 = pin((350, 205))
-pin2.connect(arm3)
+pivot2 = pivot((350, 200))
+pivot2.connect(arm3)
 
-ball1 = ball((110, 100), 5)
-ball1.color = Color("blue")
+# ball1 = ball((110, 100), 5)
+# ball1.color = Color("blue")
+#
+# ball2 = ball((350, 0), 5)
+# ball2.color = Color("green")
 
-ball2 = ball((350, 0), 5)
-ball2.color = Color("green")
-
-gear1 = gear(arm1, arm3)
+gear(arm1, arm3)
+motor = motor(arm1, arm3, 20)
 
 # # # fulcrum
 # # triangle = poly(((250, 450), (275, 500), (225, 500)))

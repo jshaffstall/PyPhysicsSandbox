@@ -202,7 +202,7 @@ class Poly(BaseShape):
             pygame.draw.polygon(screen, self.color, ps)
 
 
-class PinJoint(BaseShape):
+class PivotJoint(BaseShape):
     def __init__(self, x, y):
         self.body = pymunk.Body(body_type=pymunk.Body.STATIC)
         self.body.position = x, y
@@ -212,7 +212,7 @@ class PinJoint(BaseShape):
     def connect(self, shape):
         join_x = self.body.position.x-shape.body.position.x
         join_y = self.body.position.y-shape.body.position.y
-        join = pymunk.PinJoint(shape.body, self.body, (join_x, join_y), (0, 0))
+        join = pymunk.PivotJoint(shape.body, self.body, self.body.position)
         self.shape.append(join)
         space.add(join)
 
@@ -227,6 +227,18 @@ class GearJoint(BaseShape):
         # it is removed when that body is out of the simulation
         self.body = shape1.body
         self.shape = pymunk.GearJoint(shape1.body, shape2.body, angle, 1)
+        space.add(self.shape)
+
+    def draw(self, screen):
+        pass
+
+
+class Motor(BaseShape):
+    def __init__(self, shape1, shape2, speed):
+        # Associate the motor with the location of one of the bodies so
+        # it is removed when that body is out of the simulation
+        self.body = shape1.body
+        self.shape = pymunk.SimpleMotor(shape1.body, shape2.body, speed)
         space.add(self.shape)
 
     def draw(self, screen):
@@ -367,11 +379,11 @@ def text_with_font(p, caption, font, size, mass=1, static=False):
     return text
 
 
-def pin(p):
-    pin = PinJoint(p[0], p[1])
-    shapes.append(pin)
+def pivot(p):
+    pivot = PivotJoint(p[0], p[1])
+    shapes.append(pivot)
 
-    return pin
+    return pivot
 
 
 def gear(shape1, shape2):
@@ -379,6 +391,13 @@ def gear(shape1, shape2):
     shapes.append(gear)
 
     return gear
+
+
+def motor(shape1, shape2, speed=5):
+    motor = Motor(shape1, shape2, speed)
+    shapes.append(motor)
+
+    return motor
 
 
 def run(do_physics=True):

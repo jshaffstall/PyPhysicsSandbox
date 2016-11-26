@@ -156,19 +156,22 @@ Creates text that will interact with the world as if it were a rectangle.  The s
 p is a tuple containing the x and  y coordinates of the upper left corner of the text.
 
 ```python
-pin1 = pin(p)
-pin1.connect(other_shape)
+pivot1 = pivot(p)
+pivot1.connect(other_shape)
 ```
 
-Create a pin joint at point p in the world.  The other_shape should be a shape whose coordinates intersect the location of the pin joint.  
+Create a pivot joint at point p in the world.  The other_shape should be a shape whose coordinates intersect the location of the pivot joint.  
 
-The pin join pins the other shape to the background, not allowing it to fall.  The other shape can rotate around the pin joint.
+The pivot joins pins the other shape to the background, not allowing it to fall.  The other shape can rotate around the pivot joint.
  
 ```python
 gear1 = gear(shape1, shape2)
 ```
 
-Creates a gear joint connecting the two shapes.  A gear joint keeps the angle of the two shapes constant.  Two parallel boxes, for example, will remain parallel. 
+Creates a gear joint connecting the two shapes.  A gear joint keeps the angle of the two shapes constant.  Two parallel boxes, for example, will remain parallel.
+ 
+```python
+```
 
 ```python
 run(do_physics=True)
