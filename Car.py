@@ -12,7 +12,7 @@ base.friction = 1.0
 base.elasticity = 0.0
 
 wheel1 = ball((45, 200), 25, 100)
-wheel1.color = Color (52, 219, 119)
+wheel1.color = Color(52, 219, 119)
 wheel1.friction = 1.5
 wheel1.elasticity = 0.0
 

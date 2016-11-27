@@ -40,13 +40,18 @@ class BaseShape:
     _color = Color('black')
     _wrap = False
     active = True
+    _visible = True
 
     def hit(self, x, y):
         self.body.apply_impulse_at_world_point((x,y))
 
     def has_own_body(self):
         return True
-    
+
+    def draw(self, screen):
+        if self.visible:
+            self._draw(screen)
+
     @property
     def elasticity(self):
         if type(self.shape) is list:
@@ -92,7 +97,18 @@ class BaseShape:
         if type(value) == bool:
             self._wrap = value
         else:
-            print("Wrap value must be a bool value")
+            print("Wrap value must be True or False")
+
+    @property
+    def visible(self):
+        return self._visible
+
+    @visible.setter
+    def visible(self, value):
+        if type(value) == bool:
+            self._visible = value
+        else:
+            print("Visible value must be True or False")
 
     @property
     def color(self):
@@ -121,7 +137,7 @@ class Ball(BaseShape):
         self.friction = 0.6
         space.add(self.body, self.shape)
 
-    def draw(self, screen):
+    def _draw(self, screen):
         p = to_pygame(self.body.position)
         pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
 
@@ -144,7 +160,7 @@ class Box(BaseShape):
         self.height = height
         self.radius = radius
 
-    def draw(self, screen):
+    def _draw(self, screen):
         ps = [self.body.local_to_world(v) for v in self.shape.get_vertices()]
         ps += [ps[0]]
 
@@ -171,7 +187,7 @@ class Line(BaseShape):
         space.add(self.body, self.shape)
         self.radius = thickness
 
-    def draw(self, screen):
+    def _draw(self, screen):
         p1 = self.body.local_to_world(self.shape.a)
         p2 = self.body.local_to_world(self.shape.b)
 
@@ -194,7 +210,7 @@ class Text(Box):
 
         super(Text,self).__init__(box_x, box_y, width, height, 3, mass, static)
 
-    def draw(self, screen):
+    def _draw(self, screen):
         body_angle = self.body.angle
         degrees = body_angle * 180 / math.pi
         rotated = pygame.transform.rotate(self.label, -degrees)
@@ -228,7 +244,7 @@ class Poly(BaseShape):
         space.add(self.body, self.shape)
         self.radius = radius
 
-    def draw(self, screen):
+    def _draw(self, screen):
         for shape in self.shape:
             ps = [self.body.local_to_world(v) for v in shape.get_vertices()]
 
@@ -249,7 +265,7 @@ class PivotJoint(BaseShape):
         self.shape.append(join)
         space.add(join)
 
-    def draw(self, screen):
+    def _draw(self, screen):
         p = to_pygame(self.body.position)
         pygame.draw.circle(screen, self.color, p, 5, 0)
 
@@ -271,7 +287,7 @@ class PinJoint(BaseShape):
     def has_own_body(self):
         return False
     
-    def draw(self, screen):
+    def _draw(self, screen):
         pass
 
 
@@ -286,7 +302,7 @@ class GearJoint(BaseShape):
     def has_own_body(self):
         return False
 
-    def draw(self, screen):
+    def _draw(self, screen):
         pass
 
 
@@ -301,7 +317,7 @@ class Motor(BaseShape):
     def has_own_body(self):
         return False
 
-    def draw(self, screen):
+    def _draw(self, screen):
         pass
 
 
