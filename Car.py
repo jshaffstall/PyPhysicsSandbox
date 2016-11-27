@@ -24,6 +24,8 @@ wheel2.elasticity = 0.0
 chassis = box((75, 160), 50, 30, 100)
 chassis.elasticity = 0.0
 
+# The pin joints must connect to the center of the wheel or
+# the car will flip as the wheels rotate.
 pin((45, 200), wheel1, (75, 160), chassis)
 pin((45, 200), wheel1, (75, 190), chassis)
 pin((155, 200), wheel2, (125, 160), chassis)
