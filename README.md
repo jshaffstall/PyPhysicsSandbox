@@ -42,7 +42,7 @@ Also, being IDE agnostic, this library can be used with your favorite IDE.
 
 ## Installation
 
-The code is written for Python 3, and uses pygame, pymunk, and py2d.  You must install all of those packages before you can use this library.  I have not made use of requirements.txt since py2d and pygame particularly you cannot install using pip.
+The code is written for Python 3, and uses pygame, pymunk, and py2d.  You must install all of those packages before you can use this library.  I have not made use of requirements.txt since py2d and pygame particularly you cannot install using the standard pip repositories.
 
 ###Python 3
 
