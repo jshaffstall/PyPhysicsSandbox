@@ -288,7 +288,10 @@ class PinJoint(BaseShape):
         return False
     
     def _draw(self, screen):
-        pass
+        p1 = self.shape.a.local_to_world(self.shape.anchor_a)
+        p2 = self.shape.b.local_to_world(self.shape.anchor_b)
+
+        pygame.draw.line(screen, self.color, p1, p2, 1)
 
 
 class GearJoint(BaseShape):
@@ -307,11 +310,11 @@ class GearJoint(BaseShape):
 
 
 class Motor(BaseShape):
-    def __init__(self, shape1, shape2, speed):
+    def __init__(self, shape1, speed):
         # Associate the motor with the location of one of the bodies so
         # it is removed when that body is out of the simulation
         self.body = shape1.body
-        self.shape = pymunk.SimpleMotor(shape1.body, shape2.body, speed)
+        self.shape = pymunk.SimpleMotor(shape1.body, space.static_body, speed)
         space.add(self.shape)
 
     def has_own_body(self):
@@ -484,8 +487,8 @@ def gear(shape1, shape2):
     return gear
 
 
-def motor(shape1, shape2, speed=5):
-    motor = Motor(shape1, shape2, speed)
+def motor(shape1, speed=5):
+    motor = Motor(shape1, speed)
     shapes.append(motor)
 
     return motor

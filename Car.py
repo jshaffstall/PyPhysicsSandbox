@@ -31,7 +31,7 @@ pin((45, 200), wheel1, (75, 190), chassis)
 pin((155, 200), wheel2, (125, 160), chassis)
 pin((155, 200), wheel2, (125, 190), chassis)
 
-motor(wheel1, chassis, 4)
-motor(wheel2, chassis, 4)
+motor(wheel1, 4)
+motor(wheel2, 4)
 
 run(True)

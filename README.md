@@ -182,12 +182,16 @@ gear1 = gear(shape1, shape2)
 ```
 
 Creates a gear joint connecting the two shapes.  A gear joint keeps the angle of the two shapes constant.  As one shape rotates, the other rotates to match automatically.
- 
+
+Note that the gear has no visible representation in the simulation.
+
 ```python
-motor(shape1, shape2, radians)
+motor(shape1, radians)
 ```
 
-Creates a motor to give the two shapes the same angular rotation force.  Typically the two shapes should be a pivot joint and the shape associated with the pivot joint.  If you want other shapes to also move, use a gear joint to connect them to the shape with the motor.
+Creates a motor to give the shape a constant rotation.  If you want other shapes to also move, use a gear joint to connect them to the shape with the motor.
+
+Note that the motor has no visible representation in the simulation.
 
 ```python
 pin((100, 580), ball1, (150, 580), ball2)
@@ -236,6 +240,12 @@ shape.wrap
 ```
 
 Sets whether the shape should wrap when going off the edges of the screen or not.  A True value means the shape can never be off screen, and if it starts off screen it's immediately brought on as if it were wrapping. 
+
+```python
+shape.visible
+```
+
+Sets whether the shape draws itself or not.  Defaults to True.  Most useful to set this to False for joints you don't want shown on screen. 
 
 ## Tests
 
