@@ -44,6 +44,9 @@ class BaseShape:
     def hit(self, x, y):
         self.body.apply_impulse_at_world_point((x,y))
 
+    def has_own_body(self):
+        return True
+    
     @property
     def elasticity(self):
         if type(self.shape) is list:
@@ -253,6 +256,8 @@ class PivotJoint(BaseShape):
 
 class PinJoint(BaseShape):
     def __init__(self, p1, shape1, p2, shape2):
+        # Associate the pin with the location of one of the bodies so
+        # it is removed when that body is out of the simulation
         self.body = shape1.body
 
         ax = p1[0]-shape1.body.position.x
@@ -263,6 +268,9 @@ class PinJoint(BaseShape):
         self.shape = pymunk.PinJoint(shape1.body, shape2.body, (ax, ay), (bx, by))
         space.add(self.shape)
 
+    def has_own_body(self):
+        return False
+    
     def draw(self, screen):
         pass
 
@@ -275,6 +283,9 @@ class GearJoint(BaseShape):
         self.shape = pymunk.GearJoint(shape1.body, shape2.body, angle, 1)
         space.add(self.shape)
 
+    def has_own_body(self):
+        return False
+
     def draw(self, screen):
         pass
 
@@ -286,6 +297,9 @@ class Motor(BaseShape):
         self.body = shape1.body
         self.shape = pymunk.SimpleMotor(shape1.body, shape2.body, speed)
         space.add(self.shape)
+
+    def has_own_body(self):
+        return False
 
     def draw(self, screen):
         pass
@@ -498,10 +512,14 @@ def run(do_physics=True):
             if type(shape.shape) is list:
                 for s in shape.shape:
                     space.remove(s)
-
-                space.remove(shape.body)
+        
+                if shape.has_own_body():
+                    space.remove(shape.body)
             else:
-                space.remove(shape.shape, shape.body)
+                if shape.has_own_body():
+                    space.remove(shape.shape, shape.body)
+                else:
+                    space.remove(shape.shape)
 
             shapes.remove(shape)
 
