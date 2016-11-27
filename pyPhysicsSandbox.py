@@ -149,6 +149,32 @@ class Box(BaseShape):
         pygame.draw.lines(screen, self.color, False, ps, self.radius)
 
 
+class Line(BaseShape):
+    def __init__(self, p1, p2, thickness, mass, static):
+        x = (p1[0]+p2[0])/2
+        y = (p1[1]+p2[1])/2
+
+        moment = pymunk.moment_for_segment(mass, (p1[0]-x, p1[1]-y), (p2[0]-x, p2[1]-y), thickness)
+
+        if static:
+            self.body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
+        else:
+            self.body = pymunk.Body(mass, moment)
+
+        self.body.position = x, y
+        self.shape = pymunk.Segment(self.body, (p1[0]-x, p1[1]-y), (p2[0]-x, p2[1]-y), thickness)
+        self.elasticity = 0.9
+        self.friction = 0.6
+        space.add(self.body, self.shape)
+        self.radius = thickness
+
+    def draw(self, screen):
+        p1 = self.body.local_to_world(self.shape.a)
+        p2 = self.body.local_to_world(self.shape.b)
+
+        pygame.draw.line(screen, self.color, p1, p2, self.radius)
+
+
 class Text(Box):
     def __init__(self, x, y, caption, font_name, font_size, mass, static):
         font = pygame.font.SysFont(font_name, font_size)
@@ -401,6 +427,17 @@ def text_with_font(p, caption, font, size, mass=1, static=False):
     shapes.append(text)
 
     return text
+
+
+def static_line(p1, p2, radius, mass=1):
+    return line(p1, p2, radius, mass, True)
+
+
+def line(p1, p2, radius, mass=1, static=False):
+    line = Line(p1, p2, radius, mass, static)
+    shapes.append(line)
+
+    return line
 
 
 def pivot(p):

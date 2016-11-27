@@ -162,6 +162,13 @@ Creates text that will interact with the world as if it were a rectangle.  The s
 p is a tuple containing the x and  y coordinates of the upper left corner of the text.
 
 ```python
+line(p1, p2, thickness)
+static_line(p1, p2, thickness)
+```
+
+Creates a line from coordinates p1 to coordinates p2 of the given thickness.  The static line version does not move.  
+
+```python
 pivot1 = pivot(p)
 pivot1.connect(other_shape)
 ```
