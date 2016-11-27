@@ -174,13 +174,13 @@ The pivot joins pins the other shape to the background, not allowing it to fall.
 gear1 = gear(shape1, shape2)
 ```
 
-Creates a gear joint connecting the two shapes.  A gear joint keeps the angle of the two shapes constant.  Two parallel boxes, for example, will remain parallel.
+Creates a gear joint connecting the two shapes.  A gear joint keeps the angle of the two shapes constant.  As one shape rotates, the other rotates to match automatically.
  
 ```python
 motor(shape1, shape2, radians)
 ```
 
-Creates a motor to give the two shapes the same angular rotation force.
+Creates a motor to give the two shapes the same angular rotation force.  Typically the two shapes should be a pivot joint and the shape associated with the pivot joint.  If you want other shapes to also move, use a gear joint to connect them to the shape with the motor.
 
 ```python
 pin((100, 580), ball1, (150, 580), ball2)

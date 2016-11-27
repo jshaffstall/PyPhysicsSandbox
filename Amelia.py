@@ -31,28 +31,28 @@ base.color = Color("black")
 # gear2 = gear(arm2, arm3, 90)
 # gear3 = gear(arm3, arm4, 90)
 
-# arm1 = box((100, 200), 100, 10, 100)
-# arm1.color = Color("yellow")
-# arm1.friction = 1.0
-#
-# arm3 = box((345, 150), 10, 100)
-# arm3.color = Color("yellow")
-# arm3.friction = .90
-#
-# pivot1 = pivot((105, 205))
-# pivot1.connect(arm1)
-#
-# pivot2 = pivot((350, 200))
-# pivot2.connect(arm3)
+arm1 = box((100, 200), 100, 10, 100)
+arm1.color = Color("yellow")
+arm1.friction = 1.0
 
-# ball1 = ball((110, 100), 5)
-# ball1.color = Color("blue")
-#
-# ball2 = ball((350, 0), 5)
-# ball2.color = Color("green")
+arm3 = box((345, 150), 10, 100)
+arm3.color = Color("yellow")
+arm3.friction = .90
 
-#gear(arm1, arm3)
-#motor = motor(arm1, arm3, -2)
+pivot1 = pivot((150, 205))
+pivot1.connect(arm1)
+
+pivot2 = pivot((350, 200))
+pivot2.connect(arm3)
+
+ball1 = ball((110, 100), 5)
+ball1.color = Color("blue")
+
+ball2 = ball((350, 0), 5)
+ball2.color = Color("green")
+
+gear(arm1, arm3)
+motor = motor(arm1, pivot1, 3)
 
 # # # fulcrum
 # # triangle = poly(((250, 450), (275, 500), (225, 500)))
@@ -100,22 +100,22 @@ base.color = Color("black")
 # #
 # # text = text((90, 250), "Catapult")
 
-def look_for_ball():
-    global ball1
-
-    if mouse_pressed():
-        ball1.hit(0,-100)
-
-set_observer(look_for_ball)
-
-ball1 = ball((110, 580), 10)
-ball1.color = Color("blue")
-ball1.wrap = True
-
-ball2 = ball((150, 580), 10)
-ball2.color = Color("green")
-
-pin((100, 580), ball1, (150, 580), ball2)
+# def look_for_ball():
+#     global ball1
+#
+#     if mouse_pressed():
+#         ball1.hit(0,-100)
+#
+# set_observer(look_for_ball)
+#
+# ball1 = ball((110, 580), 10)
+# ball1.color = Color("blue")
+# ball1.wrap = True
+#
+# ball2 = ball((150, 580), 10)
+# ball2.color = Color("green")
+#
+# pin((100, 580), ball1, (150, 580), ball2)
 
 run()
 
