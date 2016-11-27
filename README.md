@@ -191,7 +191,7 @@ motor(shape1, radians)
 
 Creates a motor to give the shape a constant rotation.  If you want other shapes to also move, use a gear joint to connect them to the shape with the motor.
 
-Note that the motor has no visible representation in the simulation.
+The motor displays as a semicircle with a dot in the direction of rotation.
 
 ```python
 pin((100, 580), ball1, (150, 580), ball2)
