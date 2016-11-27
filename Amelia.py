@@ -52,7 +52,7 @@ ball2 = ball((350, 0), 5)
 ball2.color = Color("green")
 
 gear(arm1, arm3)
-motor = motor(arm1, pivot1, 3)
+motor = motor(arm1, 3)
 
 # # # fulcrum
 # # triangle = poly(((250, 450), (275, 500), (225, 500)))
