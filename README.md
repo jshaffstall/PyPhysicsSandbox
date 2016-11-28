@@ -48,7 +48,7 @@ The code is written for Python 3, and uses pygame, pymunk, and py2d.  You must i
 
 https://www.python.org/
 
-This library was written with Python 3.4, but should run on any newer Python 3.
+This library was written with Python 3.5, but should run on any Python 3.
 
 ###pygame
 
