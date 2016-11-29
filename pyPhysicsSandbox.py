@@ -130,6 +130,8 @@ class BaseShape:
 
 
 class Ball(BaseShape):
+    _draw_radius_line = False
+
     def __init__(self, x, y, radius, mass, static):
         moment = pymunk.moment_for_circle(mass, 0, radius)
 
@@ -147,6 +149,23 @@ class Ball(BaseShape):
     def _draw(self, screen):
         p = to_pygame(self.body.position)
         pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
+
+        if self.draw_radius_line:
+            circle_edge = self.body.position + pymunk.Vec2d(self.shape.radius, 0).rotated(self.body.angle)
+            p2 = to_pygame(circle_edge)
+            pygame.draw.lines(screen, Color('black'), False, [p, p2], 1)
+
+    @property
+    def draw_radius_line(self):
+        return self._draw_radius_line
+
+    @draw_radius_line.setter
+    def draw_radius_line(self, value):
+        if type(value) == bool:
+            self._draw_radius_line = value
+        else:
+            print("draw_radius_line value must be a True or False")
+
 
 
 class Box(BaseShape):
@@ -315,6 +334,7 @@ class GearJoint(BaseShape):
     def _draw(self, screen):
         pass
 
+
 class Motor(BaseShape):
     def __init__(self, shape1, speed):
         # Associate the motor with the location of one of the bodies so
@@ -337,6 +357,21 @@ class Motor(BaseShape):
             pygame.draw.circle(screen, self.color, rect.topright, 2, 0)
         else:
             pygame.draw.circle(screen, self.color, rect.bottomright, 2, 0)
+
+
+class AngleLimitJoint(BaseShape):
+    def __init__(self, shape1, min_angle, max_angle):
+        # Associate the joint with the location of one of the bodies so
+        # it is removed when that body is out of the simulation
+        self.body = shape1.body
+        self.shape = pymunk.RotaryLimitJoint(shape1.body, space.static_body, math.radians(min_angle), math.radians(max_angle))
+        space.add(self.shape)
+
+    def has_own_body(self):
+        return False
+
+    def _draw(self, screen):
+        pass
 
 
 def to_pygame(p):
@@ -514,6 +549,13 @@ def pin(p1, shape1, p2, shape2):
     shapes.append(pin)
 
     return pin
+
+
+def limit_angle(shape, min_angle, max_angle):
+    limit = AngleLimitJoint(shape, min_angle, max_angle)
+    shapes.append(limit)
+
+    return limit
 
 
 def run(do_physics=True):

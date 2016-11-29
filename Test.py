@@ -1,6 +1,6 @@
 """Program used to generate the logo animation on the pymunk main page.
 
-This program will showcase several features of Pymunk, such as collisions, 
+This program will showcase several features of Pymunk, such as collisions,
 debug drawing, automatic generation of shapes from images, motors, joints and
 sleeping bodies.
 """
@@ -80,7 +80,7 @@ for line in line_set:
         min_y = min(min_y, l.y)
     w, h = max_x - min_x, max_y - min_y
 
-    # we skip the line which has less than 35 height, since its the "hole" in 
+    # we skip the line which has less than 35 height, since its the "hole" in
     # the p in pymunk, and we dont need it.
     if h < 35:
         continue

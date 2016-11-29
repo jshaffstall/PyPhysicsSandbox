@@ -50,9 +50,19 @@ ball1.color = Color("blue")
 
 ball2 = ball((350, 0), 5)
 ball2.color = Color("green")
+ball2.draw_radius_line = True
 
 gear(arm1, arm3)
 motor = motor(arm1, 3)
+
+limit_angle(arm1, 0, 90)
+
+def observe():
+    print(math.degrees(arm1.body.angle))
+
+set_observer(observe)
+
+
 
 # # # fulcrum
 # # triangle = poly(((250, 450), (275, 500), (225, 500)))

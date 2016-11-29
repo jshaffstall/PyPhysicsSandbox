@@ -200,6 +200,12 @@ pin((100, 580), ball1, (150, 580), ball2)
 Creates a pin joint between the two shapes at the given points.  A pin join creates a fixed separation between the two bodies (as if there is a metal pin connecting them).  You'll get strange effects when wrapping these shapes.
 
 ```python
+limit_angle(shape, min_angle, max_angle)
+```
+
+Limits the possible rotation of the shape to between the two angles.  
+
+```python
 run(do_physics=True)
 ```
 
