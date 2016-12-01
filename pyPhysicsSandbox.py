@@ -134,18 +134,18 @@ class BaseShape:
     @property
     def group(self):
         if type(self.shape) is list:
-            return self.shape[0].group
+            return self.shape[0].filter.group
 
-        return self.shape.group
+        return self.shape.filter.group
 
     @group.setter
     def group(self, value):
         if type(value) == int:
             if type(self.shape) is list:
                 for shape in self.shape:
-                    shape.group = value
+                    shape.filter = pymunk.ShapeFilter(group=value)
             else:
-                self.shape.group = value
+                self.shape.filter = pymunk.ShapeFilter(group=value)
         else:
             print("Group value must be an integer")
 

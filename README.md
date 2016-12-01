@@ -248,6 +248,12 @@ shape.visible
 Sets whether the shape draws itself or not.  Defaults to True.  Most useful to set this to False for joints you don't want shown on screen. 
 
 ```python
+shape.group
+```
+
+Set to an integer.  Shapes that share the same group number will not collide with each other.  Useful to have overlapping objects connected by joints that do not make the physics crazy. 
+
+```python
 shape.draw_radius_line
 ```
 
