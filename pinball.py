@@ -28,17 +28,17 @@ l_flipper = poly(((l_pos_x+20, l_pos_y-20), (l_pos_x-120, l_pos_y-100), (l_pos_x
 l_flipper.color = Color('blue')
 l_flipper.group = 1
 
-# r_pivot = pivot((r_pos_x, r_pos_y))
-# r_pivot.group = 1
-# r_pivot.connect(r_flipper)
-# #rotary_spring(r_flipper, r_pivot, 0.15, 20000000,900000)
-#
-# l_pivot = pivot((l_pos_x, l_pos_y))
-# l_pivot.group = 1
-# l_pivot.connect(l_flipper)
-# #rotary_spring(l_flipper, l_pivot, 0.15, 20000000,900000)
+r_pivot = pivot((r_pos_x, r_pos_y))
+r_pivot.group = 1
+r_pivot.connect(r_flipper)
+#rotary_spring(r_flipper, r_pivot, 0.15, 20000000,900000)
+
+l_pivot = pivot((l_pos_x, l_pos_y))
+l_pivot.group = 1
+l_pivot.connect(l_flipper)
+#rotary_spring(l_flipper, l_pivot, 0.15, 20000000,900000)
 
 #r_flipper.hit(600-450+100, 600-100)
 
-run(False)
+run()
 

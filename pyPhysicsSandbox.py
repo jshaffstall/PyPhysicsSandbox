@@ -20,6 +20,9 @@
 
 # TODO: Figure out how to do a slip gear
 
+# TODO: look at difference between dynamic bodies and kinematic bodies.  The pinball
+# example using kinematic for the joint body.
+
 
 from pygame import Color
 from py2d.Math.Polygon import *
