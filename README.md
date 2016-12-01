@@ -200,12 +200,6 @@ pin((100, 580), ball1, (150, 580), ball2)
 Creates a pin joint between the two shapes at the given points.  A pin join creates a fixed separation between the two bodies (as if there is a metal pin connecting them).  You'll get strange effects when wrapping these shapes.
 
 ```python
-limit_angle(shape, min_angle, max_angle)
-```
-
-Limits the possible rotation of the shape to between the two angles.  
-
-```python
 run(do_physics=True)
 ```
 
@@ -252,6 +246,12 @@ shape.visible
 ```
 
 Sets whether the shape draws itself or not.  Defaults to True.  Most useful to set this to False for joints you don't want shown on screen. 
+
+```python
+shape.draw_radius_line
+```
+
+Only for balls, this sets whether a line from the center of the ball to the 0 degree point on the outer edge is drawn.  Defaults to False.  Can be set to True to gauge rotation of the ball. 
 
 ## Tests
 

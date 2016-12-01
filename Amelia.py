@@ -39,7 +39,7 @@ arm3 = box((345, 150), 10, 100)
 arm3.color = Color("yellow")
 arm3.friction = .90
 
-pivot1 = pivot((150, 205))
+pivot1 = pivot((105, 205))
 pivot1.connect(arm1)
 
 pivot2 = pivot((350, 200))
@@ -47,22 +47,15 @@ pivot2.connect(arm3)
 
 ball1 = ball((110, 100), 5)
 ball1.color = Color("blue")
+ball1.wrap = True
 
 ball2 = ball((350, 0), 5)
 ball2.color = Color("green")
 ball2.draw_radius_line = True
+ball2.wrap = True
 
 gear(arm1, arm3)
-motor = motor(arm1, 3)
-
-limit_angle(arm1, 0, 90)
-
-def observe():
-    print(math.degrees(arm1.body.angle))
-
-set_observer(observe)
-
-
+motor = motor(arm1, -3)
 
 # # # fulcrum
 # # triangle = poly(((250, 450), (275, 500), (225, 500)))

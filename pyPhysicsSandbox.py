@@ -128,6 +128,24 @@ class BaseShape:
         else:
             print("Color value must be a Color instance")
 
+    @property
+    def group(self):
+        if type(self.shape) is list:
+            return self.shape[0].group
+
+        return self.shape.group
+
+    @group.setter
+    def group(self, value):
+        if type(value) == int:
+            if type(self.shape) is list:
+                for shape in self.shape:
+                    shape.group = value
+            else:
+                self.shape.group = value
+        else:
+            print("Group value must be an integer")
+
 
 class Ball(BaseShape):
     _draw_radius_line = False
@@ -285,8 +303,6 @@ class PivotJoint(BaseShape):
         space.add(self.body)
 
     def connect(self, shape):
-        join_x = self.body.position.x-shape.body.position.x
-        join_y = self.body.position.y-shape.body.position.y
         join = pymunk.PivotJoint(shape.body, self.body, self.body.position)
         self.shape.append(join)
         space.add(join)
@@ -359,12 +375,12 @@ class Motor(BaseShape):
             pygame.draw.circle(screen, self.color, rect.bottomright, 2, 0)
 
 
-class AngleLimitJoint(BaseShape):
-    def __init__(self, shape1, min_angle, max_angle):
+class RotarySpring(BaseShape):
+    def __init__(self, shape1, shape2, angle, stiffness, damping):
         # Associate the joint with the location of one of the bodies so
         # it is removed when that body is out of the simulation
         self.body = shape1.body
-        self.shape = pymunk.RotaryLimitJoint(shape1.body, space.static_body, math.radians(min_angle), math.radians(max_angle))
+        self.shape = pymunk.DampedRotarySpring(shape1.body, shape2.body, angle, stiffness, damping)
         space.add(self.shape)
 
     def has_own_body(self):
@@ -372,6 +388,23 @@ class AngleLimitJoint(BaseShape):
 
     def _draw(self, screen):
         pass
+
+
+# I couldn't get this to work the way I wanted, so needs more investigation
+#
+# class AngleLimitJoint(BaseShape):
+#     def __init__(self, shape1, min_angle, max_angle):
+#         # Associate the joint with the location of one of the bodies so
+#         # it is removed when that body is out of the simulation
+#         self.body = shape1.body
+#         self.shape = pymunk.RotaryLimitJoint(shape1.body, space.static_body, math.radians(min_angle), math.radians(max_angle))
+#         space.add(self.shape)
+#
+#     def has_own_body(self):
+#         return False
+#
+#     def _draw(self, screen):
+#         pass
 
 
 def to_pygame(p):
@@ -551,11 +584,18 @@ def pin(p1, shape1, p2, shape2):
     return pin
 
 
-def limit_angle(shape, min_angle, max_angle):
-    limit = AngleLimitJoint(shape, min_angle, max_angle)
-    shapes.append(limit)
+def rotary_spring(shape1, shape2, angle, stiffness, damping):
+    spring = RotarySpring(shape1, shape2, angle, stiffness, damping)
+    shapes.append(spring)
 
-    return limit
+    return spring
+
+
+# def limit_angle(shape, min_angle, max_angle):
+#     limit = AngleLimitJoint(shape, min_angle, max_angle)
+#     shapes.append(limit)
+#
+#     return limit
 
 
 def run(do_physics=True):

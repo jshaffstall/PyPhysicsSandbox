@@ -34,12 +34,7 @@ from pyPhysicsSandbox import *
 #         poly1.hit(0,-50)
 #
 
-def look_for_ball():
-    if mouse_pressed ():
-        while not mouse_pressed ():
-            pass
-
-set_observer(look_for_ball)
+#set_observer(look_for_ball)
 
 window("My Window", 400, 300)
 gravity(0.0, 500.0)
