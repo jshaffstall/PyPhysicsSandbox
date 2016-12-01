@@ -20,8 +20,9 @@
 
 # TODO: Figure out how to do a slip gear
 
-# TODO: look at difference between dynamic bodies and kinematic bodies.  The pinball
-# example using kinematic for the joint body.
+# TODO: look at difference between dynamic bodies and kinematic bodies.
+# Implement kinematic bodies?  They're controlled by code and not by physics.  Useful
+# for things like elevators and doors.
 
 
 from pygame import Color
