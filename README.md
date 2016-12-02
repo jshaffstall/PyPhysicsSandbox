@@ -97,10 +97,12 @@ damping(v)
 Sets how much velocity each object in the simulation keeps each second.  Must be a floating point number.  Default is 0.95.  Values higher than 1.0 cause objects to increase in speed rather than lose it.  A value of 1.0 means objects will not lose any velocity artificially.   
 
 ```python
-set_observer(observer_func)
+add_observer(observer_func)
 ```
 
 Provide a function of yours that will get called once per frame.  In this function you can use the various objects you've created to either affect the simulation or simply measure something.
+
+You may call add_observer multiple times to add different observer functions.
 
 ```python
 mouse_pressed ()

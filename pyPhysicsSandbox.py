@@ -26,6 +26,12 @@
 
 # TODO: allow damping and gravity to be specified for each body
 
+# TODO: move everything but the public interface into another module that
+# gets imported here using import physics_util?  That would clean up autocomplete
+# suggestions in IDEs
+
+
+
 
 from pygame import Color
 from py2d.Math.Polygon import *
@@ -43,7 +49,7 @@ space.damping = 0.95
 win_title = "Untitled"
 win_width = 500
 win_height = 500
-observer = None
+observers = []
 pressed = False
 
 shapes = []
@@ -189,7 +195,6 @@ class Ball(BaseShape):
             self._draw_radius_line = value
         else:
             print("draw_radius_line value must be a True or False")
-
 
 
 class Box(BaseShape):
@@ -419,6 +424,17 @@ def to_pygame(p):
 
 
 def window(title, width, height):
+    """Sets the caption, width, and height of the window that will
+    appear when run () is executed.
+
+    :param title: the caption of the window
+    :type title: string
+    :param width: the width of the window in pixels
+    :type width: int
+    :param height: the height of the window in pixels
+    :type height: int
+
+    """
     global win_title
     global win_width
     global win_height
@@ -428,13 +444,34 @@ def window(title, width, height):
     win_height = height
 
 
-def set_observer(hook):
-    global observer
+def add_observer(hook):
+    """Adds an observer function to the simulation.  Every observer
+    function is called once per time step of the simulation (roughly
+    50 times a second).
 
-    observer = hook
+    To pass a function in use the name of the function without the
+    parenthesis after it.
+
+    :param hook: the observer function
+    :type hook: function
+
+    """
+    global observers
+
+    observers.append(hook)
 
 
 def gravity(x, y):
+    """Sets the direction and amount of gravity used by the simulation.
+    Positive x is to the right, positive y is downward.  This value can
+    be changed during the run of the simulation.
+
+    :param x: The horizontal gravity
+    :type x: int
+    :param y: The vertical gravity
+    :type y: int
+
+    """
     space.gravity = (x, y)
 
 
@@ -444,6 +481,8 @@ def damping(v):
     defaults to 1.0.  Values less than 1.0 cause objects to lose
     velocity over time, values greater than 1.0 cause objects to
     gain velocity over time.
+
+    This value can be changed during the run of the simulation.
 
     :param v: The damping value
     :type v: float
@@ -894,8 +933,8 @@ def run(do_physics=True):
             if event.type == pygame.QUIT:
                 running = False
 
-        if observer:
-            observer ()
+        for observer in observers:
+            observer()
 
         screen.fill((255, 255, 255))
 

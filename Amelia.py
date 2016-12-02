@@ -57,6 +57,12 @@ ball2.wrap = True
 gear(arm1, arm3)
 motor = motor(arm1, -3)
 
+def switch_gravity():
+    if mouse_pressed():
+        gravity(0, -900)
+
+add_observer(switch_gravity)
+
 # # # fulcrum
 # # triangle = poly(((250, 450), (275, 500), (225, 500)))
 # # triangle.color = Color("green")

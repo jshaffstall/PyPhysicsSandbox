@@ -19,7 +19,7 @@ lever = poly(((50, 405), (65, 405), (65, 440), (450, 440), (450, 450), (50, 450)
 lever.color = Color("darkblue")
 lever.elasticity = 0.90
 
-pin1 = pin((250,445))
+pin1 = pivot((250,445))
 pin1.connect(lever)
 
 ball1 = ball((90, 425), 10)
