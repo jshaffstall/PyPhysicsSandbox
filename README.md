@@ -2,7 +2,7 @@
 
 pyPhysicsSandbox is a simple wrapper around Pymunk that makes it easy to write code to explore physics simulations.  It's intended for use in introductory programming classrooms.
 
-Caution! The simulation does not behave well if you start out with objects overlapping each other, especially if overlapping objects are connected with joints.
+Caution! The simulation does not behave well if you start out with objects overlapping each other, especially if overlapping objects are connected with joints.  To have overlapping objects connected by joints, set the group on each object to the same number to disable collision detection between those objects.
 
 ## Code Example
 
@@ -175,7 +175,7 @@ pivot1.connect(other_shape)
 
 Create a pivot joint at point p in the world.  The other_shape should be a shape whose coordinates intersect the location of the pivot joint.  
 
-The pivot joins pins the other shape to the background, not allowing it to fall.  The other shape can rotate around the pivot joint.
+The pivot joint pins the other shape to the background, not allowing it to fall.  The other shape can rotate around the pivot joint.
  
 ```python
 gear1 = gear(shape1, shape2)
@@ -189,7 +189,7 @@ Note that the gear has no visible representation in the simulation.
 motor(shape1, radians)
 ```
 
-Creates a motor to give the shape a constant rotation.  If you want other shapes to also move, use a gear joint to connect them to the shape with the motor.
+Creates a motor to give the shape a constant rotation.  If you want other shapes to also rotate at the same rate, use a gear joint to connect them to the shape with the motor.
 
 The motor displays as a semicircle with a dot in the direction of rotation.
 
@@ -197,7 +197,7 @@ The motor displays as a semicircle with a dot in the direction of rotation.
 pin((100, 580), ball1, (150, 580), ball2)
 ```
 
-Creates a pin joint between the two shapes at the given points.  A pin join creates a fixed separation between the two bodies (as if there is a metal pin connecting them).  You'll get strange effects when wrapping these shapes.
+Creates a pin joint between the two shapes at the given points.  A pin joint creates a fixed separation between the two bodies (as if there were a metal pin connecting them).  You'll get strange effects when wrapping these shapes.
 
 ```python
 run(do_physics=True)
