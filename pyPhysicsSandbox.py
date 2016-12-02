@@ -24,8 +24,7 @@
 # Implement kinematic bodies?  They're controlled by code and not by physics.  Useful
 # for things like elevators and doors.
 
-# TODO: remove mass from the static shapes?  Those methods can pass infinite mass
-# in automatically.  Test this and make sure it works.
+# TODO: allow damping and gravity to be specified for each body
 
 
 from pygame import Color
@@ -473,19 +472,17 @@ def mouse_pressed ():
     return False
 
 
-def static_ball(p, radius, mass=1):
+def static_ball(p, radius):
     """Creates a ball that remains fixed in place.
 
     :param p: The center point of the ball
     :type p: (int, int)
     :param radius: The radius of the ball
     :type radius: int
-    :param mass: The mass of the shape (defaults to 1)
-    :type mass: int
     :rtype: shape
 
     """
-    return ball(p, radius, mass, True)
+    return ball(p, radius, pymunk.inf, True)
 
 
 def ball(p, radius, mass=1, static=False):
@@ -506,7 +503,7 @@ def ball(p, radius, mass=1, static=False):
     return ball
 
 
-def static_box(p, width, height, mass=1):
+def static_box(p, width, height):
     """Creates a box that remains fixed in place.
 
     :param p: The upper left corner of the box
@@ -515,12 +512,10 @@ def static_box(p, width, height, mass=1):
     :type width: int
     :param height: The height of the box
     :type height: int
-    :param mass: The mass of the shape (defaults to 1)
-    :type mass: int
     :rtype: shape
 
     """
-    return box(p, width, height, mass, True)
+    return box(p, width, height, pymunk.inf, True)
 
 
 def box(p, width, height, mass=1, static=False):
@@ -547,7 +542,7 @@ def box(p, width, height, mass=1, static=False):
     return box
 
 
-def static_rounded_box(p, width, height, radius, mass=1):
+def static_rounded_box(p, width, height, radius):
     """Creates a box with rounded corners that remains fixed in place.
 
     :param p: The upper left corner of the box
@@ -558,12 +553,10 @@ def static_rounded_box(p, width, height, radius, mass=1):
     :type height: int
     :param radius: The radius of the rounded corners
     :type radius: int
-    :param mass: The mass of the shape (defaults to 1)
-    :type mass: int
     :rtype: shape
 
     """
-    return rounded_box(p, width, height, radius, mass, True)
+    return rounded_box(p, width, height, radius, pymunk.inf, True)
 
 
 def rounded_box(p, width, height, radius, mass=1, static=False):
@@ -592,17 +585,15 @@ def rounded_box(p, width, height, radius, mass=1, static=False):
     return box
 
 
-def static_poly(vertices, mass=1):
+def static_poly(vertices):
     """Creates a polygon that remains fixed in place.
 
     :param vertices: A tuple of points on the polygon
     :type vertices: ((int, int), (int, int), ...)
-    :param mass: The mass of the shape (defaults to 1)
-    :type mass: int
     :rtype: shape
 
     """
-    return poly(vertices, mass, True)
+    return poly(vertices, pymunk.inf, True)
 
 
 def poly(vertices, mass=1, static=False):
@@ -624,7 +615,7 @@ def poly(vertices, mass=1, static=False):
     return poly
 
 
-def static_triangle(p1, p2, p3, mass=1):
+def static_triangle(p1, p2, p3):
     """Creates a triangle that remains fixed in place.
 
     :param p1: The first point of the triangle
@@ -633,12 +624,10 @@ def static_triangle(p1, p2, p3, mass=1):
     :type p2: (int, int)
     :param p3: The third point of the triangle
     :type p3: (int, int)
-    :param mass: The mass of the shape (defaults to 1)
-    :type mass: int
     :rtype: shape
 
     """
-    return triangle(p1, p2, p3, mass, True)
+    return triangle(p1, p2, p3, pymunk.inf, True)
 
 
 def triangle(p1, p2, p3, mass=1, static=False):
@@ -669,7 +658,7 @@ def triangle(p1, p2, p3, mass=1, static=False):
     return triangle
 
 
-def static_text(p, caption, mass=1):
+def static_text(p, caption):
     """Creates a text rectangle that remains fixed in place, using
     Arial 12 point font.
 
@@ -677,12 +666,10 @@ def static_text(p, caption, mass=1):
     :type p: (int, int)
     :param caption: The text to display
     :type caption: string
-    :param mass: The mass of the shape (defaults to 1)
-    :type mass: int
     :rtype: shape
 
     """
-    return text(p, caption, mass, True)
+    return text(p, caption, pymunk.inf, True)
 
 
 def text(p, caption, mass=1, static=False):
@@ -704,7 +691,7 @@ def text(p, caption, mass=1, static=False):
     return text
 
 
-def static_text_with_font(p, caption, font, size, mass=1):
+def static_text_with_font(p, caption, font, size):
     """Creates a text rectangle that remains fixed in place.
 
     :param p: The upper left corner of the text rectangle
@@ -715,12 +702,10 @@ def static_text_with_font(p, caption, font, size, mass=1):
     :type font: string
     :param size: The point size of the font
     :type size: int
-    :param mass: The mass of the shape (defaults to 1)
-    :type mass: int
     :rtype: shape
 
     """
-    return text_with_font(p, caption, font, size, mass, True)
+    return text_with_font(p, caption, font, size, pymunk.inf, True)
 
 
 def text_with_font(p, caption, font, size, mass=1, static=False):
@@ -745,7 +730,7 @@ def text_with_font(p, caption, font, size, mass=1, static=False):
     return text
 
 
-def static_line(p1, p2, radius, mass=1):
+def static_line(p1, p2, thickness):
     """Creates a line segment that remains fixed in place.
 
     :param p1: The starting point of the line segement
@@ -754,12 +739,10 @@ def static_line(p1, p2, radius, mass=1):
     :type p2: (int, int)
     :param thickness: The thickness of the line segement
     :type thickness: int
-    :param mass: The mass of the shape (defaults to 1)
-    :type mass: int
     :rtype: shape
 
     """
-    return line(p1, p2, radius, mass, True)
+    return line(p1, p2, thickness, pymunk.inf, True)
 
 
 def line(p1, p2, thickness, mass=1, static=False):
@@ -776,7 +759,7 @@ def line(p1, p2, thickness, mass=1, static=False):
     :rtype: shape
 
     """
-    line = Line(p1, p2, radius, mass, static)
+    line = Line(p1, p2, thickness, mass, static)
     shapes.append(line)
 
     return line
