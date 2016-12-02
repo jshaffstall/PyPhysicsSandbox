@@ -24,6 +24,9 @@
 # Implement kinematic bodies?  They're controlled by code and not by physics.  Useful
 # for things like elevators and doors.
 
+# TODO: remove mass from the static shapes?  Those methods can pass infinite mass
+# in automatically.  Test this and make sure it works.
+
 
 from pygame import Color
 from py2d.Math.Polygon import *
@@ -384,7 +387,7 @@ class RotarySpring(BaseShape):
         # Associate the joint with the location of one of the bodies so
         # it is removed when that body is out of the simulation
         self.body = shape1.body
-        self.shape = pymunk.DampedRotarySpring(shape1.body, shape2.body, angle, stiffness, damping)
+        self.shape = pymunk.DampedRotarySpring(shape1.body, shape2.body, math.radians(angle), stiffness, damping)
         space.add(self.shape)
 
     def has_own_body(self):
@@ -437,10 +440,27 @@ def gravity(x, y):
 
 
 def damping(v):
+    """Sets the amount of velocity that all objects lose over time.
+    This can be used to simulate air resistance.  Damping value
+    defaults to 1.0.  Values less than 1.0 cause objects to lose
+    velocity over time, values greater than 1.0 cause objects to
+    gain velocity over time.
+
+    :param v: The damping value
+    :type v: float
+
+    """
     space.damping = v
 
 
 def mouse_pressed ():
+    """Returns True if the mouse has been pressed this time step.
+    The method ensures that you only get one True result for a given
+    click and release of the mouse.
+
+    :rtype: bool
+
+    """
     global pressed
 
     if not pressed and pygame.mouse.get_pressed()[0]:
@@ -454,10 +474,32 @@ def mouse_pressed ():
 
 
 def static_ball(p, radius, mass=1):
+    """Creates a ball that remains fixed in place.
+
+    :param p: The center point of the ball
+    :type p: (int, int)
+    :param radius: The radius of the ball
+    :type radius: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     return ball(p, radius, mass, True)
 
 
 def ball(p, radius, mass=1, static=False):
+    """Creates a ball that reacts to gravity.
+
+    :param p: The center point of the ball
+    :type p: (int, int)
+    :param radius: The radius of the ball
+    :type radius: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     ball = Ball(p[0], p[1], radius, mass, static)
     shapes.append(ball)
 
@@ -465,10 +507,36 @@ def ball(p, radius, mass=1, static=False):
 
 
 def static_box(p, width, height, mass=1):
+    """Creates a box that remains fixed in place.
+
+    :param p: The upper left corner of the box
+    :type p: (int, int)
+    :param width: The width of the box
+    :type width: int
+    :param height: The height of the box
+    :type height: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     return box(p, width, height, mass, True)
 
 
 def box(p, width, height, mass=1, static=False):
+    """Creates a box that reacts to gravity.
+
+    :param p: The upper left corner of the box
+    :type p: (int, int)
+    :param width: The width of the box
+    :type width: int
+    :param height: The height of the box
+    :type height: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     # Polygons expect x,y to be the center point
     x = p[0] + width/2
     y = p[1] + height/2
@@ -480,10 +548,40 @@ def box(p, width, height, mass=1, static=False):
 
 
 def static_rounded_box(p, width, height, radius, mass=1):
+    """Creates a box with rounded corners that remains fixed in place.
+
+    :param p: The upper left corner of the box
+    :type p: (int, int)
+    :param width: The width of the box
+    :type width: int
+    :param height: The height of the box
+    :type height: int
+    :param radius: The radius of the rounded corners
+    :type radius: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     return rounded_box(p, width, height, radius, mass, True)
 
 
 def rounded_box(p, width, height, radius, mass=1, static=False):
+    """Creates a box with rounded corners that reacts to gravity.
+
+    :param p: The upper left corner of the box
+    :type p: (int, int)
+    :param width: The width of the box
+    :type width: int
+    :param height: The height of the box
+    :type height: int
+    :param radius: The radius of the rounded corners
+    :type radius: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     # Polygons expect x,y to be the center point
     x = p[0] + width/2
     y = p[1] + height/2
@@ -495,10 +593,28 @@ def rounded_box(p, width, height, radius, mass=1, static=False):
 
 
 def static_poly(vertices, mass=1):
+    """Creates a polygon that remains fixed in place.
+
+    :param vertices: A tuple of points on the polygon
+    :type vertices: ((int, int), (int, int), ...)
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     return poly(vertices, mass, True)
 
 
 def poly(vertices, mass=1, static=False):
+    """Creates a polygon that reacts to gravity.
+
+    :param vertices: A tuple of points on the polygon
+    :type vertices: ((int, int), (int, int), ...)
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     x, y = poly_centroid(vertices)
 
     vertices = [(v[0]-x, v[1]-y) for v in vertices]
@@ -509,10 +625,36 @@ def poly(vertices, mass=1, static=False):
 
 
 def static_triangle(p1, p2, p3, mass=1):
+    """Creates a triangle that remains fixed in place.
+
+    :param p1: The first point of the triangle
+    :type p1: (int, int)
+    :param p2: The second point of the triangle
+    :type p2: (int, int)
+    :param p3: The third point of the triangle
+    :type p3: (int, int)
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     return triangle(p1, p2, p3, mass, True)
 
 
 def triangle(p1, p2, p3, mass=1, static=False):
+    """Creates a triangle that reacts to gravity.
+
+    :param p1: The first point of the triangle
+    :type p1: (int, int)
+    :param p2: The second point of the triangle
+    :type p2: (int, int)
+    :param p3: The third point of the triangle
+    :type p3: (int, int)
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     x1, y1 = p1
     x2, y2 = p2
     x3, y3 = p3
@@ -528,10 +670,34 @@ def triangle(p1, p2, p3, mass=1, static=False):
 
 
 def static_text(p, caption, mass=1):
+    """Creates a text rectangle that remains fixed in place, using
+    Arial 12 point font.
+
+    :param p: The upper left corner of the text rectangle
+    :type p: (int, int)
+    :param caption: The text to display
+    :type caption: string
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     return text(p, caption, mass, True)
 
 
 def text(p, caption, mass=1, static=False):
+    """Creates a text rectangle that reacts to gravity, using
+    Arial 12 point font.
+
+    :param p: The upper left corner of the text rectangle
+    :type p: (int, int)
+    :param caption: The text to display
+    :type caption: string
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     text = Text(p[0], p[1], caption, "Arial", 12, mass, static)
     shapes.append(text)
 
@@ -539,10 +705,40 @@ def text(p, caption, mass=1, static=False):
 
 
 def static_text_with_font(p, caption, font, size, mass=1):
+    """Creates a text rectangle that remains fixed in place.
+
+    :param p: The upper left corner of the text rectangle
+    :type p: (int, int)
+    :param caption: The text to display
+    :type caption: string
+    :param font: The font family to use
+    :type font: string
+    :param size: The point size of the font
+    :type size: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     return text_with_font(p, caption, font, size, mass, True)
 
 
 def text_with_font(p, caption, font, size, mass=1, static=False):
+    """Creates a text rectangle that reacts to gravity.
+
+    :param p: The upper left corner of the text rectangle
+    :type p: (int, int)
+    :param caption: The text to display
+    :type caption: string
+    :param font: The font family to use
+    :type font: string
+    :param size: The point size of the font
+    :type size: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     text = Text(p[0], p[1], caption, font, size, mass, static)
     shapes.append(text)
 
@@ -550,10 +746,36 @@ def text_with_font(p, caption, font, size, mass=1, static=False):
 
 
 def static_line(p1, p2, radius, mass=1):
+    """Creates a line segment that remains fixed in place.
+
+    :param p1: The starting point of the line segement
+    :type p1: (int, int)
+    :param p2: The ending point of the line segement
+    :type p2: (int, int)
+    :param thickness: The thickness of the line segement
+    :type thickness: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     return line(p1, p2, radius, mass, True)
 
 
-def line(p1, p2, radius, mass=1, static=False):
+def line(p1, p2, thickness, mass=1, static=False):
+    """Creates a line segment that will react to gravity.
+
+    :param p1: The starting point of the line segement
+    :type p1: (int, int)
+    :param p2: The ending point of the line segement
+    :type p2: (int, int)
+    :param thickness: The thickness of the line segement
+    :type thickness: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
     line = Line(p1, p2, radius, mass, static)
     shapes.append(line)
 
@@ -561,6 +783,15 @@ def line(p1, p2, radius, mass=1, static=False):
 
 
 def pivot(p):
+    """Creates a pivot joint around which shapes can freely rotate.
+    Shapes must be connected to the pivot using the connect method
+    on the returned shape.  The pivot joint remains fixed in place.
+
+    :param p: The point at which to place the pivot
+    :type p: (int, int)
+    :rtype: shape
+
+    """
     pivot = PivotJoint(p[0], p[1])
     shapes.append(pivot)
 
@@ -568,6 +799,17 @@ def pivot(p):
 
 
 def gear(shape1, shape2):
+    """Connects two objects such that their rotations become the same.
+    Can be used in conjunction with a motor on one shape to ensure the
+    second shape rotates at the same speed as the first.
+
+    :param shape1: The first shape to connect
+    :type shape1: shape
+    :param shape2: The second shape to connect
+    :type shape2: shape
+    :rtype: shape
+
+    """
     gear = GearJoint(shape1, shape2)
     shapes.append(gear)
 
@@ -575,6 +817,18 @@ def gear(shape1, shape2):
 
 
 def motor(shape1, speed=5):
+    """Creates a constant rotation of the given shape around its
+    center point.  The direction of rotation is controlled by the
+    sign of the speed.  Positive speed is clockwise, negative speed
+    is counter-clockwise.
+
+    :param shape1: The shape to connect to the motor
+    :type shape1: shape
+    :param speed: The speed at which to rotate the shape
+    :type speed: int
+    :rtype: shape
+
+    """
     motor = Motor(shape1, speed)
     shapes.append(motor)
 
@@ -582,6 +836,21 @@ def motor(shape1, speed=5):
 
 
 def pin(p1, shape1, p2, shape2):
+    """Creates a connection between the shapes at the given positions.
+    Those points on the shapes will remain that same distance apart,
+    regardless of movement or rotation.
+
+    :param p1: The point on the first shape
+    :type p1: (int, int)
+    :param shape1: The first shape to connect via the pin
+    :type shape1: shape
+    :param p2: The point on the second shape
+    :type p2: (int, int)
+    :param shape2: The second shape to connect via the pin
+    :type shape2: shape
+    :rtype: shape
+
+    """
     pin = PinJoint(p1, shape1, p2, shape2)
     shapes.append(pin)
 
@@ -589,6 +858,25 @@ def pin(p1, shape1, p2, shape2):
 
 
 def rotary_spring(shape1, shape2, angle, stiffness, damping):
+    """Creates a spring that constrains the rotations of the given shapes.
+    The angle between the two shapes prefers to be at the given angle, but
+    may be varied by forces on the objects.  The spring will bring the objects
+    back to the desired angle.  The initial positioning of the shapes is considered
+    to be at an angle of 0.
+
+    :param shape1: The first shape to connect via the spring
+    :type shape1: shape
+    :param shape2: The second shape to connect via the spring
+    :type shape2: shape
+    :param angle: The desired angle between the two objects
+    :type angle: float
+    :param stiffness: the spring constant (Young's modulus)
+    :type stiffness: float
+    :param damping: the softness of the spring damping
+    :type damping: float
+    :rtype: shape
+
+    """
     spring = RotarySpring(shape1, shape2, angle, stiffness, damping)
     shapes.append(spring)
 
@@ -603,6 +891,16 @@ def rotary_spring(shape1, shape2, angle, stiffness, damping):
 
 
 def run(do_physics=True):
+    """Call this after you have created all your shapes to actually run the simulation.
+    This function returns only when the user has closed the simulation window.
+
+    Pass False to this method to do the drawing but not activate physics.
+    Useful for getting the scene right before running the simulation.
+
+    :param do_physics: Should physics be activated or not
+    :type do_physics: bool
+    """
+
     screen = pygame.display.set_mode((win_width, win_height))
     pygame.display.set_caption(win_title)
     clock = pygame.time.Clock()
