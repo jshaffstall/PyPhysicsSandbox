@@ -83,11 +83,14 @@ def gravity(x, y):
 
 
 def resistance(v):
-    """Sets the amount of velocity that all objects lose over time.
+    """Sets the amount of velocity that all objects lose each second.
     This can be used to simulate air resistance.  Resistance value
     defaults to 1.0.  Values less than 1.0 cause objects to lose
     velocity over time, values greater than 1.0 cause objects to
     gain velocity over time.
+
+    For example a value of .9 means the body will lose 10% of its
+    velocity each second (.9 = 90% velocity retained each second).
 
     This value can be changed during the run of the simulation.
 
