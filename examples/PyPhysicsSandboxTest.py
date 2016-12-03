@@ -60,6 +60,8 @@ text1 = text((200,200), "Hello World")
 text1.color = Color('green')
 text1.wrap = True
 
+box1 = box((150,20), 30, 30)
+
 run()
 
 

@@ -1,7 +1,7 @@
 import pygame
 import math
 
-from .box import Box
+from .box_shape import Box
 
 
 class Text(Box):

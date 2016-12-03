@@ -183,7 +183,7 @@ def box(p, width, height, mass=1, static=False):
     :rtype: shape
 
     """
-    from .box import Box
+    from .box_shape import Box
 
     # Polygons expect x,y to be the center point
     x = p[0] + width / 2
@@ -228,7 +228,7 @@ def rounded_box(p, width, height, radius, mass=1, static=False):
     :rtype: shape
 
     """
-    from .box import Box
+    from .box_shape import Box
 
     # Polygons expect x,y to be the center point
     x = p[0] + width / 2
@@ -261,7 +261,7 @@ def polygon(vertices, mass=1, static=False):
     :rtype: shape
 
     """
-    from .poly import Poly
+    from .poly_shape import Poly
     from .util import poly_centroid
 
     x, y = poly_centroid(vertices)
@@ -302,7 +302,7 @@ def triangle(p1, p2, p3, mass=1, static=False):
     :rtype: shape
 
     """
-    from .poly import Poly
+    from .poly_shape import Poly
 
     x1, y1 = p1
     x2, y2 = p2
@@ -345,7 +345,7 @@ def text(p, caption, mass=1, static=False):
     :rtype: shape
 
     """
-    from .text import Text
+    from .text_shape import Text
 
     result = Text(space, p[0], p[1], caption, "Arial", 12, mass, static)
     shapes.append(result)
@@ -386,7 +386,7 @@ def text_with_font(p, caption, font, size, mass=1, static=False):
     :rtype: shape
 
     """
-    from .text import Text
+    from .text_shape import Text
 
     result = Text(space, p[0], p[1], caption, font, size, mass, static)
     shapes.append(result)
@@ -441,7 +441,7 @@ def pivot(p):
     :rtype: shape
 
     """
-    from .pivot import Pivot
+    from .pivot_joint import Pivot
 
     result = Pivot(space, p[0], p[1])
     shapes.append(result)
@@ -461,7 +461,7 @@ def gear(shape1, shape2):
     :rtype: shape
 
     """
-    from .gear import Gear
+    from .gear_joint import Gear
 
     result = Gear(space, shape1, shape2)
     shapes.append(result)
@@ -482,7 +482,7 @@ def motor(shape1, speed=5):
     :rtype: shape
 
     """
-    from .motor import Motor
+    from .motor_joint import Motor
 
     result = Motor(space, shape1, speed)
     shapes.append(result)
@@ -506,7 +506,7 @@ def pin(p1, shape1, p2, shape2):
     :rtype: shape
 
     """
-    from .pin import Pin
+    from .pin_joint import Pin
 
     result = Pin(space, p1, shape1, p2, shape2)
     shapes.append(result)
