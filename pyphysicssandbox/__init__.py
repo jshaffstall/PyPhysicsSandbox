@@ -11,7 +11,7 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_pressed',
            'rounded_box', 'static_polygon', 'polygon', 'static_triangle',
            'triangle', 'static_text', 'text', 'static_text_with_font',
            'text_with_font', 'static_line', 'line', 'pivot', 'gear',
-           'motor', 'pin', 'rotary_spring', 'run', 'Color'
+           'motor', 'pin', 'rotary_spring', 'run', 'draw', 'Color'
            ]
 
 
@@ -131,10 +131,10 @@ def static_ball(p, radius):
     :rtype: shape
 
     """
-    return ball(p, radius, pymunk.inf, True)
+    return _ball(p, radius, pymunk.inf, True)
 
 
-def ball(p, radius, mass=1, static=False):
+def ball(p, radius, mass=1):
     """Creates a ball that reacts to gravity.
 
     :param p: The center point of the ball
@@ -146,6 +146,10 @@ def ball(p, radius, mass=1, static=False):
     :rtype: shape
 
     """
+    return _ball(p, radius, mass, False)
+
+
+def _ball(p, radius, mass=1, static=False):
     from .ball_shape import Ball
 
     result = Ball(space, p[0], p[1], radius, mass, static)
@@ -166,10 +170,27 @@ def static_box(p, width, height):
     :rtype: shape
 
     """
-    return box(p, width, height, pymunk.inf, True)
+    return _box(p, width, height, pymunk.inf, True)
 
 
-def box(p, width, height, mass=1, static=False):
+def box(p, width, height, mass=1):
+    """Creates a box that reacts to gravity.
+
+    :param p: The upper left corner of the box
+    :type p: (int, int)
+    :param width: The width of the box
+    :type width: int
+    :param height: The height of the box
+    :type height: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
+    return _box(p, width, height, mass, False)
+
+
+def _box(p, width, height, mass, static):
     """Creates a box that reacts to gravity.
 
     :param p: The upper left corner of the box
@@ -209,10 +230,29 @@ def static_rounded_box(p, width, height, radius):
     :rtype: shape
 
     """
-    return rounded_box(p, width, height, radius, pymunk.inf, True)
+    return _rounded_box(p, width, height, radius, pymunk.inf, True)
 
 
-def rounded_box(p, width, height, radius, mass=1, static=False):
+def rounded_box(p, width, height, radius, mass=1):
+    """Creates a box with rounded corners that reacts to gravity.
+
+    :param p: The upper left corner of the box
+    :type p: (int, int)
+    :param width: The width of the box
+    :type width: int
+    :param height: The height of the box
+    :type height: int
+    :param radius: The radius of the rounded corners
+    :type radius: int
+    :param mass: The mass of the shape (defaults to 1)
+    :type mass: int
+    :rtype: shape
+
+    """
+    return _rounded_box(p, width, height, radius, mass, False)
+
+
+def _rounded_box(p, width, height, radius, mass, static):
     """Creates a box with rounded corners that reacts to gravity.
 
     :param p: The upper left corner of the box
@@ -248,10 +288,10 @@ def static_polygon(vertices):
     :rtype: shape
 
     """
-    return polygon(vertices, pymunk.inf, True)
+    return _polygon(vertices, pymunk.inf, True)
 
 
-def polygon(vertices, mass=1, static=False):
+def polygon(vertices, mass=1):
     """Creates a polygon that reacts to gravity.
 
     :param vertices: A tuple of points on the polygon
@@ -261,6 +301,10 @@ def polygon(vertices, mass=1, static=False):
     :rtype: shape
 
     """
+    return _polygon(vertices, mass, False)
+
+
+def _polygon(vertices, mass, static):
     from .poly_shape import Poly
     from .util import poly_centroid
 
@@ -285,10 +329,10 @@ def static_triangle(p1, p2, p3):
     :rtype: shape
 
     """
-    return triangle(p1, p2, p3, pymunk.inf, True)
+    return _triangle(p1, p2, p3, pymunk.inf, True)
 
 
-def triangle(p1, p2, p3, mass=1, static=False):
+def triangle(p1, p2, p3, mass=1):
     """Creates a triangle that reacts to gravity.
 
     :param p1: The first point of the triangle
@@ -302,6 +346,10 @@ def triangle(p1, p2, p3, mass=1, static=False):
     :rtype: shape
 
     """
+    return _triangle(p1, p2, p3, mass, False)
+
+
+def _triangle(p1, p2, p3, mass, static):
     from .poly_shape import Poly
 
     x1, y1 = p1
@@ -329,10 +377,10 @@ def static_text(p, caption):
     :rtype: shape
 
     """
-    return text(p, caption, pymunk.inf, True)
+    return _text(p, caption, pymunk.inf, True)
 
 
-def text(p, caption, mass=1, static=False):
+def text(p, caption, mass):
     """Creates a text rectangle that reacts to gravity, using
     Arial 12 point font.
 
@@ -345,6 +393,10 @@ def text(p, caption, mass=1, static=False):
     :rtype: shape
 
     """
+    return _text(p, caption, mass, False)
+
+
+def _text(p, caption, mass, static):
     from .text_shape import Text
 
     result = Text(space, p[0], p[1], caption, "Arial", 12, mass, static)
@@ -367,10 +419,10 @@ def static_text_with_font(p, caption, font, size):
     :rtype: shape
 
     """
-    return text_with_font(p, caption, font, size, pymunk.inf, True)
+    return _text_with_font(p, caption, font, size, pymunk.inf, True)
 
 
-def text_with_font(p, caption, font, size, mass=1, static=False):
+def text_with_font(p, caption, font, size, mass=1):
     """Creates a text rectangle that reacts to gravity.
 
     :param p: The upper left corner of the text rectangle
@@ -386,6 +438,10 @@ def text_with_font(p, caption, font, size, mass=1, static=False):
     :rtype: shape
 
     """
+    return _text_with_font(p, caption, font, size, mass, False)
+
+
+def _text_with_font(p, caption, font, size, mass, static):
     from .text_shape import Text
 
     result = Text(space, p[0], p[1], caption, font, size, mass, static)
@@ -406,10 +462,10 @@ def static_line(p1, p2, thickness):
     :rtype: shape
 
     """
-    return line(p1, p2, thickness, pymunk.inf, True)
+    return _line(p1, p2, thickness, pymunk.inf, True)
 
 
-def line(p1, p2, thickness, mass=1, static=False):
+def line(p1, p2, thickness, mass=1):
     """Creates a line segment that will react to gravity.
 
     :param p1: The starting point of the line segement
@@ -423,6 +479,10 @@ def line(p1, p2, thickness, mass=1, static=False):
     :rtype: shape
 
     """
+    return _line(p1, p2, thickness, mass, False)
+
+
+def _line(p1, p2, thickness, mass, static):
     from .line_segment import Line
 
     result = Line(space, p1, p2, thickness, mass, static)
@@ -622,3 +682,10 @@ def run(do_physics=True):
     pygame.quit()
 
 
+def draw():
+    """Call this after you have created all your shapes to actually draw them.
+    This function only returns after you close the window.
+
+    This is an alias for run(False).
+    """
+    run(False)

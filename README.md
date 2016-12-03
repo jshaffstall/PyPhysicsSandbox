@@ -209,6 +209,14 @@ Call this after you have created all your shapes to actually run the simulation.
 
 Pass False to this method to do the drawing but not activate physics.  Useful for getting the scene right before running the simulation.
 
+```python
+draw()
+```
+
+Call this after you have created all your shapes to draw the shapes.  This function returns only when the user has closed the window.
+
+This is an alias for run(False).
+
 ###Shape Methods
 
 Each shape object that gets returned has some methods and properties that can be called to adjust the shape.  
