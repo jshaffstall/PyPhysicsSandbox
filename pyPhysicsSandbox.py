@@ -30,7 +30,11 @@
 # gets imported here using import physics_util?  That would clean up autocomplete
 # suggestions in IDEs
 
+# TODO: add cosmetic text that gets drawn but is not involved in physics, and that
+# you can change the text inside observer functions
 
+# TODO: see if it's possible to change the text of text blocks that are involved in
+# physics...can we alter the size of the box while the simulation is active?
 
 
 from pygame import Color
@@ -58,7 +62,7 @@ shapes = []
 class BaseShape:
     _color = Color('black')
     _wrap = False
-    active = True
+    _active = True
     _visible = True
 
     def hit(self, x, y):
@@ -70,6 +74,10 @@ class BaseShape:
     def draw(self, screen):
         if self.visible:
             self._draw(screen)
+
+    @property
+    def active(self):
+        return self._active
 
     @property
     def elasticity(self):
@@ -475,23 +483,23 @@ def gravity(x, y):
     space.gravity = (x, y)
 
 
-def damping(v):
+def resistance(v):
     """Sets the amount of velocity that all objects lose over time.
-    This can be used to simulate air resistance.  Damping value
+    This can be used to simulate air resistance.  Resistance value
     defaults to 1.0.  Values less than 1.0 cause objects to lose
     velocity over time, values greater than 1.0 cause objects to
     gain velocity over time.
 
     This value can be changed during the run of the simulation.
 
-    :param v: The damping value
+    :param v: The resistance value
     :type v: float
 
     """
     space.damping = v
 
 
-def mouse_pressed ():
+def mouse_pressed():
     """Returns True if the mouse has been pressed this time step.
     The method ensures that you only get one True result for a given
     click and release of the mouse.
@@ -624,7 +632,7 @@ def rounded_box(p, width, height, radius, mass=1, static=False):
     return box
 
 
-def static_poly(vertices):
+def static_polygon(vertices):
     """Creates a polygon that remains fixed in place.
 
     :param vertices: A tuple of points on the polygon
@@ -635,7 +643,7 @@ def static_poly(vertices):
     return poly(vertices, pymunk.inf, True)
 
 
-def poly(vertices, mass=1, static=False):
+def polygon(vertices, mass=1, static=False):
     """Creates a polygon that reacts to gravity.
 
     :param vertices: A tuple of points on the polygon
@@ -947,7 +955,7 @@ def run(do_physics=True):
                 shapes_to_remove.append(shape)
 
         for shape in shapes_to_remove:
-            shape.active = False
+            shape._active = False
 
             if type(shape.shape) is list:
                 for s in shape.shape:
