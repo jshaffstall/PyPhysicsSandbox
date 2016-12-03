@@ -1,4 +1,4 @@
-from pyPhysicsSandbox import *
+from pyphysicssandbox import *
 
 WIN_WIDTH = 500
 WIN_HT = 600
@@ -10,11 +10,11 @@ base = static_box((0, 500), WIN_WIDTH, 10)
 base.color = Color("black")
 
 # fulcrum
-triangle = poly(((250, 450), (275, 500), (225, 500)))
+triangle = polygon(((250, 450), (275, 500), (225, 500)))
 triangle.color = Color("green")
 
 # lever
-lever = poly(((50, 405), (65, 405), (65, 440), (450, 440), (450, 450), (50, 450)), 15)
+lever = polygon(((50, 405), (65, 405), (65, 440), (450, 440), (450, 450), (50, 450)), 15)
 #lever = poly(((50, 200), (50, 450), (450, 450), (450, 440), (65, 440), (65, 200)))
 lever.color = Color("darkblue")
 lever.elasticity = 0.90
