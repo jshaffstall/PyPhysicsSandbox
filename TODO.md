@@ -28,3 +28,6 @@ be a start at allowing per body gravity and damping.
 
 # TODO: see if it's possible to change the text of text blocks that are involved in
 # physics...can we alter the size of the box while the simulation is active?
+
+# TODO: make private functions for creating shapes so the public functions don't 
+# show the static parameter at all
