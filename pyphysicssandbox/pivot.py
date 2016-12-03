@@ -2,6 +2,7 @@ import pygame
 import pymunk
 
 from .base_shape import BaseShape
+from .util import to_pygame
 
 
 class Pivot(BaseShape):
@@ -20,5 +21,5 @@ class Pivot(BaseShape):
         self.space.add(join)
 
     def _draw(self, screen):
-        p = self.to_pygame(self.body.position)
+        p = to_pygame(self.body.position)
         pygame.draw.circle(screen, self.color, p, 5, 0)

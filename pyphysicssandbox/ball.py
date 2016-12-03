@@ -2,6 +2,7 @@ import pygame
 import pymunk
 
 from .base_shape import BaseShape
+from .util import to_pygame
 
 
 class Ball(BaseShape):
@@ -23,12 +24,12 @@ class Ball(BaseShape):
         space.add(self.body, self.shape)
 
     def _draw(self, screen):
-        p = self.to_pygame(self.body.position)
+        p = to_pygame(self.body.position)
         pygame.draw.circle(screen, self.color, p, int(self.shape.radius), 0)
 
         if self.draw_radius_line:
             circle_edge = self.body.position + pymunk.Vec2d(self.shape.radius, 0).rotated(self.body.angle)
-            p2 = self.to_pygame(circle_edge)
+            p2 = to_pygame(circle_edge)
             pygame.draw.lines(screen, pygame.Color('black'), False, [p, p2], 1)
 
     @property

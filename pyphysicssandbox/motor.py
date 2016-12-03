@@ -2,6 +2,7 @@ import pygame
 import pymunk
 
 from .base_shape import BaseShape
+from .util import to_pygame
 
 
 class Motor(BaseShape):
@@ -18,7 +19,7 @@ class Motor(BaseShape):
         return False
 
     def _draw(self, screen):
-        p = self.to_pygame(self.body.position)
+        p = to_pygame(self.body.position)
         radius = 10
         rect = pygame.Rect(p[0] - radius/2, p[1] - radius/2, radius, radius)
 

@@ -11,10 +11,6 @@ class BaseShape:
         self._active = True
         self.visible = True
 
-    def to_pygame(self, p):
-        # Converts pymunk body position into pygame coordinate tuple
-        return int(p.x), int(p.y)
-
     def hit(self, x, y):
         self.body.apply_impulse_at_world_point((x,y))
 
