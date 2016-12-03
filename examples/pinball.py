@@ -46,8 +46,8 @@ ball((250,100), 10)
 
 def flipper_hit():
     if mouse_pressed():
-        r_flipper.hit(0, 9000)
-        l_flipper.hit(0, -9000)
+        r_flipper.hit(r_pos_x+100, r_pos_y)
+        l_flipper.hit(l_pos_x-100, l_pos_y)
 
 add_observer(flipper_hit)
 

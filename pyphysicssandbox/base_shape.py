@@ -12,7 +12,7 @@ class BaseShape:
         self.visible = True
 
     def hit(self, x, y):
-        self.body.apply_impulse_at_world_point((x,y))
+        self.body.apply_impulse_at_world_point((0, -200), (x, y))
 
     def has_own_body(self):
         return True
