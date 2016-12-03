@@ -1,4 +1,4 @@
-from pyPhysicsSandbox import *
+from pyphysicssandbox import *
 
 # old_active = True
 #
@@ -52,7 +52,7 @@ box1.color = Color('red')
 tri1 = triangle((260, 35), (250, 35), (240, -15))
 tri1.color = Color('red')
 
-poly1 = poly(((195, 35), (245, 35), (220, -15)))
+poly1 = polygon(((195, 35), (245, 35), (220, -15)))
 poly1.color = Color('blue')
 poly1.wrap = True
 

@@ -146,7 +146,7 @@ def ball(p, radius, mass=1, static=False):
     :rtype: shape
 
     """
-    from .ball import Ball
+    from .ball_shape import Ball
 
     result = Ball(space, p[0], p[1], radius, mass, static)
     shapes.append(result)
