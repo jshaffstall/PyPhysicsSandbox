@@ -41,7 +41,15 @@ l_pivot = pivot((l_pos_x, l_pos_y))
 l_pivot.connect(l_flipper)
 rotary_spring(l_flipper, l_pivot, -0.15, 20000000,900000)
 
-#r_flipper.hit(600-450+100, 600-100)
+ball((250,100), 10)
+
+
+def flipper_hit():
+    if mouse_pressed():
+        r_flipper.hit(0, 9000)
+        l_flipper.hit(0, -9000)
+
+add_observer(flipper_hit)
 
 run()
 
