@@ -1,6 +1,3 @@
-# See https://github.com/viblo/pymunk/blob/master/pymunk/__init__.py for the technique of how
-# to expose functions from the package
-
 import pygame
 import pymunk
 
@@ -422,7 +419,7 @@ def line(p1, p2, thickness, mass=1, static=False):
     :rtype: shape
 
     """
-    from .line import Line
+    from .line_segment import Line
 
     result = Line(space, p1, p2, thickness, mass, static)
     shapes.append(result)

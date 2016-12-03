@@ -1,4 +1,4 @@
-from pyPhysicsSandbox import *
+from pyphysicssandbox import *
 
 window('Pinball', 600, 600)
 gravity(0, 900)
@@ -17,14 +17,14 @@ for line in lines:
 r_pos_x = 150
 r_pos_y = 500
 
-r_flipper = poly(((r_pos_x-20, r_pos_y-20), (r_pos_x+120, r_pos_y), (r_pos_x-20, r_pos_y+20)), 100)
+r_flipper = polygon(((r_pos_x-20, r_pos_y-20), (r_pos_x+120, r_pos_y), (r_pos_x-20, r_pos_y+20)), 100)
 r_flipper.color = Color('blue')
 r_flipper.group = 1
 
 l_pos_x = 450
 l_pos_y = 500
 
-l_flipper = poly(((l_pos_x+20, l_pos_y-20), (l_pos_x-120, l_pos_y), (l_pos_x+20, l_pos_y+20)), 100)
+l_flipper = polygon(((l_pos_x+20, l_pos_y-20), (l_pos_x-120, l_pos_y), (l_pos_x+20, l_pos_y+20)), 100)
 l_flipper.color = Color('blue')
 l_flipper.group = 1
 

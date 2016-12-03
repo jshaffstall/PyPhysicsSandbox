@@ -1,4 +1,4 @@
-from pyPhysicsSandbox import *
+from pyphysicssandbox import *
 import random
 
 WIN_WIDTH = 600
@@ -59,7 +59,7 @@ motor = motor(arm1, -3)
 
 def switch_gravity():
     if mouse_pressed():
-        gravity(0, -900)
+        gravity(0, -100)
 
 add_observer(switch_gravity)
 

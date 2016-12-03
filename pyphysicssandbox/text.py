@@ -13,12 +13,13 @@ class Text(Box):
         self.x = x
         self.y = y
         self.caption = caption
-        self.label = font.render(self.caption, True, self.color)
 
         box_x = x + width / 2
         box_y = y + height / 2
 
         super().__init__(space, box_x, box_y, width, height, 3, mass, static)
+
+        self.label = font.render(self.caption, True, self.color)
 
     def _draw(self, screen):
         degrees = math.degrees(self.body.angle)
