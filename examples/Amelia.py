@@ -47,12 +47,12 @@ pivot2.connect(arm3)
 
 ball1 = ball((110, 100), 5)
 ball1.color = Color("blue")
-ball1.wrap_y = True
+ball1.wrap = True
 
 ball2 = ball((350, 0), 5)
 ball2.color = Color("green")
 ball2.draw_radius_line = True
-ball2.wrap_y = True
+ball2.wrap = True
 
 gear(arm1, arm3)
 motor = motor(arm1, -3)

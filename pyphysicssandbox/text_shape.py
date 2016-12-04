@@ -77,7 +77,8 @@ class Text(Box):
 
 class CosmeticText:
     body = None
-    wrap = False
+    wrap_x = False
+    wrap_y = False
     _visible = True
 
     def __init__(self, x, y, caption, font_name, font_size):

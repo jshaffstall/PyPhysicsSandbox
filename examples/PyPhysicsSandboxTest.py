@@ -44,19 +44,19 @@ b1.color = Color('green')
 b1.friction = 0.25
 b1.group = 1
 
-poly2 = triangle((100, 5), (105, 15), (105, 0))
-poly2.color = Color('blue')
-poly2.group = 1
-poly2.paste_on(b1)
+# poly2 = triangle((100, 5), (105, 15), (105, 0))
+# poly2.color = Color('blue')
+# poly2.group = 1
+# poly2.paste_on(b1)
 
-# text2 = text((100, 10), "Hi")
-# text2.color = Color('green')
-# text2.group = 1
-# text2.draw_on(b1)
+text2 = text((100, 10), "Hi")
+text2.color = Color('green')
+text2.group = 1
+text2.paste_on(b1)
 
 # line1 = line((100,5), (100,15), 1)
 # line1.group = 1
-# line1.draw_on(b1)
+# line1.paste_on(b1)
 
 b2 = static_ball((98, 100), 30)
 b2.color = Color('blue')
