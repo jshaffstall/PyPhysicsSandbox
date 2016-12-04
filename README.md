@@ -222,10 +222,14 @@ This is an alias for run(False).
 Each shape object that gets returned has some methods and properties that can be called to adjust the shape.  
 
 ```python
-shape.hit(x, y)
+shape.hit(direction, position)
 ```
 
-Hits the shape in the given direction.  This is an instantaneous impulse.
+Hits the shape at the given position in the given direction.  This is an instantaneous impulse.
+
+Direction is a tuple containing the x direction and y direction (in the same orientation as the gravity tuple).
+
+Position is a tuple containing the x and y position of the spot on the shape to hit.
 
 ```python
 shape.color

@@ -35,19 +35,20 @@ l_flipper.group = 1
 
 r_pivot = pivot((r_pos_x, r_pos_y))
 r_pivot.connect(r_flipper)
-rotary_spring(r_flipper, r_pivot, 0.15, 20000000,900000)
+rotary_spring(r_flipper, r_pivot, 0.15, 20000000, 900000)
 
 l_pivot = pivot((l_pos_x, l_pos_y))
 l_pivot.connect(l_flipper)
-rotary_spring(l_flipper, l_pivot, -0.15, 20000000,900000)
+rotary_spring(l_flipper, l_pivot, -0.15, 20000000, 900000)
 
-ball((250,100), 10)
+ball((250,100), 25)
+ball.elasticity = 0.95
 
 
 def flipper_hit():
     if mouse_pressed():
-        r_flipper.hit(r_pos_x+100, r_pos_y)
-        l_flipper.hit(l_pos_x-100, l_pos_y)
+        r_flipper.hit((0, -20000), (r_pos_x+100, r_pos_y))
+        l_flipper.hit((0, -20000), (l_pos_x-100, l_pos_y))
 
 add_observer(flipper_hit)
 

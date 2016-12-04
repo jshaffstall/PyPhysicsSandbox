@@ -19,10 +19,6 @@ This https://github.com/viblo/pymunk/blob/0d79176cf2fd642bd2ce4005478cb8d6e37c1e
 shows setting a custom velocity function on a body.  That's for constant velocity, but might
 be a start at allowing per body gravity and damping.
 
-# TODO: move everything but the public interface into another module that
-# gets imported here using import physics_util?  That would clean up autocomplete
-# suggestions in IDEs
-
 # TODO: add cosmetic text that gets drawn but is not involved in physics, and that
 # you can change the text inside observer functions
 
