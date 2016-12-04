@@ -4,8 +4,6 @@
 # TODO: create this as an open source library for distribution
 # https://jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/
 
-# TODO: create __repr__ functions in the shape classes to show info during debugging
-
 # TODO: Expose motor's max torque
 
 # TODO: Figure out how to do a slip gear
