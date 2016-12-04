@@ -22,7 +22,5 @@ be a start at allowing per body gravity and damping.
 # TODO: add cosmetic text that gets drawn but is not involved in physics, and that
 # you can change the text inside observer functions
 
-# TODO: see if it's possible to change the text of text blocks that are involved in
-# physics...can we alter the size of the box while the simulation is active?
 
 

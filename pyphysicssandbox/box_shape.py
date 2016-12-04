@@ -18,6 +18,7 @@ class Box(BaseShape):
         self.width = width
         self.height = height
         self.radius = radius
+
         super().__init__()
 
         space.add(self.body, self.shape)

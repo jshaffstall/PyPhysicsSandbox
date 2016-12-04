@@ -273,6 +273,12 @@ shape.draw_radius_line
 
 Only for balls, this sets whether a line from the center of the ball to the 0 degree point on the outer edge is drawn.  Defaults to False.  Can be set to True to gauge rotation of the ball. 
 
+```python
+shape.text
+```
+
+Only for text, this sets the text to be displayed.  This will modify the box shape around the text for collision detection. 
+
 ## Tests
 
 Describe and show how to run the tests with code examples.
