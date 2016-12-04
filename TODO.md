@@ -5,6 +5,9 @@
 # tie two objects' locations and rotations together
 #
 # Maybe special case it for cosmetic text drawn inside another shape?
+#
+# A pin instead of a pivot might work, since the pins do move.  Make the pins
+# 0 length so they keep the shapes together, and use multiple of them.
 
 # TODO: create this as an open source library for distribution
 # https://jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/
