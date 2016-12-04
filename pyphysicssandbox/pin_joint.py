@@ -29,6 +29,9 @@ class Pin(BaseShape):
 
         pygame.draw.line(screen, self.color, p1, p2, 1)
 
+    def _pin_points(self):
+        raise Exception('Do not use draw_on for pins')
+
     def __repr__(self):
         p1 = self.body.local_to_world(self.shape.a)
         p2 = self.body.local_to_world(self.shape.b)

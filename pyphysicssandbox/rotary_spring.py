@@ -20,6 +20,9 @@ class RotarySpring(BaseShape):
     def _draw(self, screen):
         pass
 
+    def _pin_points(self):
+        raise Exception('Do not use draw_on for rotary springs')
+
     def __repr__(self):
         return 'rotary_spring: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), angle: ' + \
                str(self.shape.rest_angle)

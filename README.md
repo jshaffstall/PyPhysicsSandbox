@@ -268,6 +268,16 @@ shape.group
 Set to an integer.  Shapes that share the same group number will not collide with each other.  Useful to have overlapping objects connected by joints that do not make the physics crazy. 
 
 ```python
+shape.paste_on(other_shape)
+```
+
+Paste one shape onto another shape.  The coordinates for the shape must be inside that of the other_shape and their group must be set to the same value to disable collision detection between them.
+  
+This can be used, for example, to draw some text inside a shape. 
+
+This is only suitable for calling on actual shapes!  The various joints already attach themselves to objects.
+
+```python
 shape.draw_radius_line
 ```
 

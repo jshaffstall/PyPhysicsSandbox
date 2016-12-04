@@ -19,6 +19,9 @@ class Gear(BaseShape):
     def _draw(self, screen):
         pass
 
+    def _pin_points(self):
+        raise Exception('Do not use draw_on for gears')
+
     def __repr__(self):
         return 'gear: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + ')'
 

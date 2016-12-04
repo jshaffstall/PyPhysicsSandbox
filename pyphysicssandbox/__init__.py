@@ -381,7 +381,7 @@ def static_text(p, caption):
     return _text(p, caption, pymunk.inf, True)
 
 
-def text(p, caption, mass):
+def text(p, caption, mass=1):
     """Creates a text rectangle that reacts to gravity, using
     Arial 12 point font.
 

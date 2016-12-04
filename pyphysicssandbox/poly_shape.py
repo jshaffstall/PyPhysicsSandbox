@@ -37,6 +37,14 @@ class Poly(BaseShape):
 
             pygame.draw.polygon(screen, self.color, ps)
 
+    def _pin_points(self):
+        x1 = self.body.position.x-5
+        y1 = self.body.position.y
+        x2 = self.body.position.x+5
+        y2 = y1
+
+        return (x1, y1), (x2, y2)
+
     def __repr__(self):
         prefix = 'polygon'
 

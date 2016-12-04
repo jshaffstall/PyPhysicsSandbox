@@ -33,6 +33,14 @@ class Ball(BaseShape):
             p2 = to_pygame(circle_edge)
             pygame.draw.lines(screen, pygame.Color('black'), False, [p, p2], 1)
 
+    def _pin_points(self):
+        x1 = self.body.position.x - self.shape.radius
+        y1 = self.body.position.y
+        x2 = self.body.position.x + self.shape.radius
+        y2 = y1
+
+        return (x1, y1), (x2, y2)
+
     def __repr__(self):
         prefix = 'ball'
 

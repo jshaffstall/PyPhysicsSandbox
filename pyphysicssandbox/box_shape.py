@@ -31,6 +31,14 @@ class Box(BaseShape):
         pygame.draw.polygon(screen, self.color, ps)
         pygame.draw.lines(screen, self.color, False, ps, self.radius)
 
+    def _pin_points(self):
+        x1 = self.body.position.x
+        y1 = self.body.position.y + (self.height/2)
+        x2 = x1 + self.width
+        y2 = y1
+
+        return (x1, y1), (x2, y2)
+
     def __repr__(self):
         prefix = 'box'
 

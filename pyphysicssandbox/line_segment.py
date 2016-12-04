@@ -31,6 +31,12 @@ class Line(BaseShape):
 
         pygame.draw.line(screen, self.color, p1, p2, self.radius)
 
+    def _pin_points(self):
+        p1 = self.body.local_to_world(self.shape.a)
+        p2 = self.body.local_to_world(self.shape.b)
+
+        return p1, p2
+
     def __repr__(self):
         prefix = 'line'
 

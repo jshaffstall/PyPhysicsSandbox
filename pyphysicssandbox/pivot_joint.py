@@ -24,6 +24,9 @@ class Pivot(BaseShape):
         p = to_pygame(self.body.position)
         pygame.draw.circle(screen, self.color, p, 5, 0)
 
+    def _pin_points(self):
+        raise Exception('Do not use draw_on for pivots')
+
     def __repr__(self):
         return 'pivot: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + ')'
 

@@ -1,6 +1,8 @@
 import pygame
 import pymunk
 
+from pyphysicssandbox import pin
+
 
 class BaseShape:
     def __init__(self):
@@ -20,6 +22,12 @@ class BaseShape:
     def draw(self, screen):
         if self.visible:
             self._draw(screen)
+
+    def paste_on(self, other_shape):
+        p1, p2 = self._pin_points()
+
+        pin(p1, self, p1, other_shape).visible = False
+        pin(p2, self, p2, other_shape).visible = False
 
     @property
     def active(self):
