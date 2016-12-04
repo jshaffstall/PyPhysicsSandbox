@@ -4,6 +4,8 @@ pyPhysicsSandbox is a simple wrapper around Pymunk that makes it easy to write c
 
 Caution! The simulation does not behave well if you start out with objects overlapping each other, especially if overlapping objects are connected with joints.  To have overlapping objects connected by joints, set the group on each object to the same number to disable collision detection between those objects.
 
+Objects far enough outside the simulation window (generally, above or below by the height of the window, or to either side by the width of the window) are automatically removed from the simulation and their active property set to False.
+
 ## Code Example
 
 ```python
@@ -202,6 +204,12 @@ pin((100, 580), ball1, (150, 580), ball2)
 Creates a pin joint between the two shapes at the given points.  A pin joint creates a fixed separation between the two bodies (as if there were a metal pin connecting them).  You'll get strange effects when wrapping these shapes.
 
 ```python
+num_shapes()
+```
+
+Returns the number of active shapes in the simulation.  Mostly useful for debugging.
+
+```python
 run(do_physics=True)
 ```
 
@@ -253,7 +261,21 @@ Sets how much friction the object should have.  The default is 0.6.  The Wikiped
 shape.wrap
 ```
 
-Sets whether the shape should wrap when going off the edges of the screen or not.  A True value means the shape can never be off screen, and if it starts off screen it's immediately brought on as if it were wrapping. 
+Sets whether the shape should wrap when going off the edges of the screen or not.  A True value means the shape can never be off screen, and if it starts off screen it's immediately brought on as if it were wrapping.
+ 
+This is a convenience function for setting wrap_x and wrap_y at the same time. 
+
+```python
+shape.wrap_x
+```
+
+Sets whether the shape should wrap when going off the sides of the screen or not. 
+
+```python
+shape.wrap_y
+```
+
+Sets whether the shape should wrap when going off the top or bottom of the screen or not. 
 
 ```python
 shape.visible

@@ -12,7 +12,7 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_pressed',
            'triangle', 'static_text', 'text', 'static_text_with_font',
            'text_with_font', 'static_line', 'line', 'pivot', 'gear',
            'motor', 'pin', 'rotary_spring', 'run', 'draw', 'Color',
-           'cosmetic_text', 'cosmetic_text_with_font'
+           'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes'
            ]
 
 
@@ -645,6 +645,14 @@ def rotary_spring(shape1, shape2, angle, stiffness, damping):
     return result
 
 
+def num_shapes():
+    """Returns the number of active shapes in the simulation.
+
+    :rtype int
+    """
+    return len(shapes)
+
+
 def run(do_physics=True):
     """Call this after you have created all your shapes to actually run the simulation.
     This function returns only when the user has closed the simulation window.
@@ -676,7 +684,16 @@ def run(do_physics=True):
         # that they won't be involved in anything visible
         shapes_to_remove = []
         for shape in shapes:
+            if shape.body and shape.body.position.x > win_width * 2:
+                shapes_to_remove.append(shape)
+
+            if shape.body and shape.body.position.x < -win_width:
+                shapes_to_remove.append(shape)
+
             if shape.body and shape.body.position.y > win_height * 2:
+                shapes_to_remove.append(shape)
+
+            if shape.body and shape.body.position.y < -win_height:
                 shapes_to_remove.append(shape)
 
         for shape in shapes_to_remove:
@@ -699,13 +716,14 @@ def run(do_physics=True):
         # Also adjust positions for any shapes that are supposed
         # to wrap and have gone off an edge of the screen.
         for shape in shapes:
-            if shape.wrap:
+            if shape.wrap_x:
                 if shape.body.position.x < 0:
                     shape.body.position = (win_width - 1, shape.body.position.y)
 
                 if shape.body.position.x >= win_width:
                     shape.body.position = (0, shape.body.position.y)
 
+            if shape.wrap_y:
                 if shape.body.position.y < 0:
                     shape.body.position = (shape.body.position.x, win_height - 1)
 

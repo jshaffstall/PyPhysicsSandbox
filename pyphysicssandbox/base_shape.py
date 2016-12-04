@@ -8,10 +8,11 @@ class BaseShape:
     def __init__(self):
         self.elasticity = 0.90
         self.friction = 0.6
-        self.color = pygame.Color('black')
-        self.wrap = False
+        self._color = pygame.Color('black')
+        self._wrap_x = False
+        self._wrap_y = False
         self._active = True
-        self.visible = True
+        self._visible = True
 
     def hit(self, direction, position):
         self.body.apply_impulse_at_world_point(direction, position)
@@ -71,12 +72,35 @@ class BaseShape:
 
     @property
     def wrap(self):
-        return self._wrap
+        return self._wrap_x or self.wrap_y
 
     @wrap.setter
     def wrap(self, value):
         if type(value) == bool:
-            self._wrap = value
+            self._wrap_x = value
+            self._wrap_y = value
+        else:
+            print("Wrap value must be True or False")
+
+    @property
+    def wrap_x(self):
+        return self._wrap_x
+
+    @wrap_x.setter
+    def wrap_x(self, value):
+        if type(value) == bool:
+            self._wrap_x = value
+        else:
+            print("Wrap value must be True or False")
+
+    @property
+    def wrap_y(self):
+        return self._wrap_y
+
+    @wrap_y.setter
+    def wrap_y(self, value):
+        if type(value) == bool:
+            self._wrap_y = value
         else:
             print("Wrap value must be True or False")
 
