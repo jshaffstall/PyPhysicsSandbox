@@ -28,3 +28,10 @@ class Pin(BaseShape):
         p2 = self.shape.b.local_to_world(self.shape.anchor_b)
 
         pygame.draw.line(screen, self.color, p1, p2, 1)
+
+    def __repr__(self):
+        p1 = self.body.local_to_world(self.shape.a)
+        p2 = self.body.local_to_world(self.shape.b)
+
+        return 'pin: p1(' + str(p1.x) + ',' + str(p1.y) + '), p2(' + str(p2.x) + ',' + str(p2.y) + ')'
+

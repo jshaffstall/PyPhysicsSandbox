@@ -18,3 +18,7 @@ class Gear(BaseShape):
 
     def _draw(self, screen):
         pass
+
+    def __repr__(self):
+        return 'gear: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + ')'
+

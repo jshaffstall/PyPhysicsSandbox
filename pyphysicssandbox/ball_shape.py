@@ -18,6 +18,7 @@ class Ball(BaseShape):
 
         self.body.position = x, y
         self.shape = pymunk.Circle(self.body, radius)
+        self.static = static
 
         super().__init__()
 
@@ -31,6 +32,15 @@ class Ball(BaseShape):
             circle_edge = self.body.position + pymunk.Vec2d(self.shape.radius, 0).rotated(self.body.angle)
             p2 = to_pygame(circle_edge)
             pygame.draw.lines(screen, pygame.Color('black'), False, [p, p2], 1)
+
+    def __repr__(self):
+        prefix = 'ball'
+
+        if self.static:
+            prefix = 'static_ball'
+
+        return prefix+': p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), radius: ' + \
+            str(self.shape.radius)
 
     @property
     def draw_radius_line(self):

@@ -20,3 +20,8 @@ class RotarySpring(BaseShape):
     def _draw(self, screen):
         pass
 
+    def __repr__(self):
+        return 'rotary_spring: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), angle: ' + \
+               str(self.shape.rest_angle)
+
+

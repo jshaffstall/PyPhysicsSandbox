@@ -15,6 +15,7 @@ class Poly(BaseShape):
             self.body = pymunk.Body(mass, moment)
 
         self.body.position = x, y
+        self.static = static
 
         temp = Polygon.from_tuples(vertices)
         polys = Polygon.convex_decompose(temp)
@@ -35,3 +36,11 @@ class Poly(BaseShape):
             ps = [self.body.local_to_world(v) for v in shape.get_vertices()]
 
             pygame.draw.polygon(screen, self.color, ps)
+
+    def __repr__(self):
+        prefix = 'polygon'
+
+        if self.static:
+            prefix = 'static_polygon'
+
+        return prefix + ': center(' + str(self.body.position.x) + ',' + str(self.body.position.y) + ')'

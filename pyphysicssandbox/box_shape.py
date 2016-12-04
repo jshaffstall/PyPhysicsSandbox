@@ -18,6 +18,7 @@ class Box(BaseShape):
         self.width = width
         self.height = height
         self.radius = radius
+        self.static = static
 
         super().__init__()
 
@@ -29,3 +30,14 @@ class Box(BaseShape):
 
         pygame.draw.polygon(screen, self.color, ps)
         pygame.draw.lines(screen, self.color, False, ps, self.radius)
+
+    def __repr__(self):
+        prefix = 'box'
+
+        if self.static:
+            prefix = 'static_box'
+
+        return prefix+': p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), width: ' + \
+            str(self.width) + ', height: ' + str(self.height)
+
+

@@ -23,3 +23,7 @@ class Pivot(BaseShape):
     def _draw(self, screen):
         p = to_pygame(self.body.position)
         pygame.draw.circle(screen, self.color, p, 5, 0)
+
+    def __repr__(self):
+        return 'pivot: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + ')'
+

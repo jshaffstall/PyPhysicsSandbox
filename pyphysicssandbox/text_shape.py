@@ -31,6 +31,14 @@ class Text(Box):
         size = rotated.get_rect()
         screen.blit(rotated, (self.body.position.x-(size.width/2), self.body.position.y-(size.height/2)))
 
+    def __repr__(self):
+        prefix = 'box'
+
+        if self.static:
+            prefix = 'static_box'
+
+        return prefix+': p(' + str(self.x) + ',' + str(self.y) + '), caption: ' + self.caption
+
     @property
     def text(self):
         return self.caption
@@ -89,6 +97,9 @@ class CosmeticText:
 
     def _draw(self, screen):
         screen.blit(self.label, (self.x, self.y))
+
+    def __repr__(self):
+        return 'cosmetic_text: p('+str(self.x)+','+str(self.y)+'), caption: '+self.caption
 
     @property
     def visible(self):

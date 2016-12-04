@@ -30,3 +30,7 @@ class Motor(BaseShape):
         else:
             pygame.draw.circle(screen, self.color, rect.bottomright, 2, 0)
 
+    def __repr__(self):
+        return 'motor: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), speed: ' + \
+            str(self.shape.speed)
+
