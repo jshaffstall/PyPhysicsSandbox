@@ -2,6 +2,7 @@ import pygame
 import pymunk
 
 from pygame import Color
+from pygame import constants
 
 __docformat__ = "reStructuredText"
 
@@ -12,7 +13,8 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_pressed',
            'triangle', 'static_text', 'text', 'static_text_with_font',
            'text_with_font', 'static_line', 'line', 'pivot', 'gear',
            'motor', 'pin', 'rotary_spring', 'run', 'draw', 'Color',
-           'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes'
+           'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes',
+           'constants'
            ]
 
 
@@ -55,10 +57,20 @@ def window(title, width, height):
 def add_observer(hook):
     """Adds an observer function to the simulation.  Every observer
     function is called once per time step of the simulation (roughly
-    50 times a second).
+    50 times a second).  The function should be defined like this:
+
+        def function_name(keys):
+            # do something each time step
 
     To pass a function in use the name of the function without the
     parenthesis after it.
+
+    The observer function must take a single parameter which is a
+    list of keys pressed this step.  To see if a particular key has
+    been pressed, use something like this:
+
+            if constants.K_UP in keys:
+                # do something based on the up arrow being pressed
 
     :param hook: the observer function
     :type hook: function
@@ -670,12 +682,17 @@ def run(do_physics=True):
     running = True
 
     while running:
+        keys = []
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
+            if event.type == pygame.KEYDOWN:
+                keys.append(event.key)
+
         for observer in observers:
-            observer()
+            observer(keys)
 
         screen.fill((255, 255, 255))
 

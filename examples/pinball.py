@@ -44,14 +44,15 @@ l_pivot = pivot((l_pos_x, l_pos_y))
 l_pivot.connect(l_flipper)
 rotary_spring(l_flipper, l_pivot, -0.15, 20000000, 900000)
 
-ball((250, 100), 25)
-ball.elasticity = 0.95
 
-
-def flipper_hit():
+def flipper_hit(keys):
     if mouse_pressed():
         r_flipper.hit((0, -20000), (r_pos_x+120, r_pos_y))
         l_flipper.hit((0, -20000), (l_pos_x-120, l_pos_y))
+
+    if constants.K_b in keys:
+        ball((250, 100), 25)
+        ball.elasticity = 0.95
 
 add_observer(flipper_hit)
 

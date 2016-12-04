@@ -106,6 +106,22 @@ Provide a function of yours that will get called once per frame.  In this functi
 
 You may call add_observer multiple times to add different observer functions.
 
+The function should be defined like this:
+
+```python
+        def function_name(keys):
+            # do something each time step
+```
+
+The observer function must take a single parameter which is a
+list of keys pressed this step.  To see if a particular key has
+been pressed, use something like this:
+    
+```python
+            if constants.K_UP in keys:
+                # do something based on the up arrow being pressed
+```
+
 ```python
 mouse_pressed ()
 ```
