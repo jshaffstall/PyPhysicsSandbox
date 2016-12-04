@@ -15,12 +15,15 @@ def inc_counter():
         counter -= 1
 
         text1.text = '*'*counter
+        text2.text = '*' * counter
 
 window("Amelia's Test", 300, 600)
 add_observer(drop_balls)
 
 counter = 30
-text1 = static_text((100, 30), '*'*counter)
+text1 = static_text((100, 100), '*'*counter)
+
+text2 = cosmetic_text((100, 30), '*'*counter)
 
 add_observer(inc_counter)
 

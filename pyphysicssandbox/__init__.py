@@ -11,7 +11,8 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_pressed',
            'rounded_box', 'static_polygon', 'polygon', 'static_triangle',
            'triangle', 'static_text', 'text', 'static_text_with_font',
            'text_with_font', 'static_line', 'line', 'pivot', 'gear',
-           'motor', 'pin', 'rotary_spring', 'run', 'draw', 'Color'
+           'motor', 'pin', 'rotary_spring', 'run', 'draw', 'Color',
+           'cosmetic_text', 'cosmetic_text_with_font'
            ]
 
 
@@ -450,6 +451,48 @@ def _text_with_font(p, caption, font, size, mass, static):
     return result
 
 
+def cosmetic_text(p, caption):
+    """Creates text that displays on the screen but does not interact
+    with other objects in any way.
+
+    :param p: The upper left corner of the text
+    :type p: (int, int)
+    :param caption: The text to display
+    :type caption: string
+    :rtype: shape
+
+    """
+    from .text_shape import CosmeticText
+
+    result = CosmeticText(p[0], p[1], caption, "Arial", 12)
+    shapes.append(result)
+
+    return result
+
+
+def cosmetic_text_with_font(p, caption, font, size):
+    """Creates text that displays on the screen but does not interact
+    with other objects in any way.
+
+    :param p: The upper left corner of the text
+    :type p: (int, int)
+    :param caption: The text to display
+    :type caption: string
+    :param font: The font family to use
+    :type font: string
+    :param size: The point size of the font
+    :type size: int
+    :rtype: shape
+
+    """
+    from .text_shape import CosmeticText
+
+    result = CosmeticText(p[0], p[1], caption, font, size)
+    shapes.append(result)
+
+    return result
+
+
 def static_line(p1, p2, thickness):
     """Creates a line segment that remains fixed in place.
 
@@ -633,7 +676,7 @@ def run(do_physics=True):
         # that they won't be involved in anything visible
         shapes_to_remove = []
         for shape in shapes:
-            if shape.body.position.y > win_height * 2:
+            if shape.body and shape.body.position.y > win_height * 2:
                 shapes_to_remove.append(shape)
 
         for shape in shapes_to_remove:

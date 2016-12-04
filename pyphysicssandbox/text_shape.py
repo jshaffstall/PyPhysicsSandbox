@@ -66,3 +66,66 @@ class Text(Box):
         else:
             print("Text value must be a string")
 
+
+class CosmeticText:
+    body = None
+    wrap = False
+    _visible = True
+
+    def __init__(self, x, y, caption, font_name, font_size):
+        self.font = pygame.font.SysFont(font_name, font_size)
+        self.x = x
+        self.y = y
+        self.caption = caption
+        self._color = pygame.Color('black')
+
+        super().__init__()
+
+        self.label = self.font.render(self.caption, True, self.color)
+
+    def draw(self, screen):
+        if self.visible:
+            self._draw(screen)
+
+    def _draw(self, screen):
+        screen.blit(self.label, (self.x, self.y))
+
+    @property
+    def visible(self):
+        return self._visible
+
+    @visible.setter
+    def visible(self, value):
+        if type(value) == bool:
+            self._visible = value
+        else:
+            print("Visible value must be True or False")
+
+    @property
+    def text(self):
+        return self.caption
+
+    @text.setter
+    def text(self, value):
+        if type(value) == str:
+            self.caption = value
+            self.label = self.font.render(self.caption, True, self.color)
+        else:
+            print("Text value must be a string")
+
+    @property
+    def color(self):
+        return self._color
+
+    @color.setter
+    def color(self, value):
+        if type(value) == pygame.Color:
+            self._color = value
+        else:
+            print("Color value must be a Color instance")
+
+
+
+
+
+
