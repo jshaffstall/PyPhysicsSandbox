@@ -226,6 +226,18 @@ num_shapes()
 Returns the number of active shapes in the simulation.  Mostly useful for debugging.
 
 ```python
+deactivate(shape)
+```
+
+Removes the given shape from the simulation.
+
+```python
+reactivate(shape)
+```
+
+Adds the given shape back to the simulation.
+
+```python
 run(do_physics=True)
 ```
 

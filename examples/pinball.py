@@ -54,6 +54,12 @@ def flipper_hit(keys):
         ball((250, 100), 25)
         ball.elasticity = 0.95
 
+    if constants.K_t in keys:
+        if tri1.active:
+            deactivate(tri1)
+        else:
+            reactivate(tri1)
+
 add_observer(flipper_hit)
 
 run()

@@ -14,7 +14,7 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_pressed',
            'text_with_font', 'static_line', 'line', 'pivot', 'gear',
            'motor', 'pin', 'rotary_spring', 'run', 'draw', 'Color',
            'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes',
-           'constants'
+           'constants', 'deactivate', 'reactivate'
            ]
 
 
@@ -665,6 +665,58 @@ def num_shapes():
     return len(shapes)
 
 
+def deactivate(shape):
+    """Removes the given shape from the simulation.  The shape will no longer
+    display or interact with other objects
+
+    :param shape: the shape to deactivate
+    """
+    if not shape.active:
+        return
+
+    shape._active = False
+
+    if type(shape.shape) is list:
+        for s in shape.shape:
+            space.remove(s)
+
+        if shape.has_own_body():
+            space.remove(shape.body)
+    else:
+        if shape.has_own_body():
+            space.remove(shape.shape, shape.body)
+        else:
+            space.remove(shape.shape)
+
+    shapes.remove(shape)
+
+
+def reactivate(shape):
+    """The given shape will be reactivated.  Its position and velocity will remain the same
+    as it was when it was deactivated.
+
+    :param shape: the shape to activate
+    """
+    if shape.active:
+        return
+
+    shape._active = True
+
+    if type(shape.shape) is list:
+        for s in shape.shape:
+            space.add(s)
+
+        if shape.has_own_body():
+            space.add(shape.body)
+    else:
+        if shape.has_own_body():
+            space.add(shape.shape, shape.body)
+        else:
+            space.add(shape.shape)
+
+    shapes.append(shape)
+
+
 def run(do_physics=True):
     """Call this after you have created all your shapes to actually run the simulation.
     This function returns only when the user has closed the simulation window.
@@ -714,21 +766,7 @@ def run(do_physics=True):
                 shapes_to_remove.append(shape)
 
         for shape in shapes_to_remove:
-            shape._active = False
-
-            if type(shape.shape) is list:
-                for s in shape.shape:
-                    space.remove(s)
-
-                if shape.has_own_body():
-                    space.remove(shape.body)
-            else:
-                if shape.has_own_body():
-                    space.remove(shape.shape, shape.body)
-                else:
-                    space.remove(shape.shape)
-
-            shapes.remove(shape)
+            deactivate(shape)
 
         # Also adjust positions for any shapes that are supposed
         # to wrap and have gone off an edge of the screen.
