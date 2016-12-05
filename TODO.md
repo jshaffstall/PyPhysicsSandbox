@@ -5,7 +5,10 @@
 
 # TODO: Figure out how to do a slip gear
 
-# TODO: function for detecting key presses
+# TODO: add way to detect collisions between shapes
+
+# TODO: add way to remove shapes from the simulation, or possibly to
+# temporarily remove them
 
 # TODO: allow damping and gravity to be specified for each body
 This https://github.com/viblo/pymunk/blob/0d79176cf2fd642bd2ce4005478cb8d6e37c1e9c/examples/breakout.py
