@@ -1,4 +1,5 @@
 from pyphysicssandbox import *
+import random
 
 window('Pinball', 600, 600)
 gravity(0, 900)
@@ -46,19 +47,26 @@ rotary_spring(l_flipper, l_pivot, -0.15, 20000000, 900000)
 
 
 def flipper_hit(keys):
-    if mouse_pressed():
+    if mouse_clicked():
         r_flipper.hit((0, -20000), (r_pos_x+120, r_pos_y))
         l_flipper.hit((0, -20000), (l_pos_x-120, l_pos_y))
 
     if constants.K_b in keys:
-        ball((250, 100), 25)
-        ball.elasticity = 0.95
+        ball1 = ball((250, 100), 25)
+        ball1.elasticity = 0.95
 
     if constants.K_t in keys:
         if tri1.active:
             deactivate(tri1)
         else:
             reactivate(tri1)
+
+    if mouse_clicked() and tri1.inside(mouse_point()):
+        if tri1.active:
+            deactivate(tri1)
+        else:
+            reactivate(tri1)
+
 
 add_observer(flipper_hit)
 

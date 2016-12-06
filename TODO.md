@@ -5,27 +5,6 @@
 
 # TODO: Figure out how to do a slip gear
 
-# TODO: add way to detect collisions between shapes
-Code examples here: https://www.reddit.com/r/pygame/comments/2vogr6/pymunk_and_pygamehow_do_i_figure_out_which/
-
-# TODO: Consider adding way to tell if mouse is pressed on a particular shape 
-# (a callback, maybe?)
-#
-# Rework mouse handling to use the MOUSEBUTTONDOWN event in pygame setting
-# a global variable
-
-To tell what shape the mouse is pressed on, go through the shapes and pass
-the mouse point to the hit method on each.  The first one that returns 
-True is the one.  Implement the hit method for each type of shape, 
-including any joints that have a visual representation.  Return False
-for any joints that don't have a visual representation (e.g. rotary
-springs)
-
-# TODO: allow damping and gravity to be specified for each body
-This https://github.com/viblo/pymunk/blob/0d79176cf2fd642bd2ce4005478cb8d6e37c1e9c/examples/breakout.py
-shows setting a custom velocity function on a body.  That's for constant velocity, but might
-be a start at allowing per body gravity and damping.
-
 https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules
 https://docs.python.org/2/distutils/setupscript.html
 https://pythonhosted.org/an_example_pypi_project/setuptools.html

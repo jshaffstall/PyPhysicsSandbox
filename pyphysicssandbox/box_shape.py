@@ -47,5 +47,3 @@ class Box(BaseShape):
 
         return prefix+': p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), width: ' + \
             str(self.width) + ', height: ' + str(self.height)
-
-

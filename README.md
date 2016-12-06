@@ -123,10 +123,18 @@ been pressed, use something like this:
 ```
 
 ```python
-mouse_pressed ()
+mouse_clicked ()
 ```
 
-Returns True if the mouse is currently pressed.  Only returns True once per mouse press, regardless of how often you poll.  Usable only in an observer function.
+Returns True if the mouse has been clicked this time step. Usable only in an observer function.
+
+```python
+mouse_point ()
+```
+
+Returns the current location of the mouse pointer as an (x, y) tuple.
+
+If the mouse is out of the simulation window, this will return the last location of the mouse that was in the simulation window.
 
 ```python
 ball(p, radius, mass=1)
@@ -318,6 +326,18 @@ shape.group
 Set to an integer.  Shapes that share the same group number will not collide with each other.  Useful to have overlapping objects connected by joints that do not make the physics crazy. 
 
 ```python
+shape.gravity
+```
+
+Set to an (x, y) vector in the same format as the overall gravity vector.  This overrides the overall gravity for this shape only.
+
+```python
+shape.damping
+```
+
+Set a damping value specific for this shape.  This overrides the overall damping value for this shape only.
+
+```python
 shape.paste_on(other_shape)
 ```
 
@@ -326,6 +346,12 @@ Paste one shape onto another shape.  The coordinates for the shape must be insid
 This can be used, for example, to draw some text inside a shape. 
 
 This is only suitable for calling on actual shapes!  The various joints already attach themselves to objects.
+
+```python
+shape.inside(p)
+```
+
+Returns True is the given point is inside the given shape.  Does not care if the shape is visible or not or active or not.
 
 ```python
 shape.draw_radius_line

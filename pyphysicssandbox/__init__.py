@@ -7,14 +7,14 @@ from pygame import constants
 __docformat__ = "reStructuredText"
 
 
-__all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_pressed',
+__all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_clicked',
            'static_ball', 'ball', 'static_box', 'box', 'static_rounded_box',
            'rounded_box', 'static_polygon', 'polygon', 'static_triangle',
            'triangle', 'static_text', 'text', 'static_text_with_font',
            'text_with_font', 'static_line', 'line', 'pivot', 'gear',
            'motor', 'pin', 'rotary_spring', 'run', 'draw', 'Color',
            'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes',
-           'constants', 'deactivate', 'reactivate'
+           'constants', 'deactivate', 'reactivate', 'mouse_point'
            ]
 
 
@@ -28,7 +28,7 @@ win_title = "Untitled"
 win_width = 500
 win_height = 500
 observers = []
-pressed = False
+clicked = False
 
 shapes = []
 
@@ -114,24 +114,24 @@ def resistance(v):
     space.damping = v
 
 
-def mouse_pressed():
-    """Returns True if the mouse has been pressed this time step.
-    The method ensures that you only get one True result for a given
-    click and release of the mouse.
+def mouse_clicked():
+    """Returns True if the mouse has been clicked this time step. Usable only in an observer function.
 
     :rtype: bool
 
     """
-    global pressed
+    return clicked
 
-    if not pressed and pygame.mouse.get_pressed()[0]:
-        pressed = True
-        return True
 
-    if pressed and not pygame.mouse.get_pressed()[0]:
-        pressed = False
+def mouse_point():
+    """Returns the current location of the mouse pointer.
 
-    return False
+    If the mouse is out of the simulation window, this will return the last location of the mouse
+    that was in the simulation window.
+
+    :rtype: (x, y)
+    """
+    return pygame.mouse.get_pos()
 
 
 def static_ball(p, radius):
@@ -727,6 +727,7 @@ def run(do_physics=True):
     :param do_physics: Should physics be activated or not
     :type do_physics: bool
     """
+    global clicked
 
     screen = pygame.display.set_mode((win_width, win_height))
     pygame.display.set_caption(win_title)
@@ -735,6 +736,7 @@ def run(do_physics=True):
 
     while running:
         keys = []
+        clicked = False
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -742,6 +744,9 @@ def run(do_physics=True):
 
             if event.type == pygame.KEYDOWN:
                 keys.append(event.key)
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                clicked = True
 
         for observer in observers:
             observer(keys)
