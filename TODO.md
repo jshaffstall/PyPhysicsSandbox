@@ -5,6 +5,10 @@
 
 # TODO: Figure out how to do a slip gear
 
+# TODO: add way to detect collisions between shapes
++Code examples here: https://www.reddit.com/r/pygame/comments/2vogr6/pymunk_and_pygamehow_do_i_figure_out_which/
+
+
 https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules
 https://docs.python.org/2/distutils/setupscript.html
 https://pythonhosted.org/an_example_pypi_project/setuptools.html
