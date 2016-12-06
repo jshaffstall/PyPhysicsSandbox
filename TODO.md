@@ -14,6 +14,13 @@ Code examples here: https://www.reddit.com/r/pygame/comments/2vogr6/pymunk_and_p
 # Rework mouse handling to use the MOUSEBUTTONDOWN event in pygame setting
 # a global variable
 
+To tell what shape the mouse is pressed on, go through the shapes and pass
+the mouse point to the hit method on each.  The first one that returns 
+True is the one.  Implement the hit method for each type of shape, 
+including any joints that have a visual representation.  Return False
+for any joints that don't have a visual representation (e.g. rotary
+springs)
+
 # TODO: allow damping and gravity to be specified for each body
 This https://github.com/viblo/pymunk/blob/0d79176cf2fd642bd2ce4005478cb8d6e37c1e9c/examples/breakout.py
 shows setting a custom velocity function on a body.  That's for constant velocity, but might
@@ -26,6 +33,6 @@ https://pythonhosted.org/an_example_pypi_project/setuptools.html
 Can install py2d from the github source
 https://setuptools.readthedocs.io/en/latest/setuptools.html#declaring-dependencies
 
-
-
+# TODO: Maybe use epydoc for generating HTML documentation from doc strings?
+http://epydoc.sourceforge.net/
 
