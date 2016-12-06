@@ -8,6 +8,9 @@
 # TODO: add way to detect collisions between shapes
 +Code examples here: https://www.reddit.com/r/pygame/comments/2vogr6/pymunk_and_pygamehow_do_i_figure_out_which/
 
+# TODO: expose surface_velocity of shape to allow conveyor belts
+# need to experiment with what this means for polygons
+
 
 https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules
 https://docs.python.org/2/distutils/setupscript.html
