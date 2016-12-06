@@ -15,3 +15,4 @@ https://setuptools.readthedocs.io/en/latest/setuptools.html#declaring-dependenci
 # TODO: Maybe use epydoc for generating HTML documentation from doc strings?
 http://epydoc.sourceforge.net/
 
+# TODO: tutorials on common tasks like collision detection
