@@ -1,8 +1,8 @@
 import pygame
 import pymunk
 
+from pyphysicssandbox.py2d.Math.Polygon import *
 from .base_shape import BaseShape
-from py2d.Math.Polygon import *
 
 
 class Poly(BaseShape):
