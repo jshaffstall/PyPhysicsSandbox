@@ -1,7 +1,6 @@
 import itertools
 
-from py2d.Math.Operations import *
-
+from pyphysicssandbox.py2d.Math.Operations import *
 from pyphysicssandbox.py2d.Math.Vector import *
 
 def tip_decorator_pointy(a,b,c,d,is_cw):

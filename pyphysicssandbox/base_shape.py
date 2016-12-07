@@ -6,7 +6,8 @@ from pyphysicssandbox import win_width
 from pyphysicssandbox import win_height
 from pyphysicssandbox import space
 
-next_collision_type = 1
+next_collision_type = 0
+
 
 class BaseShape:
     def __init__(self):
@@ -23,8 +24,13 @@ class BaseShape:
         self.body.custom_gravity = space.gravity
         self.body.custom_damping = space.damping
 
-        self.collision_type = next_collision_type
         next_collision_type += 1
+
+        if type(self.shape) is list:
+            for shape in self.shape:
+                shape.collision_type = next_collision_type
+        else:
+            self.shape.collision_type = next_collision_type
 
     def hit(self, direction, position):
         self.body.apply_impulse_at_world_point(direction, position)
@@ -82,18 +88,7 @@ class BaseShape:
         if type(self.shape) is list:
             return self.shape[0].collision_type
 
-        return self.shape.friction
-
-    @collision_type.setter
-    def collision_type(self, value):
-        if type(value) == int:
-            if type(self.shape) is list:
-                for shape in self.shape:
-                    shape.collision_type = value
-            else:
-                self.shape.collision_type = value
-        else:
-            print("Collision type value must be an integer")
+        return self.shape.collision_type
 
     @property
     def friction(self):

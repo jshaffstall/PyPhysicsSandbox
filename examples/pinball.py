@@ -45,7 +45,6 @@ l_pivot = pivot((l_pos_x, l_pos_y))
 l_pivot.connect(l_flipper)
 rotary_spring(l_flipper, l_pivot, -0.15, 20000000, 900000)
 
-
 def flipper_hit(keys):
     if mouse_clicked():
         r_flipper.hit((0, -20000), (r_pos_x+120, r_pos_y))
@@ -54,6 +53,7 @@ def flipper_hit(keys):
     if constants.K_b in keys:
         ball1 = ball((250, 100), 25)
         ball1.elasticity = 0.95
+        add_collision(r_flipper, ball1, ball_flipped)
 
     if constants.K_t in keys:
         if tri1.active:
@@ -69,6 +69,9 @@ def flipper_hit(keys):
 
 
 add_observer(flipper_hit)
+
+def ball_flipped(shape1, shape2, p):
+    print('Collision')
 
 run()
 

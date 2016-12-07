@@ -10,24 +10,8 @@
 # TODO: expose surface_velocity for conveyor belts
 # on shape in pymunk
 
-# TODO: add way to detect collisions between shapes
-Code examples here: https://www.reddit.com/r/pygame/comments/2vogr6/pymunk_and_pygamehow_do_i_figure_out_which/
-
-That code is bugged, here's the fixed code:
-
-def smack(arbiter, space, data):
-    if arbiter.is_first_contact: # is this the first frame contact was made?
-        for shape in arbiter.shapes:
-            shape.color = random.choice(["blue","green","yellow","purple","orange","red"])
-
-space = pm.Space()
-space.add_collision_handler(1, 1).post_solve=smack # calls the ball
-
-
-The 1 and 1 being passed is a collision type.  Each shape needs to have a collision type
-set, so I'll need to expose that (or set it automatically?)  Maybe each shape has a
-unique collision type?
-
+# TODO: fix collision handling so it passed the handler the real shapes to the handler
+# and not the pymunk shapes
 
 
 

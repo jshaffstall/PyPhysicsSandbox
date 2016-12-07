@@ -14,7 +14,8 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_clicked',
            'text_with_font', 'static_line', 'line', 'pivot', 'gear',
            'motor', 'pin', 'rotary_spring', 'run', 'draw', 'Color',
            'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes',
-           'constants', 'deactivate', 'reactivate', 'mouse_point'
+           'constants', 'deactivate', 'reactivate', 'mouse_point',
+           'add_collision'
            ]
 
 
@@ -715,6 +716,35 @@ def reactivate(shape):
             space.add(shape.shape)
 
     shapes.append(shape)
+
+
+def add_collision(shape1, shape2, handler):
+    """Tells the sandbox to call a function when the two given shapes collide.
+    The handler function is called once per collision, at the very start of the
+    collision.
+
+    The handler function is passed three parameters.  The first two are the
+    colliding shapes, the third is the point of the collision, e.g.:
+
+        handler(shape1, shape2, p)
+
+    :param shape1: the first shape in the collision
+    :param shape2: the other shape in the collision
+    :param handler: the function to call
+    :return:
+    """
+    temp = space.add_collision_handler(shape1.collision_type, shape2.collision_type)
+    temp.data['handler'] = handler
+    temp.begin = handle_collision
+
+
+def handle_collision(arbiter, space, data):
+    shape1 = arbiter.shapes[0]
+    shape2 = arbiter.shapes[1]
+    p = arbiter.contact_point_set.points[0].point_a
+
+    data['handler'](shape1, shape2, p)
+    return True
 
 
 def run(do_physics=True):
