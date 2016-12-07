@@ -35,11 +35,11 @@ ball5.color = Color("green")
 ball5.wrap = True
 
 # bigger ball, initially off the top of the screen
-ball2 = ball((425, -1000), 20, 5)
+ball2 = ball((425, -250), 20, 50)
 ball2.color = Color("darkgreen")
 
 # bigger ball, farther off the top of the screen
-ball3 = ball((325, -5000), 20)
+ball3 = ball((325, -500), 20)
 ball3.color = Color("blue")
 
 text = text((90, 250), "Catapult")
