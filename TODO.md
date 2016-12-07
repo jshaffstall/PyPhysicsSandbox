@@ -10,8 +10,6 @@
 # TODO: expose surface_velocity for conveyor belts
 # on shape in pymunk
 
-# TODO: fix collision handling so it passed the handler the real shapes to the handler
-# and not the pymunk shapes
 
 
 
