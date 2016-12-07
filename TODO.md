@@ -11,15 +11,6 @@
 # on shape in pymunk
 
 
-
-
-
-
-
-# TODO: expose surface_velocity of shape to allow conveyor belts
-# need to experiment with what this means for polygons
-
-
 https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules
 https://docs.python.org/2/distutils/setupscript.html
 https://pythonhosted.org/an_example_pypi_project/setuptools.html
