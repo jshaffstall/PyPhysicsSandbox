@@ -6,8 +6,6 @@ from .util import to_pygame
 
 
 class Ball(BaseShape):
-    _draw_radius_line = False
-
     def __init__(self, space, x, y, radius, mass, static):
         moment = pymunk.moment_for_circle(mass, 0, radius)
 
@@ -19,6 +17,7 @@ class Ball(BaseShape):
         self.body.position = x, y
         self.shape = pymunk.Circle(self.body, radius)
         self.static = static
+        self._draw_radius_line = False
 
         super().__init__()
 

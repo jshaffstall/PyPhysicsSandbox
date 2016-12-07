@@ -5,6 +5,11 @@
 
 # TODO: Figure out how to do a slip gear
 
+# TODO: automatically figure out a default mass for a shape based on its area?
+
+# TODO: expose surface_velocity for conveyor belts
+# on shape in pymunk
+
 # TODO: add way to detect collisions between shapes
 Code examples here: https://www.reddit.com/r/pygame/comments/2vogr6/pymunk_and_pygamehow_do_i_figure_out_which/
 

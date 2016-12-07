@@ -57,11 +57,9 @@ ball2.wrap = True
 gear(arm1, arm3)
 motor = motor(arm1, -3)
 
-def switch_gravity():
-    if mouse_pressed():
+def switch_gravity(keys):
+    if mouse_clicked():
         gravity(0, -100)
-
-    print(num_shapes())
 
 add_observer(switch_gravity)
 
