@@ -1,8 +1,7 @@
 """Calculation of polygonal Field of View (FOV)"""
 import functools
 
-import pyphysicssandbox.py2d.Math
-
+import py2d.Math
 
 class Vision:
 	"""Class for representing a polygonal field of vision (FOV).
@@ -10,12 +9,12 @@ class Vision:
 	It requires a list of obstructors, given as line strips made of lists of vectors (i.e. we have a list of lists of vectors).
 	The vision polygon will be cached as long as the eye position and obstructors don't change.
 
-		>>> obs = [[ pyphysicssandbox.py2d.Math.Vector(2,4), pyphysicssandbox.py2d.Math.Vector(4, 1), pyphysicssandbox.py2d.Math.Vector(7, -2) ],
-		...        [ py2d.py2d.Math.Vector(1,-2), pyphysicssandbox.py2d.Math.Vector(6, -3) ],
-		...	   [ pyphysicssandbox.py2d.Math.Vector(2.5,5), pyphysicssandbox.py2d.Math.Vector(3, 4) ]]
+		>>> obs = [[ py2d.Math.Vector(2,4), py2d.Math.Vector(4, 1), py2d.Math.Vector(7, -2) ],
+		...        [ py2d.py2d.Math.Vector(1,-2), py2d.Math.Vector(6, -3) ],
+		...	   [ py2d.Math.Vector(2.5,5), py2d.Math.Vector(3, 4) ]]
 		>>> radius = 20
-		>>> eye = pyphysicssandbox.py2d.Math.Vector(0,0)
-		>>> boundary = pyphysicssandbox.py2d.Math.Polygon.regular(eye, radius, 4)
+		>>> eye = py2d.Math.Vector(0,0)
+		>>> boundary = py2d.Math.Polygon.regular(eye, radius, 4)
 		>>> v = Vision(obs)
 		>>> poly = v.get_vision(eye, radius, boundary)
 		>>> poly.points[0:6]
@@ -94,7 +93,7 @@ class Vision:
 
 
 		def sub_segment(small, big):
-			return pyphysicssandbox.py2d.Math.distance_point_lineseg_squared(small[0], big[0], big[1]) < 0.0001 and pyphysicssandbox.py2d.Math.distance_point_lineseg_squared(small[1], big[0], big[1]) < 0.0001
+			return py2d.Math.distance_point_lineseg_squared(small[0], big[0], big[1]) < 0.0001 and py2d.Math.distance_point_lineseg_squared(small[1], big[0], big[1]) < 0.0001
 
 
 		def segment_in_obs(seg):
@@ -111,14 +110,14 @@ class Vision:
 				if not boundary.contains_point(p): return False
 
 			for line_segment in obs_segs:
-				if pyphysicssandbox.py2d.Math.check_intersect_lineseg_lineseg(eye, p, line_segment[0], line_segment[1]):
+				if py2d.Math.check_intersect_lineseg_lineseg(eye, p, line_segment[0], line_segment[1]):
 					if line_segment[0] != p and line_segment[1] != p:
 						return False
 
 			return True
 
 		def lineseg_in_radius(seg):
-			return pyphysicssandbox.py2d.Math.distance_point_lineseg_squared(eye, seg[0], seg[1]) <= radius_squared
+			return py2d.Math.distance_point_lineseg_squared(eye, seg[0], seg[1]) <= radius_squared
 
 		obs_segs = filter(lineseg_in_radius, self.obs_segs)
 
@@ -126,7 +125,7 @@ class Vision:
 		visible_points = list(filter(check_visibility, set(self.obs_points + boundary.points )))
 
 		# find all obstructors intersecting the vision polygon
-		boundary_intersection_points = pyphysicssandbox.py2d.Math.intersect_linesegs_linesegs(obs_segs, list(zip(boundary.points, boundary.points[1:])) + [(boundary.points[-1], boundary.points[0])])
+		boundary_intersection_points = py2d.Math.intersect_linesegs_linesegs(obs_segs, list(zip(boundary.points, boundary.points[1:])) + [(boundary.points[-1], boundary.points[0])])
 
 		if self.debug: self.debug_points.extend([(p, 0xFF0000) for p in visible_points])
 		if self.debug: self.debug_points.extend([(p, 0x00FFFF) for p in boundary_intersection_points])
@@ -138,14 +137,14 @@ class Vision:
 			while i < len(boundary_intersection_points):
 				p = boundary_intersection_points[i]
 
-				if pyphysicssandbox.py2d.Math.distance_point_lineseg_squared(p, line_segment[0], line_segment[1]) > 0.0001 and pyphysicssandbox.py2d.Math.check_intersect_lineseg_lineseg(eye, p, line_segment[0], line_segment[1]):
+				if py2d.Math.distance_point_lineseg_squared(p, line_segment[0], line_segment[1]) > 0.0001 and py2d.Math.check_intersect_lineseg_lineseg(eye, p, line_segment[0], line_segment[1]):
 					boundary_intersection_points.remove(p)
 				else:
 					i+=1
 
 		visible_points += boundary_intersection_points
 
-		poly = pyphysicssandbox.py2d.Math.Polygon()
+		poly = py2d.Math.Polygon()
 		poly.add_points(visible_points)
 		poly.sort_around(eye)
 
@@ -157,7 +156,7 @@ class Vision:
 
 			# intersect visible point with obstructors and boundary polygon
 			intersections = set(
-                pyphysicssandbox.py2d.Math.intersect_linesegs_ray(obs_segs, eye, c) + pyphysicssandbox.py2d.Math.intersect_poly_ray(boundary.points, eye, c))
+                py2d.Math.intersect_linesegs_ray(obs_segs, eye, c) + py2d.Math.intersect_poly_ray(boundary.points, eye, c))
 
 			intersections = [ip for ip in intersections if ip != c and boundary.contains_point(ip)]
 

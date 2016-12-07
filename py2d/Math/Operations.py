@@ -1,5 +1,3 @@
-from pyphysicssandbox.py2d.Math.Vector import *
-
 def __intersect_line_line_u(p1, p2, q1, q2):
 
 	d = (q2.y - q1.y) * (p2.x - p1.x) - (q2.x - q1.x) * (p2.y - p1.y)

@@ -1,5 +1,3 @@
-from pyphysicssandbox.py2d.Math.Vector import *
-
 class Transform(object):
 	"""Class for representing affine transformations"""
 

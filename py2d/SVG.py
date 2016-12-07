@@ -9,10 +9,8 @@ import re
 import warnings
 from xml.etree import ElementTree
 
+from py2d import Polygon, Vector, Transform
 from py2d.Bezier import flatten_cubic_bezier
-
-from pyphysicssandbox.py2d.Math import Polygon, Vector, Transform
-
 
 def convert_svg(f, transform=Transform.unit(), bezier_max_divisions=None, bezier_max_flatness=0.1):
 	"""Convert an SVG file to a hash of Py2D Polygons.

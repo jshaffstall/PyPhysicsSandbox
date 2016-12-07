@@ -1,8 +1,8 @@
 import pygame
 import pymunk
 
-from pyphysicssandbox.py2d.Math.Polygon import *
 from .base_shape import BaseShape
+from py2d.Math.Polygon import *
 
 
 class Poly(BaseShape):
@@ -52,19 +52,3 @@ class Poly(BaseShape):
             prefix = 'static_polygon'
 
         return prefix + ': center(' + str(self.body.position.x) + ',' + str(self.body.position.y) + ')'
-
-    """
-    To see if a point is inside the polygon, use something like this:
-    (Modify this to be Python and work with an array of vertice tuples)
-
-    int pnpoly(int nvert, float *vertx, float *verty, float testx, float testy)
-    {
-      int i, j, c = 0;
-      for (i = 0, j = nvert-1; i < nvert; j = i++) {
-        if ( ((verty[i]>testy) != (verty[j]>testy)) &&
-         (testx < (vertx[j]-vertx[i]) * (testy-verty[i]) / (verty[j]-verty[i]) + vertx[i]) )
-           c = !c;
-      }
-      return c;
-    }
-    """

@@ -15,7 +15,7 @@ References:
 	www.caffeineowl.com/graphics/2d/vectorial/bezierintro.htm
 """
 
-from pyphysicssandbox.py2d.Math import Vector, distance_point_line
+from py2d import distance_point_line
 
 
 def point_on_cubic_bezier(p1,p2,c1,c2,t):

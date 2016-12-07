@@ -3,8 +3,7 @@
 import itertools
 from collections import defaultdict
 
-import pyphysicssandbox.py2d.Math
-
+import py2d.Math
 
 def poly_midpoint_distance(poly_a, poly_b):
 	"""Polygon distance function that takes the euclidean distance between polygon midpoints."""
@@ -34,7 +33,7 @@ class NavMesh(object):
 		@param distance_function: Function of the type f(p_a, p_b) that returns the distance between polygon objects p_a and p_b according to some metric.
 		"""
 
-		convex_decomp = pyphysicssandbox.py2d.Math.Polygon.convex_decompose(boundary, walls)
+		convex_decomp = py2d.Math.Polygon.convex_decompose(boundary, walls)
 
 		# make NavPolygons out of the convex decomposition polygons
 		polygons = [NavPolygon(poly) for poly in convex_decomp]
@@ -100,8 +99,8 @@ class NavMesh(object):
 		The path returned will be an optimal sequence of NavPolygons leading to the desired target.
 		"""
 
-		if isinstance(start, pyphysicssandbox.py2d.Math.Vector): start = self.find_polygon(start)
-		if isinstance(stop, pyphysicssandbox.py2d.Math.Vector): stop = self.find_polygon(stop)
+		if isinstance(start, py2d.Math.Vector): start = self.find_polygon(start)
+		if isinstance(stop, py2d.Math.Vector): stop = self.find_polygon(stop)
 
 		if not (start and stop): return None
 
@@ -149,10 +148,10 @@ class NavMesh(object):
 	nodes = property(get_nodes)
 
 
-class NavPolygon(pyphysicssandbox.py2d.Math.Polygon):
+class NavPolygon(py2d.Math.Polygon):
 	"""Polygon class with added navigation data"""
 	def __init__(self, polygon):
-		pyphysicssandbox.py2d.Math.Polygon.__init__(self)
+		py2d.Math.Polygon.__init__(self)
 
 		self.points = polygon.points
 		self.neighbors = {}
@@ -186,28 +185,28 @@ class NavPath(object):
 
 		edge = self._polygons[i].neighbors[self._polygons[i+1]][1]
 
-		left, right = (edge[0], edge[1]) if pyphysicssandbox.py2d.Math.point_orientation(position, edge[0], edge[1]) else (edge[1], edge[0])
+		left, right = (edge[0], edge[1]) if py2d.Math.point_orientation(position, edge[0], edge[1]) else (edge[1], edge[0])
 
 		for j in range(i+1, len(self._polygons)-1):
 			edge = self._polygons[j].neighbors[self._polygons[j+1]][1]
-			new_left, new_right = (edge[0], edge[1]) if pyphysicssandbox.py2d.Math.point_orientation(position, edge[0], edge[1]) else (edge[1], edge[0])
+			new_left, new_right = (edge[0], edge[1]) if py2d.Math.point_orientation(position, edge[0], edge[1]) else (edge[1], edge[0])
 
 			# make the funnel smaller
-			if pyphysicssandbox.py2d.Math.point_orientation(position, left, new_left): left = new_left
-			if not pyphysicssandbox.py2d.Math.point_orientation(position, left, right):
+			if py2d.Math.point_orientation(position, left, new_left): left = new_left
+			if not py2d.Math.point_orientation(position, left, right):
 				return right
 
 
-			if not pyphysicssandbox.py2d.Math.point_orientation(position, right, new_right): right = new_right
-			if not pyphysicssandbox.py2d.Math.point_orientation(position, left, right):
+			if not py2d.Math.point_orientation(position, right, new_right): right = new_right
+			if not py2d.Math.point_orientation(position, left, right):
 				return left
 
-		if pyphysicssandbox.py2d.Math.point_orientation(position, left, final_target): left = final_target
-		if not pyphysicssandbox.py2d.Math.point_orientation(position, left, right):
+		if py2d.Math.point_orientation(position, left, final_target): left = final_target
+		if not py2d.Math.point_orientation(position, left, right):
 			return right
 
-		if not pyphysicssandbox.py2d.Math.point_orientation(position, right, final_target): right = final_target
-		if not pyphysicssandbox.py2d.Math.point_orientation(position, left, right):
+		if not py2d.Math.point_orientation(position, right, final_target): right = final_target
+		if not py2d.Math.point_orientation(position, left, right):
 			return left
 
 		return final_target

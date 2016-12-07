@@ -1,8 +1,5 @@
 import unittest
 
-from pyphysicssandbox.py2d.Math import *
-
-
 class TestVector(unittest.TestCase):
 
 	def setUp(self):
