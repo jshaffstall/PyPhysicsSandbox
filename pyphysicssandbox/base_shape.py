@@ -67,6 +67,24 @@ class BaseShape:
         return self._active
 
     @property
+    def surface_velocity(self):
+        if type(self.shape) is list:
+            return self.shape[0].surface_velocity
+
+        return self.shape.surface_velocity
+
+    @surface_velocity.setter
+    def surface_velocity(self, value):
+        if type(value) == tuple and len(value)==2:
+            if type(self.shape) is list:
+                for shape in self.shape:
+                    shape.surface_velocity = value
+            else:
+                self.shape.surface_velocity = value
+        else:
+            print("Surface velocity value must be a (x, y) tuple")
+
+    @property
     def elasticity(self):
         if type(self.shape) is list:
             return self.shape[0].elasticity

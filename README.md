@@ -310,6 +310,14 @@ shape.friction
 Sets how much friction the object should have.  The default is 0.6.  The Wikipedia article on friction has examples of values for different materials: https://en.wikipedia.org/wiki/Friction
 
 ```python
+shape.surface_velocity
+```
+
+Sets how much surface velocity the object should have.  The default is (0, 0).  
+ 
+This is the amount of movement objects touching this surface will have imparted to them.  You can use this to set up a conveyor belt.  
+
+```python
 shape.wrap
 ```
 

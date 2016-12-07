@@ -63,6 +63,7 @@ b2.color = Color('blue')
 
 box1 = static_rounded_box((0, 290), 400, 10, 3)
 box1.color = Color('red')
+box1.surface_velocity = (-20, 0)
 
 tri1 = triangle((260, 35), (250, 35), (240, -15))
 tri1.color = Color('red')

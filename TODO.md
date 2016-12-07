@@ -7,9 +7,6 @@
 
 # TODO: automatically figure out a default mass for a shape based on its area?
 
-# TODO: expose surface_velocity for conveyor belts
-# on shape in pymunk
-
 
 https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules
 https://docs.python.org/2/distutils/setupscript.html
