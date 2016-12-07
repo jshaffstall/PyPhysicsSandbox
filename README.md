@@ -248,6 +248,20 @@ reactivate(shape)
 Adds the given shape back to the simulation.
 
 ```python
+add_collision(shape1, shape2, handler)
+```
+
+Tells the sandbox to call a function when the two given shapes collide. The handler function is called once per collision, at the very start of the collision.
+
+The handler function is passed three parameters. The first two are the colliding shapes, the third is the point of the collision, e.g.:
+
+```python
+        handler(shape1, shape2, p)
+```
+
+Note that you will never have a collision with a deactivated object or with a cosmetic object.
+
+```python
 run(do_physics=True)
 ```
 

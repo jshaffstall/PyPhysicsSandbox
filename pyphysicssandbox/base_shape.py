@@ -25,6 +25,7 @@ class BaseShape:
         self.body.custom_damping = space.damping
 
         next_collision_type += 1
+        self._collision_type = next_collision_type
 
         if type(self.shape) is list:
             for shape in self.shape:
@@ -85,10 +86,7 @@ class BaseShape:
 
     @property
     def collision_type(self):
-        if type(self.shape) is list:
-            return self.shape[0].collision_type
-
-        return self.shape.collision_type
+        return self._collision_type
 
     @property
     def friction(self):

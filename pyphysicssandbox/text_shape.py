@@ -76,17 +76,22 @@ class Text(Box):
 
 
 class CosmeticText:
-    body = None
-    wrap_x = False
-    wrap_y = False
-    _visible = True
-
+    # This class requires a lot of hacks to be treated as a shape even
+    # though it is not a shape
     def __init__(self, x, y, caption, font_name, font_size):
         self.font = pygame.font.SysFont(font_name, font_size)
         self.x = x
         self.y = y
         self.caption = caption
         self._color = pygame.Color('black')
+        self.body = None
+        self.wrap_x = False
+        self.wrap_y = False
+        self._visible = True
+
+        from .base_shape import next_collision_type
+        next_collision_type += 1
+        self._collision_type = next_collision_type
 
         super().__init__()
 
@@ -101,6 +106,10 @@ class CosmeticText:
 
     def __repr__(self):
         return 'cosmetic_text: p('+str(self.x)+','+str(self.y)+'), caption: '+self.caption
+
+    @property
+    def collision_type(self):
+        return self._collision_type
 
     @property
     def visible(self):

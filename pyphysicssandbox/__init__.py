@@ -31,7 +31,7 @@ win_height = 500
 observers = []
 clicked = False
 
-shapes = []
+shapes = {}
 
 
 def window(title, width, height):
@@ -167,7 +167,7 @@ def _ball(p, radius, mass=1, static=False):
     from .ball_shape import Ball
 
     result = Ball(space, p[0], p[1], radius, mass, static)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -225,7 +225,7 @@ def _box(p, width, height, mass, static):
     y = p[1] + height / 2
 
     result = Box(space, x, y, width, height, 0, mass, static)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -289,7 +289,7 @@ def _rounded_box(p, width, height, radius, mass, static):
     y = p[1] + height / 2
 
     result = Box(space, x, y, width, height, radius, mass, static)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -326,7 +326,7 @@ def _polygon(vertices, mass, static):
 
     vertices = [(v[0] - x, v[1] - y) for v in vertices]
     result = Poly(space, x, y, vertices, 0, mass, static)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -375,7 +375,7 @@ def _triangle(p1, p2, p3, mass, static):
     vertices = ((x1 - x, y1 - y), (x2 - x, y2 - y), (x3 - x, y3 - y))
 
     result = Poly(space, x, y, vertices, 0, mass, static)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -414,7 +414,7 @@ def _text(p, caption, mass, static):
     from .text_shape import Text
 
     result = Text(space, p[0], p[1], caption, "Arial", 12, mass, static)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -459,7 +459,7 @@ def _text_with_font(p, caption, font, size, mass, static):
     from .text_shape import Text
 
     result = Text(space, p[0], p[1], caption, font, size, mass, static)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -478,7 +478,7 @@ def cosmetic_text(p, caption):
     from .text_shape import CosmeticText
 
     result = CosmeticText(p[0], p[1], caption, "Arial", 12)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -501,7 +501,7 @@ def cosmetic_text_with_font(p, caption, font, size):
     from .text_shape import CosmeticText
 
     result = CosmeticText(p[0], p[1], caption, font, size)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -542,7 +542,7 @@ def _line(p1, p2, thickness, mass, static):
     from .line_segment import Line
 
     result = Line(space, p1, p2, thickness, mass, static)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -560,7 +560,7 @@ def pivot(p):
     from .pivot_joint import Pivot
 
     result = Pivot(space, p[0], p[1])
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -580,7 +580,7 @@ def gear(shape1, shape2):
     from .gear_joint import Gear
 
     result = Gear(space, shape1, shape2)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -601,7 +601,7 @@ def motor(shape1, speed=5):
     from .motor_joint import Motor
 
     result = Motor(space, shape1, speed)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -625,7 +625,7 @@ def pin(p1, shape1, p2, shape2):
     from .pin_joint import Pin
 
     result = Pin(space, p1, shape1, p2, shape2)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -653,7 +653,7 @@ def rotary_spring(shape1, shape2, angle, stiffness, damping):
     from .rotary_spring import RotarySpring
 
     result = RotarySpring(space, shape1, shape2, angle, stiffness, damping)
-    shapes.append(result)
+    shapes[result.collision_type] = result
 
     return result
 
@@ -689,7 +689,7 @@ def deactivate(shape):
         else:
             space.remove(shape.shape)
 
-    shapes.remove(shape)
+    del shapes[shape.collision_type]
 
 
 def reactivate(shape):
@@ -715,7 +715,7 @@ def reactivate(shape):
         else:
             space.add(shape.shape)
 
-    shapes.append(shape)
+    shapes[shape.collision_type] = shape
 
 
 def add_collision(shape1, shape2, handler):
@@ -739,8 +739,8 @@ def add_collision(shape1, shape2, handler):
 
 
 def handle_collision(arbiter, space, data):
-    shape1 = arbiter.shapes[0]
-    shape2 = arbiter.shapes[1]
+    shape1 = shapes[arbiter.shapes[0].collision_type]
+    shape2 = shapes[arbiter.shapes[1].collision_type]
     p = arbiter.contact_point_set.points[0].point_a
 
     data['handler'](shape1, shape2, p)
@@ -787,7 +787,7 @@ def run(do_physics=True):
         # far enough below the bottom edge of the window
         # that they won't be involved in anything visible
         shapes_to_remove = []
-        for shape in shapes:
+        for collision_type, shape in shapes.items():
             if shape.body and shape.body.position.x > win_width * 2:
                 shapes_to_remove.append(shape)
 
@@ -805,7 +805,7 @@ def run(do_physics=True):
 
         # Also adjust positions for any shapes that are supposed
         # to wrap and have gone off an edge of the screen.
-        for shape in shapes:
+        for collision_type, shape in shapes.items():
             if shape.wrap_x:
                 if shape.body.position.x < 0:
                     shape.body.position = (win_width - 1, shape.body.position.y)
@@ -821,7 +821,7 @@ def run(do_physics=True):
                     shape.body.position = (shape.body.position.x, 0)
 
         # Now draw the shapes that are left
-        for shape in shapes:
+        for collision_type, shape in shapes.items():
             shape.draw(screen)
 
         if do_physics:
