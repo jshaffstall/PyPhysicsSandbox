@@ -40,7 +40,7 @@ print('Done!')
 
 The Calico IDE had a nice physics simulation built into it I used for a lab in my introductory programming classes.  Students wanted to use features that were reasonable to think about in a physics simulation (joints and pins, for example), but were not exposed by Calico.  This wrapper keeps the simplicity of the Calico physics API but exposes more advanced tools.
 
-Efficiency was also a goal.  This library handles more objects before slowing down, allowing students to create a thousand objects in a for loop and still be able to run the simulation in a reasonable time.
+Efficiency was also a goal.  This library handles more objects than the Calico IDE before slowing down, allowing students to create a thousand objects in a for loop and still be able to run the simulation in a reasonable time.
 
 Also, being IDE agnostic, this library can be used with your favorite IDE.
 
