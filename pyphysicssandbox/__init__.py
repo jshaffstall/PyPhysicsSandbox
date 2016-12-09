@@ -1,5 +1,6 @@
 import pygame
 import pymunk
+import math
 
 from pygame import Color
 from pygame import constants
@@ -148,7 +149,7 @@ def static_ball(p, radius):
     return _ball(p, radius, pymunk.inf, True)
 
 
-def ball(p, radius, mass=1):
+def ball(p, radius, mass=-1):
     """Creates a ball that reacts to gravity.
 
     :param p: The center point of the ball
@@ -163,8 +164,11 @@ def ball(p, radius, mass=1):
     return _ball(p, radius, mass, False)
 
 
-def _ball(p, radius, mass=1, static=False):
+def _ball(p, radius, mass, static=False):
     from .ball_shape import Ball
+
+    if mass == -1:
+        mass = math.pi*radius*radius
 
     result = Ball(space, p[0], p[1], radius, mass, static)
     shapes[result.collision_type] = result
@@ -187,7 +191,7 @@ def static_box(p, width, height):
     return _box(p, width, height, pymunk.inf, True)
 
 
-def box(p, width, height, mass=1):
+def box(p, width, height, mass=-1):
     """Creates a box that reacts to gravity.
 
     :param p: The upper left corner of the box
@@ -204,27 +208,17 @@ def box(p, width, height, mass=1):
     return _box(p, width, height, mass, False)
 
 
-def _box(p, width, height, mass, static):
-    """Creates a box that reacts to gravity.
-
-    :param p: The upper left corner of the box
-    :type p: (int, int)
-    :param width: The width of the box
-    :type width: int
-    :param height: The height of the box
-    :type height: int
-    :param mass: The mass of the shape (defaults to 1)
-    :type mass: int
-    :rtype: shape
-
-    """
+def _box(p, width, height, mass, static, radius=0):
     from .box_shape import Box
+
+    if mass == -1:
+        mass = width * height
 
     # Polygons expect x,y to be the center point
     x = p[0] + width / 2
     y = p[1] + height / 2
 
-    result = Box(space, x, y, width, height, 0, mass, static)
+    result = Box(space, x, y, width, height, radius, mass, static)
     shapes[result.collision_type] = result
 
     return result
@@ -244,10 +238,10 @@ def static_rounded_box(p, width, height, radius):
     :rtype: shape
 
     """
-    return _rounded_box(p, width, height, radius, pymunk.inf, True)
+    return _box(p, width, height, pymunk.inf, True, radius)
 
 
-def rounded_box(p, width, height, radius, mass=1):
+def rounded_box(p, width, height, radius, mass=-1):
     """Creates a box with rounded corners that reacts to gravity.
 
     :param p: The upper left corner of the box
@@ -263,35 +257,7 @@ def rounded_box(p, width, height, radius, mass=1):
     :rtype: shape
 
     """
-    return _rounded_box(p, width, height, radius, mass, False)
-
-
-def _rounded_box(p, width, height, radius, mass, static):
-    """Creates a box with rounded corners that reacts to gravity.
-
-    :param p: The upper left corner of the box
-    :type p: (int, int)
-    :param width: The width of the box
-    :type width: int
-    :param height: The height of the box
-    :type height: int
-    :param radius: The radius of the rounded corners
-    :type radius: int
-    :param mass: The mass of the shape (defaults to 1)
-    :type mass: int
-    :rtype: shape
-
-    """
-    from .box_shape import Box
-
-    # Polygons expect x,y to be the center point
-    x = p[0] + width / 2
-    y = p[1] + height / 2
-
-    result = Box(space, x, y, width, height, radius, mass, static)
-    shapes[result.collision_type] = result
-
-    return result
+    return _box(p, width, height, mass, False, radius)
 
 
 def static_polygon(vertices):
@@ -305,7 +271,7 @@ def static_polygon(vertices):
     return _polygon(vertices, pymunk.inf, True)
 
 
-def polygon(vertices, mass=1):
+def polygon(vertices, mass=-1):
     """Creates a polygon that reacts to gravity.
 
     :param vertices: A tuple of points on the polygon
@@ -321,8 +287,12 @@ def polygon(vertices, mass=1):
 def _polygon(vertices, mass, static):
     from .poly_shape import Poly
     from .util import poly_centroid
+    from .util import poly_area
 
     x, y = poly_centroid(vertices)
+
+    if mass == -1:
+        mass = poly_area(vertices)
 
     vertices = [(v[0] - x, v[1] - y) for v in vertices]
     result = Poly(space, x, y, vertices, 0, mass, static)
@@ -346,7 +316,7 @@ def static_triangle(p1, p2, p3):
     return _triangle(p1, p2, p3, pymunk.inf, True)
 
 
-def triangle(p1, p2, p3, mass=1):
+def triangle(p1, p2, p3, mass=-1):
     """Creates a triangle that reacts to gravity.
 
     :param p1: The first point of the triangle
@@ -394,7 +364,7 @@ def static_text(p, caption):
     return _text(p, caption, pymunk.inf, True)
 
 
-def text(p, caption, mass=1):
+def text(p, caption, mass=-1):
     """Creates a text rectangle that reacts to gravity, using
     Arial 12 point font.
 
@@ -436,7 +406,7 @@ def static_text_with_font(p, caption, font, size):
     return _text_with_font(p, caption, font, size, pymunk.inf, True)
 
 
-def text_with_font(p, caption, font, size, mass=1):
+def text_with_font(p, caption, font, size, mass=-1):
     """Creates a text rectangle that reacts to gravity.
 
     :param p: The upper left corner of the text rectangle
@@ -521,7 +491,7 @@ def static_line(p1, p2, thickness):
     return _line(p1, p2, thickness, pymunk.inf, True)
 
 
-def line(p1, p2, thickness, mass=1):
+def line(p1, p2, thickness, mass=-1):
     """Creates a line segment that will react to gravity.
 
     :param p1: The starting point of the line segement

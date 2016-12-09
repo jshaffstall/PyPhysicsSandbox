@@ -5,8 +5,6 @@
 
 # TODO: automatically figure out a default mass for a shape based on its area?
 
-# TODO: add center_motor API that creates a hidden pin joint at the center of the shape
-
 # TODO: add buttons, both physics and cosmetic, that can be pressed to generate
 # a call to a user defined function
 https://pythonprogramming.net/pygame-buttons-part-1-button-rectangle/
