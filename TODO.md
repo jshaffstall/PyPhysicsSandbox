@@ -5,6 +5,12 @@
 
 # TODO: automatically figure out a default mass for a shape based on its area?
 
+# TODO: add center_motor API that creates a hidden pin joint at the center of the shape
+
+# TODO: add a features section to the readme that summarizes the features available
+
+
+
 https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules
 https://docs.python.org/2/distutils/setupscript.html
 https://pythonhosted.org/an_example_pypi_project/setuptools.html
