@@ -25,6 +25,6 @@ class RotarySpring(BaseShape):
 
     def __repr__(self):
         return 'rotary_spring: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), angle: ' + \
-               str(self.shape.rest_angle)
+               str(math.degrees(self.shape.rest_angle))
 
 

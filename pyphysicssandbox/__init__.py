@@ -15,7 +15,7 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_clicked',
            'motor', 'pin', 'rotary_spring', 'run', 'draw', 'Color',
            'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes',
            'constants', 'deactivate', 'reactivate', 'mouse_point',
-           'add_collision'
+           'add_collision', 'slip_motor'
            ]
 
 
@@ -625,6 +625,37 @@ def pin(p1, shape1, p2, shape2):
     from .pin_joint import Pin
 
     result = Pin(space, p1, shape1, p2, shape2)
+    shapes[result.collision_type] = result
+
+    return result
+
+
+def slip_motor(shape1, shape2, rest_angle, stiffness, damping, slip_angle, speed):
+    """Creates a combination spring and motor.  The motor will rotate shape1
+    around shape2 at the given speed.  When shape1 reaches the slip angle it
+    will spring back to the rest_angle.  Then the motor will start to rotate
+    the object again.
+
+    :param shape1: The first shape to connect via the spring
+    :type shape1: shape
+    :param shape2: The second shape to connect via the spring
+    :type shape2: shape
+    :param rest_angle: The desired angle between the two objects
+    :type rest_angle: float
+    :param stiffness: the spring constant (Young's modulus)
+    :type stiffness: float
+    :param damping: the softness of the spring damping
+    :type damping: float
+    :param slip_angle: The angle at which to release the object
+    :type slip_angle: float
+    :param speed: The speed at which to rotate the shape
+    :type speed: int
+    :rtype: shape
+
+    """
+    from .slip_motor import SlipMotor
+
+    result = SlipMotor(space, shape1, shape2, rest_angle, stiffness, damping, slip_angle, speed)
     shapes[result.collision_type] = result
 
     return result

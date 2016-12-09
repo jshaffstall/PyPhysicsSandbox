@@ -224,6 +224,20 @@ Creates a motor to give the shape a constant rotation.  If you want other shapes
 The motor displays as a semicircle with a dot in the direction of rotation.
 
 ```python
+rotary_spring(shape1, shape2, angle, stiffness, damping)
+```
+
+Creates a spring that constrains the rotations of the given shapes. The angle between the two shapes prefers to be at the given angle, but may be varied by forces on the objects. The spring will bring the objects back to the desired angle.  The initial positioning of the shapes is considered to be at an angle of 0.
+
+A normal scenario for this is for shape1 to be a shape rotating around shape2, which is a pivot joint or other static object, but play around with different ways of using rotary springs.
+
+```python
+slip_motor(shape1, shape2, rest_angle, stiffness, damping, slip_angle, speed)
+```
+
+Creates a combination spring and motor.  The motor will rotate shape1 around shape2 at the given speed.  When shape1 reaches the slip angle it will spring back to the rest_angle.  Then the motor will start to rotate the object again.
+ 
+```python
 pin((100, 580), ball1, (150, 580), ball2)
 ```
 

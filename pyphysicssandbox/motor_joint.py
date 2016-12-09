@@ -31,7 +31,7 @@ class Motor(BaseShape):
             pygame.draw.circle(screen, self.color, rect.bottomright, 2, 0)
 
     def _pin_points(self):
-        raise Exception('Do not use draw_on for motors')
+        raise Exception('Do not use paste_on for motors')
 
     def __repr__(self):
         return 'motor: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), speed: ' + \

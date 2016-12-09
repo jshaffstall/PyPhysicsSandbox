@@ -3,10 +3,7 @@
 
 # TODO: Expose motor's max torque
 
-# TODO: Figure out how to do a slip gear
-
 # TODO: automatically figure out a default mass for a shape based on its area?
-
 
 https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules
 https://docs.python.org/2/distutils/setupscript.html

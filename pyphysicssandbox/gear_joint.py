@@ -20,7 +20,7 @@ class Gear(BaseShape):
         pass
 
     def _pin_points(self):
-        raise Exception('Do not use draw_on for gears')
+        raise Exception('Do not use paste_on for gears')
 
     def __repr__(self):
         return 'gear: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + ')'
