@@ -40,45 +40,64 @@ print('Done!')
 
 The Calico IDE had a nice physics simulation built into it I used for a lab in my introductory programming classes.  Students wanted to use features that were reasonable to think about in a physics simulation (joints and pins, for example), but were not exposed by Calico.  This wrapper keeps the simplicity of the Calico physics API but exposes more advanced tools.
 
-Efficiency was also a goal.  This library handles more objects than the Calico IDE before slowing down, allowing students to create a thousand objects in a for loop and still be able to run the simulation in a reasonable time.
-
 Also, being IDE agnostic, this library can be used with your favorite IDE.
 
-## Installation
+## Summary of Features
 
-The code is written for Python 3, and uses pygame, pymunk, and py2d.  You must install all of those packages before you can use this library.  I have not made use of requirements.txt since py2d and pygame particularly you cannot install using the standard pip repositories.
+pyPhysicsSandbox provides an easy Python interface to a rigid-body physics sandbox.  Features include:
+
+### Shapes
+
+* Circles
+* Rectangles
+* Triangles
+* Solid Polygons (both convex and concave)
+* Line Segments
+* Text
+
+### Constraints
+
+* Pivot Joints
+* Pin Joints
+* Motors
+* Slip Motors
+* Springs
+* Gears
+
+### Other
+
+* User Specified Collision Handlers
+* User Specified Observer Functions
+* Disable Collisions Between Specific Objects
+* Custom Shape Properties - color, friction, gravity, damping, elasticity
+* Allow Objects to Wrap Around the Screen
+* Conveyor Belt Like Behavior
+* Pasting One Shape Onto Another - so they behave as one shape
+* Programmatically Hit Shapes
+* Handles Thousands of Shapes
+
+## Installation
 
 ###Python 3
 
 https://www.python.org/
 
-This library was written with Python 3.5, but should run on any Python 3.
+This library was written with Python 3.5, but should run on any Python 3.  Python 3 must be installed first.
 
-###pygame
+### pyPhysicsSandbox
 
-http://www.pygame.org/
-
-This library was written with pygame 1.9.  I specifically used the Windows 64-bit versions available at http://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame , but any 1.9 or later version that supports Python 3 should work.  
-
-###pymunk
-
-http://www.pymunk.org/
-
-This library was written with pymunk 5.1.0.  This you can safely install using pip.
-
-###py2d
-
-https://github.com/sseemayer/Py2D
-
-This library was written with the version of py2d on github, since the pip package at the time did not support Python 3.  To get a quick and dirty install from github, use pip to install the older version and then download a zip from github and copy the py2d directory over top of the same directory in your Python site-packages.
-
-###pyPhysicsSandbox
-
-Once the dependencies are installed, install this library using:
+Given a suitable Python 3 installation, you should be able to install pyPhysicsSandbox by opening a command prompt in the Scripts folder of your Python installation and typing:
 
 ```
 pip install pyPhysicsSandbox
 ```
+
+### Dependencies
+
+http://www.pygame.org/
+http://www.pymunk.org/
+
+Both pygame and pymunk should be automatically installed when you install pyPhysicsSandbox.  If something goes wrong and you need to install them manually, see their respective sites for directions.
 
 ## API Reference
 
