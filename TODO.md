@@ -7,8 +7,6 @@
 
 # TODO: add center_motor API that creates a hidden pin joint at the center of the shape
 
-# TODO: add a features section to the readme that summarizes the features available
-
 # TODO: add buttons, both physics and cosmetic, that can be pressed to generate
 # a call to a user defined function
 https://pythonprogramming.net/pygame-buttons-part-1-button-rectangle/
