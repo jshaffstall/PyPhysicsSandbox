@@ -158,26 +158,30 @@ Returns the current location of the mouse pointer as an (x, y) tuple.
 If the mouse is out of the simulation window, this will return the last location of the mouse that was in the simulation window.
 
 ```python
-ball(p, radius, mass=1)
-static_ball(p, radius, mass=1)
+ball(p, radius, mass)
+static_ball(p, radius)
 ```
 
 Create a ball object and return its instance.  The static version creates a ball that does not move.
 
 p is a tuple containing the x and y coordinates of the center of the ball.  
 
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
 ```python
-box(p, width, height, mass=1)
-static_box(p, width, height, mass=1)
+box(p, width, height, mass)
+static_box(p, width, height)
 ```
 
 Create a box object and return its instance.  The static version creates a box that does not move.
 
 p is a tuple containing the x and  y coordinates of the upper left corner of the box.
 
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
 ```python
-rounded_box(p, width, height, radius, mass=1)
-static_rounded_box(p, width, height, radius, mass=1)
+rounded_box(p, width, height, radius, mass)
+static_rounded_box(p, width, height, radius)
 ```
 
 Create a box object and returns its instance.  The static version creates a box that does not move.  These boxes are drawn with rounded corners.
@@ -185,37 +189,51 @@ Create a box object and returns its instance.  The static version creates a box 
 p is a tuple containing the x and  y coordinates of the upper left corner of the box.
 radius is the radius of the corner curve.  3 works well, but you can pass any integer.
 
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
 ```python
-triangle(p1, p2, p3, mass=1)
-static_triangle(p1, p2, p3, mass=1)
+triangle(p1, p2, p3, mass)
+static_triangle(p1, p2, p3)
 ```
 
 Creates a triangle out of the given points and returns its instance.  The static version creates a triangle that does not move.
 
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
 ```python
-poly(vertices, mass=1)
-static_poly(vertices, mass=1)
+poly(vertices, mass)
+static_poly(vertices)
 ```
 
 Creates a closed polygon out of the given points and returns its instance.  The last point is automatically connected back to the first point.  The static version does not move.
 
 vertices is a tuple of points, where each point is a tuple of x and y coordinates.  The order of these points matters!
 
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
 ```python
-text(p, caption)
+text(p, caption, mass)
 static_text(p, caption)
+text_with_font(p, caption, font, size, mass)
+static_text_with_font(p, caption, font, size)
+cosmetic_text(p, caption)
+cosmetic_text_with_font(p, caption, font, size)
 ```
 
-Creates text that will interact with the world as if it were a rectangle.  The static text version does not move.
+Creates text that will interact with the world as if it were a rectangle.  The static text version does not move.  The cosmetic version does not interact with the physics simulation in any way.
 
 p is a tuple containing the x and  y coordinates of the upper left corner of the text.
 
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
 ```python
-line(p1, p2, thickness)
+line(p1, p2, thickness, mass)
 static_line(p1, p2, thickness)
 ```
 
 Creates a line from coordinates p1 to coordinates p2 of the given thickness.  The static line version does not move.  
+
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
 
 ```python
 pivot1 = pivot(p)

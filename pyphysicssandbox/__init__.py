@@ -335,6 +335,7 @@ def triangle(p1, p2, p3, mass=-1):
 
 def _triangle(p1, p2, p3, mass, static):
     from .poly_shape import Poly
+    from .util import poly_area
 
     x1, y1 = p1
     x2, y2 = p2
@@ -343,6 +344,9 @@ def _triangle(p1, p2, p3, mass, static):
     x = (x1 + x2 + x3) / 3
     y = (y1 + y2 + y3) / 3
     vertices = ((x1 - x, y1 - y), (x2 - x, y2 - y), (x3 - x, y3 - y))
+
+    if mass == -1:
+        mass = poly_area(vertices)
 
     result = Poly(space, x, y, vertices, 0, mass, static)
     shapes[result.collision_type] = result
@@ -382,6 +386,9 @@ def text(p, caption, mass=-1):
 
 def _text(p, caption, mass, static):
     from .text_shape import Text
+
+    if mass == -1:
+        mass = 10 * len(caption)
 
     result = Text(space, p[0], p[1], caption, "Arial", 12, mass, static)
     shapes[result.collision_type] = result
@@ -427,6 +434,9 @@ def text_with_font(p, caption, font, size, mass=-1):
 
 def _text_with_font(p, caption, font, size, mass, static):
     from .text_shape import Text
+
+    if mass == -1:
+        mass = 10 * len(caption)
 
     result = Text(space, p[0], p[1], caption, font, size, mass, static)
     shapes[result.collision_type] = result
@@ -510,6 +520,9 @@ def line(p1, p2, thickness, mass=-1):
 
 def _line(p1, p2, thickness, mass, static):
     from .line_segment import Line
+
+    if mass == -1:
+        mass = math.sqrt(math.pow(p1[0]-p2[0], 2)+math.pow(p1[1]-p2[1], 2))*thickness
 
     result = Line(space, p1, p2, thickness, mass, static)
     shapes[result.collision_type] = result
