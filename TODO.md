@@ -11,6 +11,11 @@
 
 # TODO: add buttons, both physics and cosmetic, that can be pressed to generate
 # a call to a user defined function
+https://pythonprogramming.net/pygame-buttons-part-1-button-rectangle/
+https://pythonprogramming.net/making-interactive-pygame-buttons/?completed=/pygame-buttons-part-1-button-rectangle/
+https://pythonprogramming.net/placing-text-pygame-buttons/?completed=/making-interactive-pygame-buttons/
+https://pythonprogramming.net/pygame-button-function/?completed=/placing-text-pygame-buttons/
+https://pythonprogramming.net/pygame-button-function-events/?completed=/pygame-button-function/
 
 
 https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules
