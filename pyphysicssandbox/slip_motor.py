@@ -21,7 +21,6 @@ class SlipMotor(Motor):
 
     def observer(self, keys):
         degrees = math.degrees(self.body.angle)
-        print(degrees)
 
         if self.active:
             if self.shape.rate < 0:
