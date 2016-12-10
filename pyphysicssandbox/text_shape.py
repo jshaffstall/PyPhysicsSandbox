@@ -89,9 +89,9 @@ class CosmeticText:
         self.wrap_y = False
         self._visible = True
 
-        from .base_shape import next_collision_type
-        next_collision_type += 1
-        self._collision_type = next_collision_type
+        from .base_shape import BaseShape
+        BaseShape.next_collision_type += 1
+        self._collision_type = BaseShape.next_collision_type
 
         super().__init__()
 

@@ -6,13 +6,11 @@ from pyphysicssandbox import win_width
 from pyphysicssandbox import win_height
 from pyphysicssandbox import space
 
-next_collision_type = 0
-
 
 class BaseShape:
-    def __init__(self):
-        global next_collision_type
+    next_collision_type = 0
 
+    def __init__(self):
         self.elasticity = 0.90
         self.friction = 0.6
         self._color = pygame.Color('black')
@@ -24,14 +22,14 @@ class BaseShape:
         self.body.custom_gravity = space.gravity
         self.body.custom_damping = space.damping
 
-        next_collision_type += 1
-        self._collision_type = next_collision_type
+        BaseShape.next_collision_type += 1
+        self._collision_type = BaseShape.next_collision_type
 
         if type(self.shape) is list:
             for shape in self.shape:
-                shape.collision_type = next_collision_type
+                shape.collision_type = BaseShape.next_collision_type
         else:
-            self.shape.collision_type = next_collision_type
+            self.shape.collision_type = BaseShape.next_collision_type
 
     def hit(self, direction, position):
         self.body.apply_impulse_at_world_point(direction, position)

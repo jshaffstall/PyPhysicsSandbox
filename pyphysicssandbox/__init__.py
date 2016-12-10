@@ -1,3 +1,18 @@
+"""
+pyPhysicsSandbox is a simple wrapper around Pymunk that makes it easy to write code to explore physics simulations.
+It's intended for use in introductory programming classrooms.
+
+Caution! The simulation does not behave well if you start out with shapes overlapping each other, especially if
+overlapping shapes are connected with joints.  To have overlapping shapes connected by joints, set the group on
+each shape to the same number to disable collision detection between those shape.
+
+Shapes far enough outside the simulation window (generally, above or below by the height of the window, or to
+either side by the width of the window) are automatically removed from the simulation and their active property
+set to False.  The distance can be modified, but be wary of making it too large...this keeps shapes that are not
+visible in the simulation and can slow the simulation down if the number of shapes grows too large.
+
+"""
+
 import pygame
 import pymunk
 import math
@@ -16,7 +31,7 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_clicked',
            'motor', 'pin', 'rotary_spring', 'run', 'draw', 'Color',
            'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes',
            'constants', 'deactivate', 'reactivate', 'mouse_point',
-           'add_collision', 'slip_motor'
+           'add_collision', 'slip_motor', 'set_margins'
            ]
 
 
@@ -29,6 +44,8 @@ space.damping = 0.95
 win_title = "Untitled"
 win_width = 500
 win_height = 500
+x_margin = win_width
+y_margin = win_height
 observers = []
 clicked = False
 
@@ -50,10 +67,14 @@ def window(title, width, height):
     global win_title
     global win_width
     global win_height
+    global x_margin
+    global y_margin
 
     win_title = title
     win_width = width
     win_height = height
+    x_margin = win_width
+    y_margin = win_height
 
 
 def add_observer(hook):
@@ -81,6 +102,22 @@ def add_observer(hook):
     global observers
 
     observers.append(hook)
+
+
+def set_margins(x, y):
+    """Sets the distance outside the simulation that shapes can be and remain active.
+    This defaults to the window width and height.  You can change it to either remove
+    shapes more quickly when they're out of view, or to allow creating shapes farther
+    outside the visible window.
+
+    :param x: horizontal margin
+    :param y: vertical margin
+    """
+    global x_margin
+    global y_margin
+
+    x_margin = x
+    y_margin = y
 
 
 def gravity(x, y):
@@ -802,16 +839,16 @@ def run(do_physics=True):
         # that they won't be involved in anything visible
         shapes_to_remove = []
         for collision_type, shape in shapes.items():
-            if shape.body and shape.body.position.x > win_width * 2:
+            if shape.body and shape.body.position.x > win_width + x_margin:
                 shapes_to_remove.append(shape)
 
-            if shape.body and shape.body.position.x < -win_width:
+            if shape.body and shape.body.position.x < -x_margin:
                 shapes_to_remove.append(shape)
 
-            if shape.body and shape.body.position.y > win_height * 2:
+            if shape.body and shape.body.position.y > win_height + y_margin:
                 shapes_to_remove.append(shape)
 
-            if shape.body and shape.body.position.y < -win_height:
+            if shape.body and shape.body.position.y < -y_margin:
                 shapes_to_remove.append(shape)
 
         for shape in shapes_to_remove:
