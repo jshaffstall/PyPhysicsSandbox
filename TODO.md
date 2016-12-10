@@ -9,6 +9,9 @@
 # TODO: add a debug mode to each shape that prints out information about the shape
 # on each step
 
+# TODO: Can cosmetic versions of all the shapes be created just by not
+# creating the pymunk body and shape in the base shape constructor?
+
 
 https://pythonprogramming.net/pygame-buttons-part-1-button-rectangle/
 https://pythonprogramming.net/making-interactive-pygame-buttons/?completed=/pygame-buttons-part-1-button-rectangle/
