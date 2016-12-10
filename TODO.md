@@ -3,10 +3,13 @@
 
 # TODO: Expose motor's max torque
 
-# TODO: automatically figure out a default mass for a shape based on its area?
-
 # TODO: add buttons, both physics and cosmetic, that can be pressed to generate
 # a call to a user defined function
+
+# TODO: add a debug mode to each shape that prints out information about the shape
+# on each step
+
+
 https://pythonprogramming.net/pygame-buttons-part-1-button-rectangle/
 https://pythonprogramming.net/making-interactive-pygame-buttons/?completed=/pygame-buttons-part-1-button-rectangle/
 https://pythonprogramming.net/placing-text-pygame-buttons/?completed=/making-interactive-pygame-buttons/
