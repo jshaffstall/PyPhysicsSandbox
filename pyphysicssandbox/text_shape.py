@@ -3,6 +3,7 @@ import pymunk
 import math
 
 from .box_shape import Box
+from .base_shape import BaseShape
 
 
 class Text(Box):
@@ -75,25 +76,16 @@ class Text(Box):
             print("Text value must be a string")
 
 
-class CosmeticText:
+class CosmeticText(BaseShape):
     # This class requires a lot of hacks to be treated as a shape even
     # though it is not a shape
     def __init__(self, x, y, caption, font_name, font_size):
         self.font = pygame.font.SysFont(font_name, font_size)
-        self.x = x
-        self.y = y
+        self._x = x
+        self._y = y
         self.caption = caption
-        self._color = pygame.Color('black')
-        self.body = None
-        self.wrap_x = False
-        self.wrap_y = False
-        self._visible = True
 
-        from .base_shape import BaseShape
-        BaseShape.next_collision_type += 1
-        self._collision_type = BaseShape.next_collision_type
-
-        super().__init__()
+        super().__init__(True)
 
         self.label = self.font.render(self.caption, True, self.color)
 
@@ -102,25 +94,10 @@ class CosmeticText:
             self._draw(screen)
 
     def _draw(self, screen):
-        screen.blit(self.label, (self.x, self.y))
+        screen.blit(self.label, (self._x, self._y))
 
     def __repr__(self):
-        return 'cosmetic_text: p('+str(self.x)+','+str(self.y)+'), caption: '+self.caption
-
-    @property
-    def collision_type(self):
-        return self._collision_type
-
-    @property
-    def visible(self):
-        return self._visible
-
-    @visible.setter
-    def visible(self, value):
-        if type(value) == bool:
-            self._visible = value
-        else:
-            print("Visible value must be True or False")
+        return 'cosmetic_text: p('+str(self._x)+','+str(self._y)+'), caption: '+self.caption
 
     @property
     def text(self):
@@ -133,20 +110,4 @@ class CosmeticText:
             self.label = self.font.render(self.caption, True, self.color)
         else:
             print("Text value must be a string")
-
-    @property
-    def color(self):
-        return self._color
-
-    @color.setter
-    def color(self, value):
-        if type(value) == pygame.Color:
-            self._color = value
-        else:
-            print("Color value must be a Color instance")
-
-
-
-
-
 

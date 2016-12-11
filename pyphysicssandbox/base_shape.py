@@ -10,7 +10,16 @@ from pyphysicssandbox import space
 class BaseShape:
     next_collision_type = 0
 
-    def __init__(self):
+    def __init__(self, cosmetic=False):
+        self._cosmetic = cosmetic
+
+        if cosmetic:
+            self.body = None
+            self.shape = []
+        else:
+            self.body.custom_gravity = space.gravity
+            self.body.custom_damping = space.damping
+
         self.elasticity = 0.90
         self.friction = 0.6
         self._color = pygame.Color('black')
@@ -19,8 +28,6 @@ class BaseShape:
         self._active = True
         self._visible = True
         self.custom_velocity_func = False
-        self.body.custom_gravity = space.gravity
-        self.body.custom_damping = space.damping
 
         BaseShape.next_collision_type += 1
         self._collision_type = BaseShape.next_collision_type
@@ -32,10 +39,13 @@ class BaseShape:
             self.shape.collision_type = BaseShape.next_collision_type
 
     def hit(self, direction, position):
+        if self._cosmetic:
+            return
+
         self.body.apply_impulse_at_world_point(direction, position)
 
     def has_own_body(self):
-        return True
+        return not self._cosmetic
 
     def inside(self, p):
         mask = pygame.Surface((win_width, win_height))
@@ -63,6 +73,54 @@ class BaseShape:
     @property
     def active(self):
         return self._active
+
+    def deactivate(self):
+        self._active = False
+
+        if type(self.shape) is list:
+            for s in self.shape:
+                space.remove(s)
+
+            if self.has_own_body():
+                space.remove(self.body)
+        else:
+            if self.has_own_body():
+                space.remove(self.shape, self.body)
+            else:
+                space.remove(self.shape)
+
+    def reactivate(self):
+        self._active = True
+
+        if type(self.shape) is list:
+            for s in self.shape:
+                space.add(s)
+
+            if self.has_own_body():
+                space.add(self.body)
+        else:
+            if self.has_own_body():
+                space.add(self.shape, self.body)
+            else:
+                space.add(self.shape)
+
+    @property
+    def position(self):
+        if self.body:
+            return self.body.position
+
+        return pymunk.vec2d.Vec2d(self._x, self._y)
+
+    @position.setter
+    def position(self, value):
+        if type(value) == tuple and len(value) == 2:
+            if self.body:
+                self.body.position = value
+            else:
+                self._x = value.x
+                self._y = value.y
+        else:
+            print("Position value must be a (x, y) tuple")
 
     @property
     def surface_velocity(self):
@@ -203,10 +261,16 @@ class BaseShape:
 
     @property
     def gravity(self):
+        if self._cosmetic:
+            return 0, 0
+
         return self.body.custom_gravity
 
     @gravity.setter
     def gravity(self, value):
+        if self._cosmetic:
+            return
+
         if type(value) == tuple and len(value) == 2:
             self.body.custom_gravity = value
             self._check_velocity_func()
@@ -215,10 +279,16 @@ class BaseShape:
 
     @property
     def damping(self):
+        if self._cosmetic:
+            return 0, 0
+
         return self.body.custom_damping
 
     @damping.setter
     def damping(self, value):
+        if self._cosmetic:
+            return
+
         if type(value) == float:
             self.body.custom_damping = value
             self._check_velocity_func()

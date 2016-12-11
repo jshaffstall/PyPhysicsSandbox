@@ -2,7 +2,7 @@ from pyphysicssandbox import *
 import random
 
 
-def drop_balls (keys):
+def drop_balls(keys):
     if random.randint(1, 50) == 1:
         for i in range(30):
             ball1 = ball((i*10, 10), 5)

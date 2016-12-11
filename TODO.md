@@ -11,6 +11,13 @@
 
 # TODO: Can cosmetic versions of all the shapes be created just by not
 # creating the pymunk body and shape in the base shape constructor?
+pass cosmetic boolean to base shape constructor
+self.shape = []  OR  put deactivate and reactivate on the shape itself (would mean passing space to base shape constructor)
+has_own_body returns False
+expose x and y on the shape itself, rather than going to shape.body
+all init.py operations with a shape are through the shape, not shape.body or shape.shape
+cosmetic versions must set body to None
+Have all shapes pass x and y to the base shape, since all shapes have an x and y?
 
 
 https://pythonprogramming.net/pygame-buttons-part-1-button-rectangle/

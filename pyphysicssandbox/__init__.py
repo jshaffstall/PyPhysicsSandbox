@@ -726,20 +726,7 @@ def deactivate(shape):
     if not shape.active:
         return
 
-    shape._active = False
-
-    if type(shape.shape) is list:
-        for s in shape.shape:
-            space.remove(s)
-
-        if shape.has_own_body():
-            space.remove(shape.body)
-    else:
-        if shape.has_own_body():
-            space.remove(shape.shape, shape.body)
-        else:
-            space.remove(shape.shape)
-
+    shape.deactivate()
     del shapes[shape.collision_type]
 
 
@@ -752,20 +739,7 @@ def reactivate(shape):
     if shape.active:
         return
 
-    shape._active = True
-
-    if type(shape.shape) is list:
-        for s in shape.shape:
-            space.add(s)
-
-        if shape.has_own_body():
-            space.add(shape.body)
-    else:
-        if shape.has_own_body():
-            space.add(shape.shape, shape.body)
-        else:
-            space.add(shape.shape)
-
+    shape.reactivate()
     shapes[shape.collision_type] = shape
 
 
@@ -839,16 +813,16 @@ def run(do_physics=True):
         # that they won't be involved in anything visible
         shapes_to_remove = []
         for collision_type, shape in shapes.items():
-            if shape.body and shape.body.position.x > win_width + x_margin:
+            if shape.position.x > win_width + x_margin:
                 shapes_to_remove.append(shape)
 
-            if shape.body and shape.body.position.x < -x_margin:
+            if shape.position.x < -x_margin:
                 shapes_to_remove.append(shape)
 
-            if shape.body and shape.body.position.y > win_height + y_margin:
+            if shape.position.y > win_height + y_margin:
                 shapes_to_remove.append(shape)
 
-            if shape.body and shape.body.position.y < -y_margin:
+            if shape.position.y < -y_margin:
                 shapes_to_remove.append(shape)
 
         for shape in shapes_to_remove:
@@ -858,18 +832,18 @@ def run(do_physics=True):
         # to wrap and have gone off an edge of the screen.
         for collision_type, shape in shapes.items():
             if shape.wrap_x:
-                if shape.body.position.x < 0:
-                    shape.body.position = (win_width - 1, shape.body.position.y)
+                if shape.position.x < 0:
+                    shape.position = (win_width - 1, shape.position.y)
 
-                if shape.body.position.x >= win_width:
-                    shape.body.position = (0, shape.body.position.y)
+                if shape.position.x >= win_width:
+                    shape.position = (0, shape.position.y)
 
             if shape.wrap_y:
-                if shape.body.position.y < 0:
-                    shape.body.position = (shape.body.position.x, win_height - 1)
+                if shape.position.y < 0:
+                    shape.position = (shape.position.x, win_height - 1)
 
-                if shape.body.position.y >= win_height:
-                    shape.body.position = (shape.body.position.x, 0)
+                if shape.position.y >= win_height:
+                    shape.position = (shape.position.x, 0)
 
         # Now draw the shapes that are left
         for collision_type, shape in shapes.items():

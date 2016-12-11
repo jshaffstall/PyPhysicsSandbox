@@ -51,7 +51,7 @@ def flipper_hit(keys):
         l_flipper.hit((0, -20000), (l_pos_x-120, l_pos_y))
 
     if constants.K_b in keys:
-        ball1 = ball((250, 100), 25)
+        ball1 = ball((250, 100), 25, 1)
         ball1.elasticity = 0.95
         add_collision(r_flipper, ball1, ball_flipped)
 
