@@ -105,6 +105,13 @@ class BaseShape:
                 space.add(self.shape)
 
     @property
+    def angle(self):
+        if self.body:
+            return self.body.angle
+
+        return 0.0
+
+    @property
     def position(self):
         if self.body:
             return self.body.position

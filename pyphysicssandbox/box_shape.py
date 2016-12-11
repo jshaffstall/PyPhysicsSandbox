@@ -5,24 +5,26 @@ from .base_shape import BaseShape
 
 
 class Box(BaseShape):
-    def __init__(self, space, x, y, width, height, radius, mass, static):
-        moment = pymunk.moment_for_box(mass, (width, height))
+    def __init__(self, space, x, y, width, height, radius, mass, static, cosmetic=False):
 
-        if static:
-            self.body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
-        else:
-            self.body = pymunk.Body(mass, moment)
+        if not cosmetic:
+            moment = pymunk.moment_for_box(mass, (width, height))
 
-        self.body.position = x, y
-        self.shape = pymunk.Poly.create_box(self.body, (width, height), radius)
+            if static:
+                self.body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
+            else:
+                self.body = pymunk.Body(mass, moment)
+
+            self.body.position = x, y
+            self.shape = pymunk.Poly.create_box(self.body, (width, height), radius)
+            space.add(self.body, self.shape)
+
         self.width = width
         self.height = height
         self.radius = radius
         self.static = static
 
-        super().__init__()
-
-        space.add(self.body, self.shape)
+        super().__init__(cosmetic)
 
     def _draw(self, screen):
         ps = [self.body.local_to_world(v) for v in self.shape.get_vertices()]
