@@ -12,7 +12,9 @@
 # TODO: Can cosmetic versions of all the shapes be created just by not
 # creating the pymunk body and shape in the base shape constructor?
 pass cosmetic boolean to base shape constructor
-hide body.angle so cosmetic versions can return 0, that way drawing can be the same
+need cosmetic_ versions of all shape functions that pass the right flags to the shape constructors
+
+
 
 https://pythonprogramming.net/pygame-buttons-part-1-button-rectangle/
 https://pythonprogramming.net/making-interactive-pygame-buttons/?completed=/pygame-buttons-part-1-button-rectangle/
