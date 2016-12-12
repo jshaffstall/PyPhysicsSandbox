@@ -7,7 +7,7 @@ setup(
     author = 'Jay Shaffstall',
     author_email = 'jshaffstall@gmail.com',
     url = 'https://github.com/jshaffstall/PyPhysicsSandbox',
-    download_url = 'https://github.com/jshaffstall/PyPhysicsSandbox/tarball/0.1',
+    download_url = 'https://github.com/jshaffstall/PyPhysicsSandbox/tarball/1.0',
     keywords = ['physics'],
     classifiers = [],
     install_requires = ['pygame','pymunk'],
