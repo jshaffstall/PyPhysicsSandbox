@@ -5,6 +5,7 @@ from pyphysicssandbox import pin
 from pyphysicssandbox import win_width
 from pyphysicssandbox import win_height
 from pyphysicssandbox import space
+from pyphysicssandbox import add_observer
 
 
 class BaseShape:
@@ -27,6 +28,7 @@ class BaseShape:
         self._wrap_y = False
         self._active = True
         self._visible = True
+        self._debug = False
         self.custom_velocity_func = False
 
         BaseShape.next_collision_type += 1
@@ -37,6 +39,12 @@ class BaseShape:
                 shape.collision_type = BaseShape.next_collision_type
         else:
             self.shape.collision_type = BaseShape.next_collision_type
+
+        add_observer(self.observer)
+
+    def observer(self, keys):
+        if self._debug:
+            print (repr(self))
 
     def hit(self, direction, position):
         if self._cosmetic:
@@ -110,6 +118,17 @@ class BaseShape:
             return self.body.angle
 
         return 0.0
+
+    @property
+    def debug(self):
+        return self._debug
+
+    @debug.setter
+    def debug(self, value):
+        if type(value) == bool:
+            self._debug = value
+        else:
+            print("Debug value must be a boolean")
 
     @property
     def position(self):

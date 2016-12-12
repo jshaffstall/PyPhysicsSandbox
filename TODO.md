@@ -6,14 +6,6 @@
 # TODO: add buttons, both physics and cosmetic, that can be pressed to generate
 # a call to a user defined function
 
-# TODO: add a debug mode to each shape that prints out information about the shape
-# on each step
-
-# TODO: Can cosmetic versions of all the shapes be created just by not
-# creating the pymunk body and shape in the base shape constructor?
-pass cosmetic boolean to base shape constructor
-need cosmetic_ versions of all shape functions that pass the right flags to the shape constructors
-
 
 
 https://pythonprogramming.net/pygame-buttons-part-1-button-rectangle/

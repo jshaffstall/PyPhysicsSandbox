@@ -17,9 +17,9 @@ class SlipMotor(Motor):
         self._slip_angle = slip_angle
         self._rest_angle = rest_angle
 
-        add_observer(self.observer)
-
     def observer(self, keys):
+        super().observer(keys)
+
         degrees = math.degrees(self.body.angle)
 
         if self.active:

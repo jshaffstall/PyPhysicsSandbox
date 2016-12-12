@@ -1,5 +1,6 @@
 import pygame
 import pymunk
+import math
 
 from .base_shape import BaseShape
 
@@ -59,4 +60,4 @@ class Box(BaseShape):
             prefix = 'cosmetic_box'
 
         return prefix+': p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), width: ' + \
-            str(self.width) + ', height: ' + str(self.height)
+            str(self.width) + ', height: ' + str(self.height) + ', angle: ' + str(math.degrees(self.angle))

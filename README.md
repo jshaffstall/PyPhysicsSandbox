@@ -355,6 +355,12 @@ Creates a pin joint between the two shapes at the given points.  A pin joint cre
 Each shape object that gets returned has some methods and properties that can be called to adjust the shape.  
 
 ```python
+shape.debug=True
+```
+
+Turns on debug output for the given shape.  Each time step the shape will print out information about its current location and other pertinent characteristics.
+
+```python
 shape.hit(direction, position)
 ```
 

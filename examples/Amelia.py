@@ -34,9 +34,6 @@ base.color = Color("black")
 base2 = cosmetic_rounded_box((20, 550), WIN_WIDTH, 10, 5)
 base2.color = Color("black")
 
-base_ball = cosmetic_triangle((50, 50), (250, 250), (50, 250))
-base_ball.color = Color('green')
-
 arm1 = box((100, 200), 100, 10, 100)
 arm1.color = Color("yellow")
 arm1.friction = 1.0
@@ -64,6 +61,10 @@ ball2 = ball((350, 0), 5)
 ball2.color = Color("green")
 ball2.draw_radius_line = True
 ball2.wrap = True
+
+for i in range(2000):
+    ball3 = ball((random.randint(0, WIN_WIDTH), random.randint(0, WIN_HT)), 5)
+    ball3.color = Color(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
 gear(arm1, arm3)
 motor = motor(arm1, -3)
