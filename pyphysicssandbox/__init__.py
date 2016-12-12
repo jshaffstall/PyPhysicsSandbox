@@ -32,7 +32,7 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_clicked',
            'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes',
            'constants', 'deactivate', 'reactivate', 'mouse_point',
            'add_collision', 'slip_motor', 'set_margins', 'cosmetic_box',
-           'cosmetic_rounded_box'
+           'cosmetic_rounded_box', 'cosmetic_ball'
            ]
 
 
@@ -202,13 +202,26 @@ def ball(p, radius, mass=-1):
     return _ball(p, radius, mass, False)
 
 
-def _ball(p, radius, mass, static=False):
+def cosmetic_ball(p, radius):
+    """Creates a ball that does not interact with the simulation in any way.
+
+    :param p: The center point of the ball
+    :type p: (int, int)
+    :param radius: The radius of the ball
+    :type radius: int
+    :rtype: shape
+
+    """
+    return _ball(p, radius, 0, False, True)
+
+
+def _ball(p, radius, mass, static=False, cosmetic=False):
     from .ball_shape import Ball
 
     if mass == -1:
         mass = math.pi*radius*radius
 
-    result = Ball(space, p[0], p[1], radius, mass, static)
+    result = Ball(space, p[0], p[1], radius, mass, static, cosmetic)
     shapes[result.collision_type] = result
 
     return result

@@ -34,6 +34,9 @@ base.color = Color("black")
 base2 = cosmetic_rounded_box((20, 550), WIN_WIDTH, 10, 5)
 base2.color = Color("black")
 
+base_ball = cosmetic_ball((50, 50), 50)
+base_ball.color = Color('green')
+
 arm1 = box((100, 200), 100, 10, 100)
 arm1.color = Color("yellow")
 arm1.friction = 1.0
