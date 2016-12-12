@@ -31,7 +31,8 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_clicked',
            'motor', 'pin', 'rotary_spring', 'run', 'draw', 'Color',
            'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes',
            'constants', 'deactivate', 'reactivate', 'mouse_point',
-           'add_collision', 'slip_motor', 'set_margins'
+           'add_collision', 'slip_motor', 'set_margins', 'cosmetic_box',
+           'cosmetic_rounded_box'
            ]
 
 
@@ -245,7 +246,22 @@ def box(p, width, height, mass=-1):
     return _box(p, width, height, mass, False)
 
 
-def _box(p, width, height, mass, static, radius=0):
+def cosmetic_box(p, width, height):
+    """Creates a box that does not react with the simulation in any way.
+
+    :param p: The upper left corner of the box
+    :type p: (int, int)
+    :param width: The width of the box
+    :type width: int
+    :param height: The height of the box
+    :type height: int
+    :rtype: shape
+
+    """
+    return _box(p, width, height, 0, False, 0, True)
+
+
+def _box(p, width, height, mass, static, radius=0, cosmetic=False):
     from .box_shape import Box
 
     if mass == -1:
@@ -255,7 +271,7 @@ def _box(p, width, height, mass, static, radius=0):
     x = p[0] + width / 2
     y = p[1] + height / 2
 
-    result = Box(space, x, y, width, height, radius, mass, static)
+    result = Box(space, x, y, width, height, radius, mass, static, cosmetic)
     shapes[result.collision_type] = result
 
     return result
@@ -295,6 +311,23 @@ def rounded_box(p, width, height, radius, mass=-1):
 
     """
     return _box(p, width, height, mass, False, radius)
+
+
+def cosmetic_rounded_box(p, width, height, radius):
+    """Creates a box with rounded corners that does not interact with the simulation in any way.
+
+    :param p: The upper left corner of the box
+    :type p: (int, int)
+    :param width: The width of the box
+    :type width: int
+    :param height: The height of the box
+    :type height: int
+    :param radius: The radius of the rounded corners
+    :type radius: int
+    :rtype: shape
+
+    """
+    return _box(p, width, height, 0, False, radius, True)
 
 
 def static_polygon(vertices):
@@ -421,13 +454,27 @@ def text(p, caption, mass=-1):
     return _text(p, caption, mass, False)
 
 
-def _text(p, caption, mass, static):
+def cosmetic_text(p, caption):
+    """Creates text that displays on the screen but does not interact
+    with other objects in any way.
+
+    :param p: The upper left corner of the text
+    :type p: (int, int)
+    :param caption: The text to display
+    :type caption: string
+    :rtype: shape
+
+    """
+    return _text(p, caption, 0, False, True)
+
+
+def _text(p, caption, mass, static, cosmetic=False):
     from .text_shape import Text
 
     if mass == -1:
         mass = 10 * len(caption)
 
-    result = Text(space, p[0], p[1], caption, "Arial", 12, mass, static)
+    result = Text(space, p[0], p[1], caption, "Arial", 12, mass, static, cosmetic)
     shapes[result.collision_type] = result
 
     return result
@@ -469,37 +516,6 @@ def text_with_font(p, caption, font, size, mass=-1):
     return _text_with_font(p, caption, font, size, mass, False)
 
 
-def _text_with_font(p, caption, font, size, mass, static):
-    from .text_shape import Text
-
-    if mass == -1:
-        mass = 10 * len(caption)
-
-    result = Text(space, p[0], p[1], caption, font, size, mass, static)
-    shapes[result.collision_type] = result
-
-    return result
-
-
-def cosmetic_text(p, caption):
-    """Creates text that displays on the screen but does not interact
-    with other objects in any way.
-
-    :param p: The upper left corner of the text
-    :type p: (int, int)
-    :param caption: The text to display
-    :type caption: string
-    :rtype: shape
-
-    """
-    from .text_shape import Text
-
-    result = Text(space, p[0], p[1], caption, "Arial", 12,  0, False, True)
-    shapes[result.collision_type] = result
-
-    return result
-
-
 def cosmetic_text_with_font(p, caption, font, size):
     """Creates text that displays on the screen but does not interact
     with other objects in any way.
@@ -515,9 +531,16 @@ def cosmetic_text_with_font(p, caption, font, size):
     :rtype: shape
 
     """
-    from .text_shape import CosmeticText
+    return _text(p, caption, font, size, 0, False, True)
 
-    result = CosmeticText(p[0], p[1], caption, font, size)
+
+def _text_with_font(p, caption, font, size, mass, static, cosmetic=False):
+    from .text_shape import Text
+
+    if mass == -1:
+        mass = 10 * len(caption)
+
+    result = Text(space, p[0], p[1], caption, font, size, mass, static, cosmetic)
     shapes[result.collision_type] = result
 
     return result
@@ -768,8 +791,7 @@ def handle_collision(arbiter, space, data):
     shape2 = shapes[arbiter.shapes[1].collision_type]
     p = arbiter.contact_point_set.points[0].point_a
 
-    data['handler'](shape1, shape2, p)
-    return True
+    return data['handler'](shape1, shape2, p)
 
 
 def run(do_physics=True):

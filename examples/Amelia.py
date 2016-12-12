@@ -31,6 +31,9 @@ base.color = Color("black")
 # gear2 = gear(arm2, arm3, 90)
 # gear3 = gear(arm3, arm4, 90)
 
+base2 = cosmetic_rounded_box((20, 550), WIN_WIDTH, 10, 5)
+base2.color = Color("black")
+
 arm1 = box((100, 200), 100, 10, 100)
 arm1.color = Color("yellow")
 arm1.friction = 1.0
@@ -48,6 +51,11 @@ pivot2.connect(arm3)
 ball1 = ball((110, 100), 5)
 ball1.color = Color("blue")
 ball1.wrap = True
+
+# def ball_and_base(shape1, shape2, p):
+#     return False
+#
+# add_collision(ball1, base, ball_and_base)
 
 ball2 = ball((350, 0), 5)
 ball2.color = Color("green")

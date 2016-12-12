@@ -189,6 +189,8 @@ The handler function is passed three parameters. The first two are the colliding
         handler(shape1, shape2, p)
 ```
 
+The handler function must return True to allow the collision to happen.  If the handler returns False, then the collision will not happen.
+
 Note that you will never have a collision with a deactivated object or with a cosmetic object.
 
 ```python
@@ -213,7 +215,7 @@ All the shapes have both a static and cosmetic variation shown.
 
 Static shapes will interact with the physics simulation but will never move.  Other shapes will collide with the static shapes, but the static shapes are immovable objects.
 
-Cosmetic shapes also will never move, but they also do not interact with the physics simulation in any way.  Other shapes will fall through the cosmetic shapes.
+Cosmetic shapes also will never move, but they also do not interact with the physics simulation in any way.  Other shapes will fall through the cosmetic shapes.  This means you may not also use a cosmetic shape as part of a paste_on call.
 
 ```python
 ball(p, radius, mass)

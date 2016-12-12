@@ -6,7 +6,7 @@ from .util import to_pygame
 
 
 class Ball(BaseShape):
-    def __init__(self, space, x, y, radius, mass, static):
+    def __init__(self, space, x, y, radius, mass, static, cosmetic=False):
         if not cosmetic:
             moment = pymunk.moment_for_circle(mass, 0, radius)
 

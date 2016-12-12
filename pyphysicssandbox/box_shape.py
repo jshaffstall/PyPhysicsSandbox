@@ -29,8 +29,14 @@ class Box(BaseShape):
         super().__init__(cosmetic)
 
     def _draw(self, screen):
-        ps = [self.body.local_to_world(v) for v in self.shape.get_vertices()]
-        ps += [ps[0]]
+        if self._cosmetic:
+            x = self._x-self.width/2
+            y = self._y-self.height/2
+
+            ps = [(x, y), (x+self.width, y), (x+self.width, y+self.height), (x,y+self.height), (x, y)]
+        else:
+            ps = [self.body.local_to_world(v) for v in self.shape.get_vertices()]
+            ps += [ps[0]]
 
         pygame.draw.polygon(screen, self.color, ps)
         pygame.draw.lines(screen, self.color, False, ps, self.radius)
