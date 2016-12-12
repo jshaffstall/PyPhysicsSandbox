@@ -101,6 +101,8 @@ Both pygame and pymunk should be automatically installed when you install pyPhys
 
 ## API Reference
 
+### Simulation-wide functions
+
 ```python
 window(caption, width, height)
 ```
@@ -158,129 +160,6 @@ Returns the current location of the mouse pointer as an (x, y) tuple.
 If the mouse is out of the simulation window, this will return the last location of the mouse that was in the simulation window.
 
 ```python
-ball(p, radius, mass)
-static_ball(p, radius)
-```
-
-Create a ball object and return its instance.  The static version creates a ball that does not move.
-
-p is a tuple containing the x and y coordinates of the center of the ball.  
-
-You can omit the mass parameter and the mass will be set proportional to the area of the shape.
-
-```python
-box(p, width, height, mass)
-static_box(p, width, height)
-```
-
-Create a box object and return its instance.  The static version creates a box that does not move.
-
-p is a tuple containing the x and  y coordinates of the upper left corner of the box.
-
-You can omit the mass parameter and the mass will be set proportional to the area of the shape.
-
-```python
-rounded_box(p, width, height, radius, mass)
-static_rounded_box(p, width, height, radius)
-```
-
-Create a box object and returns its instance.  The static version creates a box that does not move.  These boxes are drawn with rounded corners.
-
-p is a tuple containing the x and  y coordinates of the upper left corner of the box.
-radius is the radius of the corner curve.  3 works well, but you can pass any integer.
-
-You can omit the mass parameter and the mass will be set proportional to the area of the shape.
-
-```python
-triangle(p1, p2, p3, mass)
-static_triangle(p1, p2, p3)
-```
-
-Creates a triangle out of the given points and returns its instance.  The static version creates a triangle that does not move.
-
-You can omit the mass parameter and the mass will be set proportional to the area of the shape.
-
-```python
-poly(vertices, mass)
-static_poly(vertices)
-```
-
-Creates a closed polygon out of the given points and returns its instance.  The last point is automatically connected back to the first point.  The static version does not move.
-
-vertices is a tuple of points, where each point is a tuple of x and y coordinates.  The order of these points matters!
-
-You can omit the mass parameter and the mass will be set proportional to the area of the shape.
-
-```python
-text(p, caption, mass)
-static_text(p, caption)
-text_with_font(p, caption, font, size, mass)
-static_text_with_font(p, caption, font, size)
-cosmetic_text(p, caption)
-cosmetic_text_with_font(p, caption, font, size)
-```
-
-Creates text that will interact with the world as if it were a rectangle.  The static text version does not move.  The cosmetic version does not interact with the physics simulation in any way.
-
-p is a tuple containing the x and  y coordinates of the upper left corner of the text.
-
-You can omit the mass parameter and the mass will be set proportional to the area of the shape.
-
-```python
-line(p1, p2, thickness, mass)
-static_line(p1, p2, thickness)
-```
-
-Creates a line from coordinates p1 to coordinates p2 of the given thickness.  The static line version does not move.  
-
-You can omit the mass parameter and the mass will be set proportional to the area of the shape.
-
-```python
-pivot1 = pivot(p)
-pivot1.connect(other_shape)
-```
-
-Create a pivot joint at point p in the world.  The other_shape should be a shape whose coordinates intersect the location of the pivot joint.  
-
-The pivot joint pins the other shape to the background, not allowing it to fall.  The other shape can rotate around the pivot joint.
- 
-```python
-gear1 = gear(shape1, shape2)
-```
-
-Creates a gear joint connecting the two shapes.  A gear joint keeps the angle of the two shapes constant.  As one shape rotates, the other rotates to match automatically.
-
-Note that the gear has no visible representation in the simulation.
-
-```python
-motor(shape1, radians)
-```
-
-Creates a motor to give the shape a constant rotation.  If you want other shapes to also rotate at the same rate, use a gear joint to connect them to the shape with the motor.
-
-The motor displays as a semicircle with a dot in the direction of rotation.
-
-```python
-rotary_spring(shape1, shape2, angle, stiffness, damping)
-```
-
-Creates a spring that constrains the rotations of the given shapes. The angle between the two shapes prefers to be at the given angle, but may be varied by forces on the objects. The spring will bring the objects back to the desired angle.  The initial positioning of the shapes is considered to be at an angle of 0.
-
-A normal scenario for this is for shape1 to be a shape rotating around shape2, which is a pivot joint or other static object, but play around with different ways of using rotary springs.
-
-```python
-slip_motor(shape1, shape2, rest_angle, stiffness, damping, slip_angle, speed)
-```
-
-Creates a combination spring and motor.  The motor will rotate shape1 around shape2 at the given speed.  When shape1 reaches the slip angle it will spring back to the rest_angle.  Then the motor will start to rotate the object again.
- 
-```python
-pin((100, 580), ball1, (150, 580), ball2)
-```
-
-Creates a pin joint between the two shapes at the given points.  A pin joint creates a fixed separation between the two bodies (as if there were a metal pin connecting them).  You'll get strange effects when wrapping these shapes.
-
-```python
 num_shapes()
 ```
 
@@ -328,7 +207,142 @@ Call this after you have created all your shapes to draw the shapes.  This funct
 
 This is an alias for run(False).
 
-###Shape Methods
+### Shape creation functions
+
+All the shapes have both a static and cosmetic variation shown.
+
+Static shapes will interact with the physics simulation but will never move.  Other shapes will collide with the static shapes, but the static shapes are immovable objects.
+
+Cosmetic shapes also will never move, but they also do not interact with the physics simulation in any way.  Other shapes will fall through the cosmetic shapes.
+
+```python
+ball(p, radius, mass)
+static_ball(p, radius)
+```
+
+Create a ball object and return its instance.
+
+p is a tuple containing the x and y coordinates of the center of the ball.  
+
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
+```python
+box(p, width, height, mass)
+static_box(p, width, height)
+```
+
+Create a box object and return its instance.
+
+p is a tuple containing the x and  y coordinates of the upper left corner of the box.
+
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
+```python
+rounded_box(p, width, height, radius, mass)
+static_rounded_box(p, width, height, radius)
+```
+
+Create a box object and returns its instance. These boxes are drawn with rounded corners.
+
+p is a tuple containing the x and  y coordinates of the upper left corner of the box.
+radius is the radius of the corner curve.  3 works well, but you can pass any integer.
+
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
+```python
+triangle(p1, p2, p3, mass)
+static_triangle(p1, p2, p3)
+```
+
+Creates a triangle out of the given points and returns its instance.
+
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
+```python
+poly(vertices, mass)
+static_poly(vertices)
+```
+
+Creates a closed polygon out of the given points and returns its instance.  The last point is automatically connected back to the first point.
+
+vertices is a tuple of points, where each point is a tuple of x and y coordinates.  The order of these points matters!
+
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
+```python
+text(p, caption, mass)
+static_text(p, caption)
+text_with_font(p, caption, font, size, mass)
+static_text_with_font(p, caption, font, size)
+cosmetic_text(p, caption)
+cosmetic_text_with_font(p, caption, font, size)
+```
+
+Creates text that will interact with the world as if it were a rectangle.
+
+p is a tuple containing the x and  y coordinates of the upper left corner of the text.
+
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
+```python
+line(p1, p2, thickness, mass)
+static_line(p1, p2, thickness)
+```
+
+Creates a line from coordinates p1 to coordinates p2 of the given thickness.
+
+You can omit the mass parameter and the mass will be set proportional to the area of the shape.
+
+### Constraints
+
+Constraints will limit or control the motion of other shapes in some fashion.
+
+```python
+pivot1 = pivot(p)
+pivot1.connect(other_shape)
+```
+
+Create a pivot joint at point p in the world.  The other_shape should be a shape whose coordinates intersect the location of the pivot joint.  
+
+The pivot joint pins the other shape to the background, not allowing it to fall.  The other shape can rotate around the pivot joint.
+ 
+```python
+gear1 = gear(shape1, shape2)
+```
+
+Creates a gear joint connecting the two shapes.  A gear joint keeps the angle of the two shapes constant.  As one shape rotates, the other rotates to match automatically.
+
+Note that the gear has no visible representation in the simulation.
+
+```python
+motor(shape1, radians)
+```
+
+Creates a motor to give the shape a constant rotation.  If you want other shapes to also rotate at the same rate, use a gear joint to connect them to the shape with the motor.
+
+The motor displays as a semicircle with a dot in the direction of rotation.
+
+```python
+rotary_spring(shape1, shape2, angle, stiffness, damping)
+```
+
+Creates a spring that constrains the rotations of the given shapes. The angle between the two shapes prefers to be at the given angle, but may be varied by forces on the objects. The spring will bring the objects back to the desired angle.  The initial positioning of the shapes is considered to be at an angle of 0.
+
+A normal scenario for this is for shape1 to be a shape rotating around shape2, which is a pivot joint or other static object, but play around with different ways of using rotary springs.
+
+```python
+slip_motor(shape1, shape2, rest_angle, stiffness, damping, slip_angle, speed)
+```
+
+Creates a combination spring and motor.  The motor will rotate shape1 around shape2 at the given speed.  When shape1 reaches the slip angle it will spring back to the rest_angle.  Then the motor will start to rotate the object again.
+ 
+```python
+pin((100, 580), ball1, (150, 580), ball2)
+```
+
+Creates a pin joint between the two shapes at the given points.  A pin joint creates a fixed separation between the two bodies (as if there were a metal pin connecting them).  You'll get strange effects when wrapping these shapes.
+
+###Shape Methods and Properties
 
 Each shape object that gets returned has some methods and properties that can be called to adjust the shape.  
 
@@ -343,25 +357,25 @@ Direction is a tuple containing the x direction and y direction (in the same ori
 Position is a tuple containing the x and y position of the spot on the shape to hit.
 
 ```python
-shape.color
+shape.color=Color('blue')
 ```
 
 Sets the color for the shape.  The value must be a pygame Color instance.  The default color is black.
 
 ```python
-shape.elasticity
+shape.elasticity=0.0
 ```
 
 Sets how bouncy the object is.  The default is 0.9.
 
 ```python
-shape.friction
+shape.friction=0.95
 ```
 
 Sets how much friction the object should have.  The default is 0.6.  The Wikipedia article on friction has examples of values for different materials: https://en.wikipedia.org/wiki/Friction
 
 ```python
-shape.surface_velocity
+shape.surface_velocity=(200,0)
 ```
 
 Sets how much surface velocity the object should have.  The default is (0, 0).  
@@ -369,7 +383,7 @@ Sets how much surface velocity the object should have.  The default is (0, 0).
 This is the amount of movement objects touching this surface will have imparted to them.  You can use this to set up a conveyor belt.  
 
 ```python
-shape.wrap
+shape.wrap=True
 ```
 
 Sets whether the shape should wrap when going off the edges of the screen or not.  A True value means the shape can never be off screen, and if it starts off screen it's immediately brought on as if it were wrapping.
@@ -377,37 +391,37 @@ Sets whether the shape should wrap when going off the edges of the screen or not
 This is a convenience function for setting wrap_x and wrap_y at the same time. 
 
 ```python
-shape.wrap_x
+shape.wrap_x=True
 ```
 
 Sets whether the shape should wrap when going off the sides of the screen or not. 
 
 ```python
-shape.wrap_y
+shape.wrap_y+True
 ```
 
 Sets whether the shape should wrap when going off the top or bottom of the screen or not. 
 
 ```python
-shape.visible
+shape.visible=False
 ```
 
 Sets whether the shape draws itself or not.  Defaults to True.  Most useful to set this to False for joints you don't want shown on screen. 
 
 ```python
-shape.group
+shape.group=1
 ```
 
 Set to an integer.  Shapes that share the same group number will not collide with each other.  Useful to have overlapping objects connected by joints that do not make the physics crazy. 
 
 ```python
-shape.gravity
+shape.gravity=(0,-300)
 ```
 
 Set to an (x, y) vector in the same format as the overall gravity vector.  This overrides the overall gravity for this shape only.
 
 ```python
-shape.damping
+shape.damping=0.9
 ```
 
 Set a damping value specific for this shape.  This overrides the overall damping value for this shape only.
@@ -429,13 +443,13 @@ shape.inside(p)
 Returns True is the given point is inside the given shape.  Does not care if the shape is visible or not or active or not.
 
 ```python
-shape.draw_radius_line
+shape.draw_radius_line=True
 ```
 
 Only for balls, this sets whether a line from the center of the ball to the 0 degree point on the outer edge is drawn.  Defaults to False.  Can be set to True to gauge rotation of the ball. 
 
 ```python
-shape.text
+shape.text='Some text"
 ```
 
 Only for text, this sets the text to be displayed.  This will modify the box shape around the text for collision detection. 

@@ -23,6 +23,8 @@ class Box(BaseShape):
         self.height = height
         self.radius = radius
         self.static = static
+        self._x = x
+        self._y = y
 
         super().__init__(cosmetic)
 
@@ -46,6 +48,9 @@ class Box(BaseShape):
 
         if self.static:
             prefix = 'static_box'
+
+        if self._cosmetic:
+            prefix = 'cosmetic_box'
 
         return prefix+': p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), width: ' + \
             str(self.width) + ', height: ' + str(self.height)

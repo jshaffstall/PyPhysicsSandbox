@@ -7,15 +7,17 @@ from .util import to_pygame
 
 class Ball(BaseShape):
     def __init__(self, space, x, y, radius, mass, static):
-        moment = pymunk.moment_for_circle(mass, 0, radius)
+        if not cosmetic:
+            moment = pymunk.moment_for_circle(mass, 0, radius)
 
-        if static:
-            self.body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
-        else:
-            self.body = pymunk.Body(mass, moment)
+            if static:
+                self.body = pymunk.Body(mass, moment, pymunk.Body.STATIC)
+            else:
+                self.body = pymunk.Body(mass, moment)
 
-        self.body.position = x, y
-        self.shape = pymunk.Circle(self.body, radius)
+            self.body.position = x, y
+            self.shape = pymunk.Circle(self.body, radius)
+
         self.static = static
         self._draw_radius_line = False
 
