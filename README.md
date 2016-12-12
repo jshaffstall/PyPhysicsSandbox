@@ -220,6 +220,7 @@ Cosmetic shapes also will never move, but they also do not interact with the phy
 ```python
 ball(p, radius, mass)
 static_ball(p, radius)
+cosmetic_ball(p, radius)
 ```
 
 Create a ball object and return its instance.
@@ -231,6 +232,7 @@ You can omit the mass parameter and the mass will be set proportional to the are
 ```python
 box(p, width, height, mass)
 static_box(p, width, height)
+cosmetic_box(p, width, height)
 ```
 
 Create a box object and return its instance.
@@ -242,6 +244,7 @@ You can omit the mass parameter and the mass will be set proportional to the are
 ```python
 rounded_box(p, width, height, radius, mass)
 static_rounded_box(p, width, height, radius)
+cosmetic_rounded_box(p, width, height, radius)
 ```
 
 Create a box object and returns its instance. These boxes are drawn with rounded corners.
@@ -254,6 +257,7 @@ You can omit the mass parameter and the mass will be set proportional to the are
 ```python
 triangle(p1, p2, p3, mass)
 static_triangle(p1, p2, p3)
+cosmetic_triangle(p1, p2, p3)
 ```
 
 Creates a triangle out of the given points and returns its instance.
@@ -263,6 +267,7 @@ You can omit the mass parameter and the mass will be set proportional to the are
 ```python
 poly(vertices, mass)
 static_poly(vertices)
+cosmetic_poly(vertices)
 ```
 
 Creates a closed polygon out of the given points and returns its instance.  The last point is automatically connected back to the first point.
@@ -274,9 +279,9 @@ You can omit the mass parameter and the mass will be set proportional to the are
 ```python
 text(p, caption, mass)
 static_text(p, caption)
+cosmetic_text(p, caption)
 text_with_font(p, caption, font, size, mass)
 static_text_with_font(p, caption, font, size)
-cosmetic_text(p, caption)
 cosmetic_text_with_font(p, caption, font, size)
 ```
 
@@ -289,6 +294,7 @@ You can omit the mass parameter and the mass will be set proportional to the are
 ```python
 line(p1, p2, thickness, mass)
 static_line(p1, p2, thickness)
+cosmetic_line(p1, p2, thickness)
 ```
 
 Creates a line from coordinates p1 to coordinates p2 of the given thickness.

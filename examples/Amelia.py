@@ -34,7 +34,7 @@ base.color = Color("black")
 base2 = cosmetic_rounded_box((20, 550), WIN_WIDTH, 10, 5)
 base2.color = Color("black")
 
-base_ball = cosmetic_line((50, 50), (250, 250), 5)
+base_ball = cosmetic_triangle((50, 50), (250, 250), (50, 250))
 base_ball.color = Color('green')
 
 arm1 = box((100, 200), 100, 10, 100)

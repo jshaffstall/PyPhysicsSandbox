@@ -32,7 +32,8 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_clicked',
            'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes',
            'constants', 'deactivate', 'reactivate', 'mouse_point',
            'add_collision', 'slip_motor', 'set_margins', 'cosmetic_box',
-           'cosmetic_rounded_box', 'cosmetic_ball', 'cosmetic_line'
+           'cosmetic_rounded_box', 'cosmetic_ball', 'cosmetic_line',
+           'cosmetic_polygon', 'cosmetic_triangle'
            ]
 
 
@@ -367,7 +368,18 @@ def polygon(vertices, mass=-1):
     return _polygon(vertices, mass, False)
 
 
-def _polygon(vertices, mass, static):
+def cosmetic_polygon(vertices):
+    """Creates a polygon that does not interact with the simulation in any way.
+
+    :param vertices: A tuple of points on the polygon
+    :type vertices: ((int, int), (int, int), ...)
+    :rtype: shape
+
+    """
+    return _polygon(vertices, 0, False, True)
+
+
+def _polygon(vertices, mass, static, cosmetic=False):
     from .poly_shape import Poly
     from .util import poly_centroid
     from .util import poly_area
@@ -378,7 +390,7 @@ def _polygon(vertices, mass, static):
         mass = poly_area(vertices)
 
     vertices = [(v[0] - x, v[1] - y) for v in vertices]
-    result = Poly(space, x, y, vertices, 0, mass, static)
+    result = Poly(space, x, y, vertices, 0, mass, static, cosmetic)
     shapes[result.collision_type] = result
 
     return result
@@ -416,7 +428,22 @@ def triangle(p1, p2, p3, mass=-1):
     return _triangle(p1, p2, p3, mass, False)
 
 
-def _triangle(p1, p2, p3, mass, static):
+def cosmetic_triangle(p1, p2, p3):
+    """Creates a triangle that does not interact with the simulation in any way.
+
+    :param p1: The first point of the triangle
+    :type p1: (int, int)
+    :param p2: The second point of the triangle
+    :type p2: (int, int)
+    :param p3: The third point of the triangle
+    :type p3: (int, int)
+    :rtype: shape
+
+    """
+    return _triangle(p1, p2, p3, 0, False, True)
+
+
+def _triangle(p1, p2, p3, mass, static, cosmetic=False):
     from .poly_shape import Poly
     from .util import poly_area
 
@@ -431,7 +458,7 @@ def _triangle(p1, p2, p3, mass, static):
     if mass == -1:
         mass = poly_area(vertices)
 
-    result = Poly(space, x, y, vertices, 0, mass, static)
+    result = Poly(space, x, y, vertices, 0, mass, static, cosmetic)
     shapes[result.collision_type] = result
 
     return result
