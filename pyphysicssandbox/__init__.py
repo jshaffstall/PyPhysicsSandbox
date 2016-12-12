@@ -492,9 +492,9 @@ def cosmetic_text(p, caption):
     :rtype: shape
 
     """
-    from .text_shape import CosmeticText
+    from .text_shape import Text
 
-    result = CosmeticText(p[0], p[1], caption, "Arial", 12)
+    result = Text(space, p[0], p[1], caption, "Arial", 12,  0, False, True)
     shapes[result.collision_type] = result
 
     return result

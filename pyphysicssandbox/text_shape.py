@@ -38,6 +38,9 @@ class Text(Box):
         if self.static:
             prefix = 'static_box'
 
+        if self._cosmetic:
+            prefix = 'cosmetic_box'
+
         return prefix+': p(' + str(self.x) + ',' + str(self.y) + '), caption: ' + self.caption
 
     @property
@@ -72,14 +75,4 @@ class Text(Box):
                 self.space.add(self.body, self.shape)
         else:
             print("Text value must be a string")
-
-
-class CosmeticText(Text):
-    # This class requires a lot of hacks to be treated as a shape even
-    # though it is not a shape
-    def __init__(self, x, y, caption, font_name, font_size):
-        super().__init__(None, x, y, caption, font_name, font_size, 0, True, True)
-
-    def __repr__(self):
-        return 'cosmetic_text: p('+str(self._x)+','+str(self._y)+'), caption: '+self.caption
 
