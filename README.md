@@ -468,14 +468,10 @@ shape.text='Some text"
 
 Only for text, this sets the text to be displayed.  This will modify the box shape around the text for collision detection. 
 
-## Tests
-
-Describe and show how to run the tests with code examples.
-
 ## Contributors
 
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
+See CONTRIBUTING.md
 
 ## License
 
-A short snippet describing the license (MIT, Apache, etc.)
+See LICENSE.md
