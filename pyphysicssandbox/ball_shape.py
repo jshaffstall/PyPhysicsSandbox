@@ -58,6 +58,9 @@ class Ball(BaseShape):
         if self.static:
             prefix = 'static_ball'
 
+        if self._cosmetic:
+            prefix = 'cosmetic_ball'
+
         return prefix+': p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), radius: ' + \
             str(self.shape.radius)
 

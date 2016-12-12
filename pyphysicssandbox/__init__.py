@@ -32,7 +32,7 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_clicked',
            'cosmetic_text', 'cosmetic_text_with_font', 'num_shapes',
            'constants', 'deactivate', 'reactivate', 'mouse_point',
            'add_collision', 'slip_motor', 'set_margins', 'cosmetic_box',
-           'cosmetic_rounded_box', 'cosmetic_ball'
+           'cosmetic_rounded_box', 'cosmetic_ball', 'cosmetic_line'
            ]
 
 
@@ -591,13 +591,28 @@ def line(p1, p2, thickness, mass=-1):
     return _line(p1, p2, thickness, mass, False)
 
 
-def _line(p1, p2, thickness, mass, static):
+def cosmetic_line(p1, p2, thickness):
+    """Creates a line segment that does not interact with the simulation in any way.
+
+    :param p1: The starting point of the line segement
+    :type p1: (int, int)
+    :param p2: The ending point of the line segement
+    :type p2: (int, int)
+    :param thickness: The thickness of the line segement
+    :type thickness: int
+    :rtype: shape
+
+    """
+    return _line(p1, p2, thickness, 0, False, True)
+
+
+def _line(p1, p2, thickness, mass, static, cosmetic=False):
     from .line_segment import Line
 
     if mass == -1:
         mass = math.sqrt(math.pow(p1[0]-p2[0], 2)+math.pow(p1[1]-p2[1], 2))*thickness
 
-    result = Line(space, p1, p2, thickness, mass, static)
+    result = Line(space, p1, p2, thickness, mass, static, cosmetic)
     shapes[result.collision_type] = result
 
     return result
