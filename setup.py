@@ -10,5 +10,5 @@ setup(
     download_url = 'https://github.com/jshaffstall/PyPhysicsSandbox/tarball/0.1',
     keywords = ['physics'],
     classifiers = [],
-    requires=['pygame','pymunk'],
+    install_requires = ['pygame','pymunk'],
 )
