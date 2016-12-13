@@ -7,3 +7,6 @@
     * ?
 
 * Generate better documentation than the monolithic readme
+
+* Add normal springs
+
