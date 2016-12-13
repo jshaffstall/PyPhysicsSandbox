@@ -32,11 +32,6 @@ l_flipper = polygon(((l_pos_x+20, l_pos_y-20), (l_pos_x-140, l_pos_y), (l_pos_x+
 l_flipper.color = Color('blue')
 l_flipper.group = 1
 
-# r_flipper_joint_body = pymunk.Body(body_type=pymunk.Body.KINEMATIC)
-# r_flipper_joint_body.position = r_flipper.body.position
-# j = pymunk.PinJoint(r_flipper.body, r_flipper_joint_body, (0,0), (0,0))
-# space.add(j)
-
 r_pivot = pivot((r_pos_x, r_pos_y))
 r_pivot.connect(r_flipper)
 rotary_spring(r_flipper, r_pivot, 0.15, 20000000, 900000)
@@ -44,6 +39,7 @@ rotary_spring(r_flipper, r_pivot, 0.15, 20000000, 900000)
 l_pivot = pivot((l_pos_x, l_pos_y))
 l_pivot.connect(l_flipper)
 rotary_spring(l_flipper, l_pivot, -0.15, 20000000, 900000)
+
 
 def flipper_hit(keys):
     if mouse_clicked():
@@ -69,6 +65,7 @@ def flipper_hit(keys):
 
 
 add_observer(flipper_hit)
+
 
 def ball_flipped(shape1, shape2, p):
     print('Collision')

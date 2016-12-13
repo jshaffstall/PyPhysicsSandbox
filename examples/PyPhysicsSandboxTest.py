@@ -1,41 +1,5 @@
 from pyphysicssandbox import *
 
-# old_active = True
-#
-# def look_for_ball():
-#     global b1
-#     global old_active
-#
-#     if old_active != b1.active and not b1.active:
-#         print ("Goodbye ball!")
-#
-#     old_active = b1.active
-#
-# set_observer(look_for_ball)
-
-# step = 50
-#
-#
-# def look_for_ball():
-#     global step
-#
-#     if step == 0:
-#         marble = ball((390,380),5)
-#         marble.color = Color('black')
-#         marble.hit(-800,-900)
-#         step = 50
-#     else:
-#         step -= 1
-
-# def look_for_ball():
-#     global poly1
-#
-#     if mouse_pressed():
-#         poly1.hit(0,-50)
-#
-
-#set_observer(look_for_ball)
-
 window("My Window", 400, 300)
 gravity(0.0, 500.0)
 

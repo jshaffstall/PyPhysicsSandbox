@@ -18,7 +18,7 @@ def inc_counter(keys):
         text1.text = '*'*counter
         text2.text = '*' * counter
 
-window("Amelia's Test", 300, 600)
+window("Testing cosmetic text", 300, 600)
 add_observer(drop_balls)
 
 counter = 30
