@@ -265,9 +265,9 @@ Creates a triangle out of the given points and returns its instance.
 You can omit the mass parameter and the mass will be set proportional to the area of the shape.
 
 ```python
-poly(vertices, mass)
-static_poly(vertices)
-cosmetic_poly(vertices)
+polygon(vertices, mass)
+static_polygon(vertices)
+cosmetic_polygon(vertices)
 ```
 
 Creates a closed polygon out of the given points and returns its instance.  The last point is automatically connected back to the first point.
