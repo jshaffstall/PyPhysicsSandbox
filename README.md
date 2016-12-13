@@ -9,7 +9,7 @@ Shapes far enough outside the simulation window (generally, above or below by th
 ## Code Example
 
 ```python
-from pyPhysicsSandbox import *
+from pyphysicssandbox import *
 
 window("My Window", 400, 300)
 gravity(0.0, 500.0)
@@ -89,7 +89,7 @@ This library was written with Python 3.5, but should run on any Python 3.  Pytho
 Given a suitable Python 3 installation, you should be able to install pyPhysicsSandbox by opening a command prompt in the Scripts folder of your Python installation and typing:
 
 ```
-pip install pyPhysicsSandbox
+pip install pyphysicssandbox
 ```
 
 ### Dependencies

@@ -1,7 +1,7 @@
 from distutils.core import setup
 setup(
     name = 'pyphysicssandbox',
-    packages = ['pyphysicssandbox', 'py2d'],
+    packages = ['pyphysicssandbox', 'py2d', 'py2d.Math'],
     version = '1.1',
     description = 'A simple Python physics sandbox for intro programming students',
     author = 'Jay Shaffstall',
