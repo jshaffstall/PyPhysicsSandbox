@@ -32,6 +32,8 @@ box1.surface_velocity = (-20, 0)
 tri1 = triangle((260, 35), (250, 35), (240, -15))
 tri1.color = Color('red')
 
+spring((100,10), b1, (98, 100), b2, 20, 20000, 10000)
+
 poly1 = polygon(((195, 35), (245, 35), (220, -15)))
 poly1.color = Color('blue')
 poly1.wrap = True

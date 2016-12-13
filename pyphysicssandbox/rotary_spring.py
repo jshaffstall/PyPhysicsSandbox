@@ -24,7 +24,7 @@ class RotarySpring(BaseShape):
         raise Exception('Do not use draw_on for rotary springs')
 
     def __repr__(self):
-        return 'rotary_spring: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), angle: ' + \
+        return 'rotary_spring: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), rest angle: ' + \
                str(math.degrees(self.shape.rest_angle))
 
 

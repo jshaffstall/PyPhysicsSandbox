@@ -33,7 +33,7 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_clicked',
            'constants', 'deactivate', 'reactivate', 'mouse_point',
            'add_collision', 'slip_motor', 'set_margins', 'cosmetic_box',
            'cosmetic_rounded_box', 'cosmetic_ball', 'cosmetic_line',
-           'cosmetic_polygon', 'cosmetic_triangle'
+           'cosmetic_polygon', 'cosmetic_triangle', 'spring'
            ]
 
 
@@ -723,6 +723,39 @@ def pin(p1, shape1, p2, shape2):
     from .pin_joint import Pin
 
     result = Pin(space, p1, shape1, p2, shape2)
+    shapes[result.collision_type] = result
+
+    return result
+
+
+def spring(p1, shape1, p2, shape2, length, stiffness, damping):
+    """Creates a connection between the shapes at the given positions.
+    Those points on the shapes will remain that same distance apart,
+    regardless of movement or rotation.
+
+    :param p1: The point on the first shape
+    :type p1: (int, int)
+    :param shape1: The first shape to connect via the pin
+    :type shape1: shape
+    :param p2: The point on the second shape
+    :type p2: (int, int)
+    :param shape2: The second shape to connect via the pin
+    :type shape2: shape
+    :param length: The length the spring wants to be
+    :type length: float
+    :param stiffness: The spring constant (Young’s modulus)
+    :type stiffness: float
+    :param damping: How soft to make the damping of the spring
+    :type damping: float
+    :rtype: shape
+
+    """
+    from .spring_joint import Spring
+
+    p1 = (p1[0]-shape1.position[0], p1[1]-shape1.position[1])
+    p2 = (p2[0]-shape2.position[0], p2[1]-shape2.position[1])
+
+    result = Spring(space, p1, shape1, p2, shape2, length, stiffness, damping)
     shapes[result.collision_type] = result
 
     return result

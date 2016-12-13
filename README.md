@@ -331,6 +331,12 @@ Creates a motor to give the shape a constant rotation.  If you want other shapes
 The motor displays as a semicircle with a dot in the direction of rotation.
 
 ```python
+spring(p1, shape1, p2, shape2, length, stiffness, damping)
+```
+
+Creates a spring that connects two shapes at the given points.  The spring wants to remain at the given length, but forces can make it be longer or shorter temporarily. 
+
+```python
 rotary_spring(shape1, shape2, angle, stiffness, damping)
 ```
 
