@@ -70,10 +70,10 @@ pyPhysicsSandbox provides an easy Python interface to a rigid-body physics sandb
 * User Specified Observer Functions
 * Disable Collisions Between Specific Objects
 * Custom Shape Properties - color, friction, gravity, damping, elasticity
-* Allow Objects to Wrap Around the Screen
+* Allow Shapes to Wrap Around the Screen
 * Conveyor Belt Like Behavior
 * Pasting One Shape Onto Another - so they behave as one shape
-* Programmatically Hit Shapes
+* Hit shapes in a specific direction with a given force
 * Handles Thousands of Shapes
 
 ## Installation
