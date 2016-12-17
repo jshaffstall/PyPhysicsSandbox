@@ -1,11 +1,11 @@
 """
-An example of using pin joints.  A screencast showing the development
+An example of using pivot joints.  A screencast showing the development
 of this example can be found at:
 """
 
 from pyphysicssandbox import *
 
-window("Pin Joints", 300, 300)
+window("Pivot Joints", 300, 300)
 
 arm1 = box((100, 50), 100, 10, 100)
 arm1.color = Color("yellow")
