@@ -1,8 +1,10 @@
 ## Synopsis
 
-pyPhysicsSandbox is a simple wrapper around Pymunk that makes it easy to write code to explore physics simulations. It's intended for use in introductory programming classrooms.
+pyPhysicsSandbox is a simple wrapper around Pymunk that makes it easy to write code to explore 2D physics simulations. It's intended for use in introductory programming classrooms.
 
 Caution! The simulation does not behave well if you start out with shapes overlapping each other, especially if overlapping shapes are connected with joints.  To have overlapping shapes connected by joints, set the group on each shape to the same number to disable collision detection between those shape.
+
+On the other hand, see the volcano example for a situation where overlapping shapes that collide with each other are useful.
 
 Shapes far enough outside the simulation window (generally, above or below by the height of the window, or to either side by the width of the window) are automatically removed from the simulation and their active property set to False.  The distance can be modified, but be wary of making it too large...this keeps shapes that are not visible in the simulation and can slow the simulation down if the number of shapes grows too large.
 
