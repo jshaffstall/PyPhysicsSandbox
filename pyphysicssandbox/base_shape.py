@@ -1,5 +1,6 @@
 import pygame
 import pymunk
+import math
 
 from pyphysicssandbox import pin
 from pyphysicssandbox import win_width
@@ -118,6 +119,13 @@ class BaseShape:
             return self.body.angle
 
         return 0.0
+
+    @angle.setter
+    def angle(self, value):
+        if type(value) == float or type(value) == int:
+            self.body.angle = math.radians(value)
+        else:
+            print("Angle value must be a number")
 
     @property
     def debug(self):

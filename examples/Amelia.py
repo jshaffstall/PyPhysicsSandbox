@@ -40,9 +40,10 @@ ball2.color = Color("green")
 ball2.draw_radius_line = True
 ball2.wrap = True
 
-for i in range(1000):
+for i in range(9000):
     ball3 = ball((random.randint(0, WIN_WIDTH), random.randint(0, WIN_HT)), 5)
     ball3.color = Color(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+    #ball3.wrap = True
 
 gear(arm1, arm3)
 motor = motor(arm1, -3)

@@ -76,6 +76,10 @@ pyPhysicsSandbox provides an easy Python interface to a rigid-body physics sandb
 * Hit shapes in a specific direction with a given force
 * Handles Thousands of Shapes
 
+## Tutorials
+
+Screencasts highlighting various features of the sandbox are available on the YouTube channel: https://www.youtube.com/channel/UCybNk1XwGtiPyiLVitMFmsQ
+
 ## Installation
 
 ###Python 3
@@ -381,6 +385,12 @@ shape.color=Color('blue')
 ```
 
 Sets the color for the shape.  The value must be a pygame Color instance.  The default color is black.
+
+```python
+shape.angle=90
+```
+
+Sets the angle for the shape.  Can be used to start shapes off rotated.
 
 ```python
 shape.elasticity=0.0

@@ -34,11 +34,11 @@ l_flipper.group = 1
 
 r_pivot = pivot((r_pos_x, r_pos_y))
 r_pivot.connect(r_flipper)
-rotary_spring(r_flipper, r_pivot, 0.15, 20000000, 900000)
+rotary_spring(r_flipper, r_pivot, -0.15, 20000000, 900000)
 
 l_pivot = pivot((l_pos_x, l_pos_y))
 l_pivot.connect(l_flipper)
-rotary_spring(l_flipper, l_pivot, -0.15, 20000000, 900000)
+rotary_spring(l_flipper, l_pivot, 0.15, 20000000, 900000)
 
 
 def flipper_hit(keys):
