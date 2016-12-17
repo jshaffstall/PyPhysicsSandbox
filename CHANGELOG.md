@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+## [1.3.1] - 2016-12-13
+### Added
+
+* Exposed angle property of shapes
+* Added Hello World example
+
 ## [1.3.0] - 2016-12-13
 ### Added
 
