@@ -78,7 +78,7 @@ pyPhysicsSandbox provides an easy Python interface to a rigid-body physics sandb
 
 ## Tutorials
 
-Screencasts highlighting various features of the sandbox are available on the YouTube channel: https://www.youtube.com/channel/UCybNk1XwGtiPyiLVitMFmsQ
+Screencasts highlighting various features of the sandbox are available on the [YouTube channel](https://www.youtube.com/channel/UCybNk1XwGtiPyiLVitMFmsQ)
 
 ## Installation
 
