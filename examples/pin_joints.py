@@ -1,9 +1,11 @@
+"""
+An example of using pin joints.  A screencast showing the development
+of this example can be found at:
+"""
+
 from pyphysicssandbox import *
 
-WIN_WIDTH = 690
-WIN_HT = 300
-window("Car Test", WIN_WIDTH, WIN_HT)
-gravity(0, 900)
+window("Pin Joints", 690, 300)
 
 # floor
 base = static_line((-100, 300), (1000, 220), 5)
