@@ -7,6 +7,7 @@ from pyphysicssandbox import *
 
 window('Motors', 300, 300)
 gravity(0, 0)
+#gravity(0, 200)
 
 wheel = ball((100, 100), 25)
 wheel.color = Color('blue')
@@ -23,5 +24,7 @@ motor(tri1, -3)
 odd_shape = polygon(((200, 200), (185, 210), (170, 180), (210, 150)))
 odd_shape.color = Color('green')
 motor(odd_shape, 8)
+
+#floor = static_box((0, 290), 300, 10)
 
 run()
