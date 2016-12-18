@@ -1,6 +1,6 @@
 """
 An example of using pivot joints.  A screencast showing the development
-of this example can be found at:
+of this example can be found at: http://youtu.be/k0EgioeURr0?hd=1
 """
 
 from pyphysicssandbox import *
