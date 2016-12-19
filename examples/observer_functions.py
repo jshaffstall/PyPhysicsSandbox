@@ -1,6 +1,6 @@
 """
 An example of using observer functions.  The screencast developing this code can be found
-here:
+here: http://youtu.be/XOQgwFivgR0?hd=1
 
 Observer functions execute each time step.  The simulation runs at about 50 time steps per
 second.
