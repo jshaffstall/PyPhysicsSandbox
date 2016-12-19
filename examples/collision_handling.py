@@ -1,6 +1,6 @@
 """
 An example of collision handling.  The screencast developing this code can be found
-here:
+here: http://youtu.be/k3BR0qsB30E?hd=1
 """
 
 from pyphysicssandbox import *
