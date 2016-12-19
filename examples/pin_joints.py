@@ -1,6 +1,6 @@
 """
 An example of using pin joints.  A screencast showing the development
-of this example can be found at:
+of this example can be found at: http://youtu.be/Hq3y-ah6Lk0?hd=1
 """
 
 from pyphysicssandbox import *
