@@ -1,6 +1,9 @@
 """
 An example of using observer functions.  The screencast developing this code can be found
 here:
+
+Observer functions execute each time step.  The simulation runs at about 50 time steps per
+second.
 """
 
 from pyphysicssandbox import *
