@@ -116,14 +116,14 @@ class BaseShape:
     @property
     def angle(self):
         if self.body:
-            return self.body.angle
+            return -self.body.angle
 
         return 0.0
 
     @angle.setter
     def angle(self, value):
         if type(value) == float or type(value) == int:
-            self.body.angle = math.radians(value)
+            self.body.angle = math.radians(-value)
         else:
             print("Angle value must be a number")
 

@@ -42,4 +42,4 @@ class SlipMotor(Motor):
 
     def __repr__(self):
         return 'slip motor: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), rest angle: ' + \
-               str(self._rest_angle) + 'slip angle ' + str(self._slip_angle)
+               str(-self._rest_angle) + 'slip angle ' + str(-self._slip_angle)

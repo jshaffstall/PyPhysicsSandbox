@@ -27,7 +27,7 @@ class Text(Box):
 
     def _draw(self, screen):
         degrees = math.degrees(self.angle)
-        rotated = pygame.transform.rotate(self.label, -degrees)
+        rotated = pygame.transform.rotate(self.label, degrees)
 
         size = rotated.get_rect()
         screen.blit(rotated, (self.position.x-(size.width/2), self.position.y-(size.height/2)))
