@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+* API now takes in counterclockwise angles and converts them to the clockwise angles the physics engine expects
+
 ## [1.3.1] - 2016-12-13
 ### Added
 
