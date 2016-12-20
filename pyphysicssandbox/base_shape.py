@@ -116,7 +116,7 @@ class BaseShape:
     @property
     def angle(self):
         if self.body:
-            return -self.body.angle
+            return -math.degrees(self.body.angle)
 
         return 0.0
 

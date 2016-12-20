@@ -14,8 +14,8 @@ class SlipMotor(Motor):
         super().__init__(space, shape1, speed)
 
         self._spring = RotarySpring(space, shape1, shape2, rest_angle, stiffness, damping)
-        self._slip_angle = slip_angle
-        self._rest_angle = rest_angle
+        self._slip_angle = -slip_angle
+        self._rest_angle = -rest_angle
 
     def observer(self, keys):
         super().observer(keys)
@@ -42,4 +42,4 @@ class SlipMotor(Motor):
 
     def __repr__(self):
         return 'slip motor: p(' + str(self.body.position.x) + ',' + str(self.body.position.y) + '), rest angle: ' + \
-               str(-self._rest_angle) + 'slip angle ' + str(-self._slip_angle)
+               str(-self._rest_angle) + ' slip angle ' + str(-self._slip_angle)
