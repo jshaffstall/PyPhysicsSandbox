@@ -17,6 +17,5 @@ pivot1.connect(arm1)
 # Play with the stiffness and damping values to get
 # different behaviors of the spring attached to the motor
 slip_motor(arm1, pivot1, 45, 20000000, 900000, -45, 3).debug = True
-arm1.debug = True
 
 run()

@@ -77,6 +77,7 @@ pyPhysicsSandbox provides an easy Python interface to a rigid-body physics sandb
 * Pasting One Shape Onto Another - so they behave as one shape
 * Hit shapes in a specific direction with a given force
 * Handles Thousands of Shapes
+* Built in debug output that can be turned on for individual shapes
 
 ## Tutorials
 
