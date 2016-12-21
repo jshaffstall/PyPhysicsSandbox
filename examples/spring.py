@@ -1,6 +1,6 @@
 """
 An example of using springs on shapes.  The screencast developing this code can be found
-here:
+here: http://youtu.be/ohSsodGpbj4?hd=1
 """
 
 from pyphysicssandbox import *
