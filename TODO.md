@@ -16,12 +16,3 @@
 - misc shape stuff: debug flag, hit method, conveyer belts, paste_on
 - large number of shapes example
 
-* Text drawing when combined with paste_on seems wonky.  Actual
-  angle of the box the text is drawn in seems okay, must be a translation
-  problem between pymunk and pygame.
-
-  Confirmed, drawing at angles of 1, 2, 3, etc produces radical shifts
-  in the angle the text is drawn at.
-
-  Seems to be a bug in the angle property introduced during the shift
-  to counter clockwise angles.

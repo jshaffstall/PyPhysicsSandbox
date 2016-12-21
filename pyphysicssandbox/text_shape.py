@@ -26,7 +26,7 @@ class Text(Box):
         self.label = self.font.render(self.caption, True, self.color)
 
     def _draw(self, screen):
-        degrees = -math.degrees(self.angle)
+        degrees = self.angle
         rotated = pygame.transform.rotate(self.label, degrees)
 
         size = rotated.get_rect()
