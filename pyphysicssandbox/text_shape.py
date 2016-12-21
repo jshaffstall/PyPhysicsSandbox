@@ -26,7 +26,7 @@ class Text(Box):
         self.label = self.font.render(self.caption, True, self.color)
 
     def _draw(self, screen):
-        degrees = math.degrees(self.angle)
+        degrees = -math.degrees(self.angle)
         rotated = pygame.transform.rotate(self.label, degrees)
 
         size = rotated.get_rect()
@@ -41,7 +41,9 @@ class Text(Box):
         if self._cosmetic:
             prefix = 'cosmetic_box'
 
-        return prefix+': p(' + str(self.x) + ',' + str(self.y) + '), caption: ' + self.caption
+        return prefix+': p(' + str(self.position[0]) + ',' + str(self.position[1]) + '), caption: ' + self.caption + \
+                        ', angle: ' + str(self.angle)
+
 
     @property
     def text(self):

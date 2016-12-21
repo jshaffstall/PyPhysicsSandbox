@@ -28,6 +28,8 @@ class Pin(BaseShape):
         p2 = self.shape.b.local_to_world(self.shape.anchor_b)
 
         pygame.draw.line(screen, self.color, p1, p2, 1)
+        pygame.draw.circle(screen, self.color, (int(p1[0]), int(p1[1])), 2)
+        pygame.draw.circle(screen, self.color, (int(p2[0]), int(p2[1])), 2)
 
     def _pin_points(self):
         raise Exception('Do not use paste_on for pins')
