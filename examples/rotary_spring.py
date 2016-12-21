@@ -1,6 +1,6 @@
 """
 An example of using rotary springs.  The screencast developing this code can be found
-here:
+here: http://youtu.be/4Fpp8Y5g-dQ?hd=1
 """
 
 from pyphysicssandbox import *
