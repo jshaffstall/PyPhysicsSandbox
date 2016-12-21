@@ -11,3 +11,7 @@
 
 * Text should draw in color
 
+* Screencasts
+- volcano example
+- misc shape stuff: debug flag, hit method, conveyer belts, paste_on
+- large number of shapes example
