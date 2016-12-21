@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 ### Added
 
+* Shape methods and properties example
+
 ### Changed
+
+* Text now properly draws in color
 
 ## [1.3.2] - 2016-12-20
 ### Added

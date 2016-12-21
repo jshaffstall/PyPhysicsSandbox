@@ -44,6 +44,10 @@ class Text(Box):
         return prefix+': p(' + str(self.position[0]) + ',' + str(self.position[1]) + '), caption: ' + self.caption + \
                         ', angle: ' + str(self.angle)
 
+    @BaseShape.color.setter
+    def color(self, value):
+        BaseShape.color.fset(self, value)
+        self.label = self.font.render(self.caption, True, self.color)
 
     @property
     def text(self):
