@@ -2,6 +2,13 @@
 A simple example that shows how shapes initially placed overlapping will
 try to move so they are not overlapping.  In this case we put too many
 balls into a very small area and let them find their way out.
+
+Note that we need to shift placement of the balls around a small area to
+get uniform expansion when the simulation starts.  Putting them all on the
+exact same spot expands them only in a horizontal line.
+
+The screencast developing this code can be found here:
+
 """
 from pyphysicssandbox import *
 import random
