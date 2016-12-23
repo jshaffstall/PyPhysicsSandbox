@@ -8,7 +8,7 @@ get uniform expansion when the simulation starts.  Putting them all on the
 exact same spot expands them only in a horizontal line.
 
 The screencast developing this code can be found here:
-
+http://youtu.be/F8qSSoBz_o8?hd=1
 """
 from pyphysicssandbox import *
 import random

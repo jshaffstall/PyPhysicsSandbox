@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 ### Added
 
+* Lots of shapes example
+
 ### Changed
 
 ## [1.3.3] - 2016-12-??
