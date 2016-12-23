@@ -1,6 +1,6 @@
 """
 An example of using shape methods and properties.  The screencast developing this code can be found
-here:
+here: http://youtu.be/_eyE4xX_Gi8?hd=1
 """
 
 from pyphysicssandbox import *
