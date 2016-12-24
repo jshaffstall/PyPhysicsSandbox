@@ -1,6 +1,6 @@
 """
 An example of a simulation using lots of shapes.  The screencast developing this code can be found
-here:
+here: http://youtu.be/OrifB0AbxUU?hd=1
 """
 
 from pyphysicssandbox import *

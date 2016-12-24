@@ -11,7 +11,3 @@
 
   Or, document set_margins if that's the way to set them.
 
-* Screencasts
-- volcano example
-- large number of shapes example
-
