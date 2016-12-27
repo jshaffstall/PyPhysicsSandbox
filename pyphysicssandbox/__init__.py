@@ -33,7 +33,8 @@ __all__ = ['window', 'add_observer', 'gravity', 'resistance', 'mouse_clicked',
            'constants', 'deactivate', 'reactivate', 'mouse_point',
            'add_collision', 'slip_motor', 'set_margins', 'cosmetic_box',
            'cosmetic_rounded_box', 'cosmetic_ball', 'cosmetic_line',
-           'cosmetic_polygon', 'cosmetic_triangle', 'spring'
+           'cosmetic_polygon', 'cosmetic_triangle', 'spring',
+           'color'
            ]
 
 
@@ -50,6 +51,7 @@ x_margin = win_width
 y_margin = win_height
 observers = []
 clicked = False
+default_color = Color('black')
 
 shapes = {}
 
@@ -134,6 +136,23 @@ def gravity(x, y):
 
     """
     space.gravity = (x, y)
+
+
+def color(c):
+    """Sets the default color to use for shapes created after this
+    call.  The function may be called at any point to change the
+    color for new shapes.
+
+    To see available color names go to
+    https://sites.google.com/site/meticulosslacker/pygame-thecolors
+    and hover the mouse pointer over a color of interest.
+
+    :param c: the color name as a string
+    :type c: str
+    """
+    global default_color
+
+    default_color = Color(c)
 
 
 def resistance(v):
@@ -223,6 +242,7 @@ def _ball(p, radius, mass, static=False, cosmetic=False):
         mass = math.pi*radius*radius
 
     result = Ball(space, p[0], p[1], radius, mass, static, cosmetic)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -286,6 +306,7 @@ def _box(p, width, height, mass, static, radius=0, cosmetic=False):
     y = p[1] + height / 2
 
     result = Box(space, x, y, width, height, radius, mass, static, cosmetic)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -391,6 +412,7 @@ def _polygon(vertices, mass, static, cosmetic=False):
 
     vertices = [(v[0] - x, v[1] - y) for v in vertices]
     result = Poly(space, x, y, vertices, 0, mass, static, cosmetic)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -459,6 +481,7 @@ def _triangle(p1, p2, p3, mass, static, cosmetic=False):
         mass = poly_area(vertices)
 
     result = Poly(space, x, y, vertices, 0, mass, static, cosmetic)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -515,6 +538,7 @@ def _text(p, caption, mass, static, cosmetic=False):
         mass = 10 * len(caption)
 
     result = Text(space, p[0], p[1], caption, "Arial", 12, mass, static, cosmetic)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -581,6 +605,7 @@ def _text_with_font(p, caption, font, size, mass, static, cosmetic=False):
         mass = 10 * len(caption)
 
     result = Text(space, p[0], p[1], caption, font, size, mass, static, cosmetic)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -640,6 +665,7 @@ def _line(p1, p2, thickness, mass, static, cosmetic=False):
         mass = math.sqrt(math.pow(p1[0]-p2[0], 2)+math.pow(p1[1]-p2[1], 2))*thickness
 
     result = Line(space, p1, p2, thickness, mass, static, cosmetic)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -658,6 +684,7 @@ def pivot(p):
     from .pivot_joint import Pivot
 
     result = Pivot(space, p[0], p[1])
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -678,6 +705,7 @@ def gear(shape1, shape2):
     from .gear_joint import Gear
 
     result = Gear(space, shape1, shape2)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -699,6 +727,7 @@ def motor(shape1, speed=5):
     from .motor_joint import Motor
 
     result = Motor(space, shape1, speed)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -723,6 +752,7 @@ def pin(p1, shape1, p2, shape2):
     from .pin_joint import Pin
 
     result = Pin(space, p1, shape1, p2, shape2)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -756,6 +786,7 @@ def spring(p1, shape1, p2, shape2, length, stiffness, damping):
     p2 = (p2[0]-shape2.position[0], p2[1]-shape2.position[1])
 
     result = Spring(space, p1, shape1, p2, shape2, length, stiffness, damping)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -787,6 +818,7 @@ def slip_motor(shape1, shape2, rest_angle, stiffness, damping, slip_angle, speed
     from .slip_motor import SlipMotor
 
     result = SlipMotor(space, shape1, shape2, rest_angle, stiffness, damping, slip_angle, speed)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result
@@ -815,6 +847,7 @@ def rotary_spring(shape1, shape2, angle, stiffness, damping):
     from .rotary_spring import RotarySpring
 
     result = RotarySpring(space, shape1, shape2, angle, stiffness, damping)
+    result.color = default_color
     shapes[result.collision_type] = result
 
     return result

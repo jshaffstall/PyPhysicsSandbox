@@ -11,6 +11,4 @@
 
   Or, document set_margins if that's the way to set them.
 
-* Add a color function to set the default color with which shapes are drawn.  This would 
-  make it easier for very early drawing assignments.
 

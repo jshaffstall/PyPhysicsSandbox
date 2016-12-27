@@ -117,6 +117,14 @@ window(caption, width, height)
 Specifies the width and height and caption of the simulation window.  Multiple calls to this overwrite the old values.  You only get one window regardless.
 
 ```python
+color(v)
+```
+
+Sets the default color for shapes drawn after this function is called.  Color must be a string containing a valid color name.
+
+See https://sites.google.com/site/meticulosslacker/pygame-thecolors for a list of colors. Hover your mouse over a color to see its name.
+
+```python
 gravity(x, y)
 ```
 
