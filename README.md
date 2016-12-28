@@ -72,6 +72,7 @@ pyPhysicsSandbox provides an easy Python interface to a rigid-body physics sandb
 * User Specified Observer Functions
 * Disable Collisions Between Specific Objects
 * Custom Shape Properties - color, friction, gravity, damping, elasticity
+* Set shapes to constant velocities
 * Allow Shapes to Wrap Around the Screen
 * Conveyor Belt Like Behavior
 * Pasting One Shape Onto Another - so they behave as one shape
@@ -426,6 +427,14 @@ shape.friction=0.95
 ```
 
 Sets how much friction the object should have.  The default is 0.6.  The Wikipedia article on friction has examples of values for different materials: https://en.wikipedia.org/wiki/Friction
+
+```python
+shape.velocity=(200,0)
+```
+
+Sets a constant velocity for the shape.  The shape will still interact with other shapes, but will always move in the given direction.
+
+To disable a constant velocity and return the shape to reacting to gravity normally, set the velocity to None.
 
 ```python
 shape.surface_velocity=(200,0)

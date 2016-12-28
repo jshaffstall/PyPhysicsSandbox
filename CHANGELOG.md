@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 * Lots of shapes example
 * Drawing example
 * Function for changing default color of shapes
+* Ability to set constant velocity for shapes
 
 ### Changed
 
