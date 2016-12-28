@@ -330,10 +330,12 @@ Creates a gear joint connecting the two shapes.  A gear joint keeps the angle of
 Note that the gear has no visible representation in the simulation.
 
 ```python
-motor(shape1, radians)
+motor(shape1, speed)
 ```
 
-Creates a motor to give the shape a constant rotation.  If you want other shapes to also rotate at the same rate, use a gear joint to connect them to the shape with the motor.
+Creates a motor to give the shape a constant rotation. The direction of rotation is controlled by the sign of the speed.  Positive speed is clockwise, negative speed is counter-clockwise.
+
+If you want other shapes to also rotate at the same rate, use a gear joint to connect them to the shape with the motor.
 
 The motor displays as a semicircle with a dot in the direction of rotation.
 
