@@ -349,8 +349,8 @@ class BaseShape:
             print("Velocity value must be an x,y tuple")
 
 def adjust_velocity(body, gravity, damping, dt):
-    # if body.constant_velocity:
-    #     body.velocity = body.constant_velocity
-    #     return
+    if body.constant_velocity:
+        body.velocity = body.constant_velocity
+        return
 
     return body.update_velocity(body, body.custom_gravity, body.custom_damping, dt)
