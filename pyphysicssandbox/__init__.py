@@ -914,6 +914,21 @@ def handle_collision(arbiter, space, data):
 
     return data['handler'](shape1, shape2, p)
 
+def _calc_margins():
+    global x_margin
+    global y_margin
+
+    for shape in shapes:
+        x, y = shapes[shape].position
+        x = abs(x)
+        y = abs(y)
+
+        if x_margin < x:
+            x_margin = x
+
+        if y_margin < y:
+            y_margin = y
+
 
 def run(do_physics=True):
     """Call this after you have created all your shapes to actually run the simulation.
@@ -926,6 +941,8 @@ def run(do_physics=True):
     :type do_physics: bool
     """
     global clicked
+
+    _calc_margins()
 
     screen = pygame.display.set_mode((win_width, win_height))
     pygame.display.set_caption(win_title)

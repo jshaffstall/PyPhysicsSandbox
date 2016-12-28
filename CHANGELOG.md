@@ -4,11 +4,22 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 ### Added
 
+### Changed
+
+## [1.4.0] - 2016-12-??
+### Added
+
 * Lots of shapes example
+* Drawing example
+* Function for changing default color of shapes
 
 ### Changed
 
-## [1.3.3] - 2016-12-??
+* Improved handling of shapes that start outside the simulation
+* Documented set_margins
+* Sandbox now calculates larger margins if shapes start outside of those already set
+
+## [1.3.3] - 2016-12-24
 ### Added
 
 * Shape methods and properties example

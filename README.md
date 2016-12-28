@@ -117,6 +117,16 @@ window(caption, width, height)
 Specifies the width and height and caption of the simulation window.  Multiple calls to this overwrite the old values.  You only get one window regardless.
 
 ```python
+set_margins(x, y)
+```
+
+Sets the minimum distance outside the visible window a shape can be and still be in the simulation.  Outside of this distance the shape is deactivated.  The default x margin is the window's width and the default y margin is the window's height.
+
+Note that if you create a shape and give it an initial position outside these margins, the simulation will expand the margins to include the shape.
+
+Use set_margins to increase the y margin particularly if you expect a shape on screen to be fired high above the top of the screen.
+
+```python
 color(v)
 ```
 
