@@ -353,4 +353,4 @@ def adjust_velocity(body, gravity, damping, dt):
         body.velocity = body.constant_velocity
         return
 
-    return body.update_velocity(body, body.custom_gravity, body.custom_damping, dt)
+    return body.update_velocity(body, body.custom_gravity, pow(body.custom_damping, dt), dt)
