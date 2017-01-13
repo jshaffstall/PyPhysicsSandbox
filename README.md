@@ -44,6 +44,12 @@ My introductory programming students love writing physics simulations, but the p
 
 Also, being IDE agnostic, this library can be used with your favorite IDE.
 
+## In Use At
+
+If you use PyPhysicsSandbox, let me know where and I'll add you here.
+
+[Muskingum University](http://muskingum.edu/) for their Intro to Computer Science course
+
 ## Summary of Features
 
 pyPhysicsSandbox provides an easy Python interface to a rigid-body physics sandbox.  Features include:
