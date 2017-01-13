@@ -72,6 +72,7 @@ pyPhysicsSandbox provides an easy Python interface to a rigid-body physics sandb
 * User Specified Observer Functions
 * Disable Collisions Between Specific Objects
 * Custom Shape Properties - color, friction, gravity, damping, elasticity
+* Set shapes to constant velocities
 * Allow Shapes to Wrap Around the Screen
 * Conveyor Belt Like Behavior
 * Pasting One Shape Onto Another - so they behave as one shape
@@ -115,6 +116,24 @@ window(caption, width, height)
 ```
 
 Specifies the width and height and caption of the simulation window.  Multiple calls to this overwrite the old values.  You only get one window regardless.
+
+```python
+set_margins(x, y)
+```
+
+Sets the minimum distance outside the visible window a shape can be and still be in the simulation.  Outside of this distance the shape is deactivated.  The default x margin is the window's width and the default y margin is the window's height.
+
+Note that if you create a shape and give it an initial position outside these margins, the simulation will expand the margins to include the shape.
+
+Use set_margins to increase the y margin particularly if you expect a shape on screen to be fired high above the top of the screen.
+
+```python
+color(v)
+```
+
+Sets the default color for shapes drawn after this function is called.  Color must be a string containing a valid color name.
+
+See https://sites.google.com/site/meticulosslacker/pygame-thecolors for a list of colors. Hover your mouse over a color to see its name.
 
 ```python
 gravity(x, y)
@@ -408,6 +427,14 @@ shape.friction=0.95
 ```
 
 Sets how much friction the object should have.  The default is 0.6.  The Wikipedia article on friction has examples of values for different materials: https://en.wikipedia.org/wiki/Friction
+
+```python
+shape.velocity=(200,0)
+```
+
+Sets a constant velocity for the shape.  The shape will still interact with other shapes, but will always move in the given direction.
+
+To disable a constant velocity and return the shape to reacting to gravity normally, set the velocity to None.
 
 ```python
 shape.surface_velocity=(200,0)

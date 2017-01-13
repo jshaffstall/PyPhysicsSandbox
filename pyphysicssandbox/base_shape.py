@@ -21,6 +21,7 @@ class BaseShape:
         else:
             self.body.custom_gravity = space.gravity
             self.body.custom_damping = space.damping
+            self.body.constant_velocity = None
 
         self.elasticity = 0.90
         self.friction = 0.6
@@ -329,6 +330,27 @@ class BaseShape:
         else:
             print("Damping value must be a float")
 
+    @property
+    def velocity(self):
+        if self._cosmetic:
+            return 0, 0
+
+        return self.body.custom_velocity
+
+    @velocity.setter
+    def velocity(self, value):
+        if self._cosmetic:
+            return
+
+        if type(value) == tuple and len(value) == 2:
+            self.body.constant_velocity = value
+            self._check_velocity_func()
+        else:
+            print("Velocity value must be an x,y tuple")
 
 def adjust_velocity(body, gravity, damping, dt):
-    return body.update_velocity(body, body.custom_gravity, body.custom_damping, dt)
+    if body.constant_velocity:
+        body.velocity = body.constant_velocity
+        return
+
+    return body.update_velocity(body, body.custom_gravity, pow(body.custom_damping, dt), dt)
