@@ -1,11 +1,6 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
-### Added
-
-### Changed
-
 ## [1.4.0] - 2016-12-??
 ### Added
 
