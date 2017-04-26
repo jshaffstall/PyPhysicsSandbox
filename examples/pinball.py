@@ -70,5 +70,7 @@ add_observer(flipper_hit)
 def ball_flipped(shape1, shape2, p):
     print('Collision')
 
+    return True
+
 run()
 
