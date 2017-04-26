@@ -595,7 +595,7 @@ def cosmetic_text_with_font(p, caption, font, size):
     :rtype: shape
 
     """
-    return _text(p, caption, font, size, 0, False, True)
+    return _text_with_font(p, caption, font, size, 0, False, True)
 
 
 def _text_with_font(p, caption, font, size, mass, static, cosmetic=False):
