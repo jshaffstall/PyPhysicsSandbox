@@ -15,6 +15,8 @@ import random
 
 window("A tiny volcano", 400, 400)
 
+cosmetic_text_with_font((125, 50), "A Volcano!", "Arial", 36)
+
 static_line((225, 400), (175, 400), 15).color=Color('grey')
 static_line((225, 400), (225, 300), 15).color=Color('grey')
 static_line((175, 300), (175, 400), 15).color=Color('grey')
