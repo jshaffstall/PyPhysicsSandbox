@@ -92,7 +92,7 @@ Screencasts highlighting various features of the sandbox are available on the [P
 
 ## Installation
 
-###Python 3
+### Python 3
 
 https://www.python.org/
 
