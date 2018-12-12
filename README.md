@@ -49,6 +49,7 @@ Also, being IDE agnostic, this library can be used with your favorite IDE.
 If you use PyPhysicsSandbox, let me know where and I'll add you here.
 
 [Muskingum University](http://muskingum.edu/) for their Intro to Computer Science course
+John Glenn High School for their after school coding club
 
 ## Summary of Features
 
