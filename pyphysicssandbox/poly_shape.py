@@ -27,7 +27,7 @@ class Poly(BaseShape):
                 shapes.append(pymunk.Poly(self.body, poly.as_tuple_list(), None, radius))
 
             self.shape = shapes
-            space.add(self.body, self.shape)
+            space.add(self.body, *self.shape)
 
         self.radius = radius
         self._x = x
