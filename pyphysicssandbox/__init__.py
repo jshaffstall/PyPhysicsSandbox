@@ -204,7 +204,7 @@ def static_ball(p, radius):
     :rtype: shape
 
     """
-    return _ball(p, radius, pymunk.inf, True)
+    return _ball(p, radius, 0, True)
 
 
 def ball(p, radius, mass=-1):
@@ -260,7 +260,7 @@ def static_box(p, width, height):
     :rtype: shape
 
     """
-    return _box(p, width, height, pymunk.inf, True)
+    return _box(p, width, height, 0, True)
 
 
 def box(p, width, height, mass=-1):
@@ -326,7 +326,7 @@ def static_rounded_box(p, width, height, radius):
     :rtype: shape
 
     """
-    return _box(p, width, height, pymunk.inf, True, radius)
+    return _box(p, width, height, 0, True, radius)
 
 
 def rounded_box(p, width, height, radius, mass=-1):
@@ -373,7 +373,7 @@ def static_polygon(vertices):
     :rtype: shape
 
     """
-    return _polygon(vertices, pymunk.inf, True)
+    return _polygon(vertices, 0, True)
 
 
 def polygon(vertices, mass=-1):
@@ -430,7 +430,7 @@ def static_triangle(p1, p2, p3):
     :rtype: shape
 
     """
-    return _triangle(p1, p2, p3, pymunk.inf, True)
+    return _triangle(p1, p2, p3, 0, True)
 
 
 def triangle(p1, p2, p3, mass=-1):
@@ -498,7 +498,7 @@ def static_text(p, caption):
     :rtype: shape
 
     """
-    return _text(p, caption, pymunk.inf, True)
+    return _text(p, caption, 0, True)
 
 
 def text(p, caption, mass=-1):
@@ -558,7 +558,7 @@ def static_text_with_font(p, caption, font, size):
     :rtype: shape
 
     """
-    return _text_with_font(p, caption, font, size, pymunk.inf, True)
+    return _text_with_font(p, caption, font, size, 0, True)
 
 
 def text_with_font(p, caption, font, size, mass=-1):
@@ -623,7 +623,7 @@ def static_line(p1, p2, thickness):
     :rtype: shape
 
     """
-    return _line(p1, p2, thickness, pymunk.inf, True)
+    return _line(p1, p2, thickness, 0, True)
 
 
 def line(p1, p2, thickness, mass=-1):
