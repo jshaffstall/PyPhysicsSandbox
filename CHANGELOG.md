@@ -1,6 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.4] - 2023-04-13
+### Added
+
+* Can now set shape x and y directly, not just through position (e.g. shape.x = 10)
+
+### Changed
+
+* Elasticity may now be an int
+* Setting velocity should now work
+* Setting the position of cosmetic shapes works correctly
+* Static shapes now respect their rotation and movement for collisions
+
 ## [1.4.0] - 2017-01-12
 ### Added
 

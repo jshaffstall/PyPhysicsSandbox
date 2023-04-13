@@ -125,6 +125,7 @@ class BaseShape:
     def angle(self, value):
         if type(value) == float or type(value) == int:
             self.body.angle = math.radians(-value)
+            space.reindex_shape(self.shape)
         else:
             print("Angle value must be a number")
 
@@ -140,20 +141,57 @@ class BaseShape:
             print("Debug value must be a boolean")
 
     @property
+    def x(self):
+        if self.body:
+            return self.body.position[0]
+
+        return self._x
+
+    @property
+    def y(self):
+        if self.body:
+            return self.body.position[1]
+
+        return self._y
+
+    @property
     def position(self):
         if self.body:
             return self.body.position
 
         return pymunk.vec2d.Vec2d(self._x, self._y)
 
+    @x.setter
+    def x(self, value):
+        if type(value) == int:
+            if self.body:
+                self.body.position = (value, self.body.position[1])
+                space.reindex_shape(self.shape)
+            else:
+                self._x = value
+        else:
+            print("X value must be an int")
+
+    @y.setter
+    def y(self, value):
+        if type(value) == int:
+            if self.body:
+                self.body.position = (self.body.position[0], value)
+                space.reindex_shape(self.shape)
+            else:
+                self._y = value
+        else:
+            print("Y value must be an int")
+
     @position.setter
     def position(self, value):
         if type(value) == tuple and len(value) == 2:
             if self.body:
                 self.body.position = value
+                space.reindex_shape(self.shape)
             else:
-                self._x = value.x
-                self._y = value.y
+                self._x = value[0]
+                self._y = value[1]
         else:
             print("Position value must be a (x, y) tuple")
 
@@ -184,6 +222,9 @@ class BaseShape:
 
     @elasticity.setter
     def elasticity(self, value):
+        if type(value) == int:
+            value = float(value)
+
         if type(value) == float:
             if type(self.shape) is list:
                 for shape in self.shape:
@@ -335,7 +376,7 @@ class BaseShape:
         if self._cosmetic:
             return 0, 0
 
-        return self.body.custom_velocity
+        return self.body.velocity
 
     @velocity.setter
     def velocity(self, value):
