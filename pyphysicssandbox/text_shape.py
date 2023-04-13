@@ -71,7 +71,7 @@ class Text(Box):
                     body = pymunk.Body(self.body.mass, moment)
 
                 body.position = self.position
-                shape = pymunk.Poly.create_box(self.body, (width, height), self.radius)
+                shape = pymunk.Poly.create_box(body, (width, height), self.radius)
                 self.width = width
                 self.height = height
 
