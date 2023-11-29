@@ -325,6 +325,8 @@ p is a tuple containing the x and  y coordinates of the upper left corner of the
 
 You can omit the mass parameter and the mass will be set proportional to the area of the shape.
 
+To change the text set the object to a variable and use the `.text("new text here")` function.
+
 ```python
 line(p1, p2, thickness, mass)
 static_line(p1, p2, thickness)
